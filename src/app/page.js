@@ -6,6 +6,7 @@ export async function generateMetadata() {
   return {
     title: 'My Blogs',
     description: 'A collection of my blog posts',
+    author: 'Samba Siva Reddy',
     openGraph: {
       title: 'My Blogs',
       description: 'A collection of my blog posts',
