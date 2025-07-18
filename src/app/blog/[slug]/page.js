@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
     }
 
     const file = await fs.readFile(
-        `${process.cwd()}/src/posts/${post.filename}`,
+        `${process.cwd()}/public/posts/${post.filename}`,
         "utf-8"
     );
     const { data: meta } = matter(file);
@@ -54,7 +54,7 @@ export default async function BlogPage({ params }) {
     if (!post) return <div>Post not found</div>;
 
     const file = await fs.readFile(
-        `${process.cwd()}/src/posts/${post.filename}`,
+        `${process.cwd()}/public/posts/${post.filename}`,
         "utf-8"
     );
     const { content, data: meta } = matter(file);
