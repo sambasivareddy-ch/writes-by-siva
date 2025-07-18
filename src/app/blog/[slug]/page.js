@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import matter from "gray-matter";
 import blogs from "@/blogInfo";
 import BlogPost from "@/components/BlogPost";
+import path from "path";
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
@@ -14,10 +15,8 @@ export async function generateMetadata({ params }) {
         };
     }
 
-    const file = await fs.readFile(
-        `${process.cwd()}/public/posts/${post.filename}`,
-        "utf-8"
-    );
+    const file = await fs.readFile(path.join(process.cwd(), 'public', 'posts', post.filename), 'utf-8');
+
     const { data: meta } = matter(file);
 
     const imageUrl = meta.image
@@ -53,10 +52,7 @@ export default async function BlogPage({ params }) {
     const post = blogs.find((p) => p.slug === slug);
     if (!post) return <div>Post not found</div>;
 
-    const file = await fs.readFile(
-        `${process.cwd()}/public/posts/${post.filename}`,
-        "utf-8"
-    );
+    const file = await fs.readFile(path.join(process.cwd(), 'public', 'posts', post.filename), 'utf-8');
     const { content, data: meta } = matter(file);
 
     const imageUrl = meta.image
