@@ -47,24 +47,6 @@ export default function BlogPost(props) {
             <Link href={'/'} passHref>
                 <ArrowBackIcon/>
             </Link>
-            <div className={styles["blog-post-header"]}>
-                <p>Share on:</p>
-                <div className={styles["blog-post-share"]}>
-                    <button onClick={copyToClipboardHandler} className={styles["copy-url-button"]}>
-                        <ContentCopyIcon/>
-                    </button>
-                    <a href={`https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`} target="_blank" rel="noopener noreferrer">
-                        <WhatsAppIcon/>
-                    </a>
-                </div>
-            </div>
-            <div className={styles["blog-post-tags"]}>
-                {tags.map((tag, index) => (
-                    <span key={index} className={styles["blog-post-tag"]}>
-                        {tag}
-                    </span>
-                ))} 
-            </div>
             <ReactMarkdown
                 rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}
                 components={{
@@ -89,6 +71,26 @@ export default function BlogPost(props) {
             >
                {content} 
             </ReactMarkdown>
+            <div className={styles["post-footer"]}>
+                <div className={styles["blog-post-footer"]}>
+                    <p>Share on:</p>
+                    <div className={styles["blog-post-share"]}>
+                        <button onClick={copyToClipboardHandler} className={styles["copy-url-button"]}>
+                            <ContentCopyIcon/>
+                        </button>
+                        <a href={`https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`} target="_blank" rel="noopener noreferrer">
+                            <WhatsAppIcon/>
+                        </a>
+                    </div>
+                </div>
+                <div className={styles["blog-post-tags"]}>
+                    {tags.map((tag, index) => (
+                        <span key={index} className={styles["blog-post-tag"]}>
+                            {tag}
+                        </span>
+                    ))} 
+                </div>
+            </div>
         </div>
     );
 } 

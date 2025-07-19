@@ -97,7 +97,12 @@
     gap: 5px;
 }
 
-.blog-post-header {
+.post-footer {
+    margin: 50px 0;
+    font-size: 14px;
+}
+
+.blog-post-footer {
     width: 100%;
     display: flex;
     align-items: center;
@@ -115,8 +120,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: var(--border-color);
     color: var(--primary-text);
@@ -274,6 +279,7 @@
     font-size: 17px;
     color: var(--primary-text);
     font-weight: 400;
+    border-bottom: solid 2px var(--border-color);
 }
 
 .blog-post-wrapper a {
@@ -395,6 +401,10 @@
 .blog-post-tag {
     padding: 5px 10px;
     background-color: var(--border-color);
+}
+
+.post-footer .blog-post-tag {
+    font-size: 12px;
 }
 
 .blog-controls {
