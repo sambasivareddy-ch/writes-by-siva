@@ -5,10 +5,6 @@ import ClearIcon from '@mui/icons-material/Clear';
 import BlogComponent from '@/components/BlogComponent';
 import styles from '@/styles/blog.module.css'
 
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -94,22 +90,6 @@ const BlogList = () => {
     return (
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
-                <div className={styles["blog-header"]}>
-                    <div className={styles["social-links"]}>
-                        <a href="https://sambasiva.vercel.app" target="_blank" rel="noreferrer" aria-label="Portfolio profile">
-                            <PersonOutlineIcon fontSize="medium" />
-                        </a>
-                        <a href="https://www.instagram.com/samsr.ch/" target="_blank" rel="noreferrer" aria-label="Instagram profile">
-                            <InstagramIcon fontSize="medium" />
-                        </a>
-                        <a href="https://www.linkedin.com/in/v-n-g-samba-siva-reddy-chinta-78a9651b2/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
-                            <LinkedInIcon fontSize="medium" />
-                        </a>
-                        <a href="https://www.github.com/sambasivareddy-ch" target="_blank" rel="noreferrer" aria-label="GitHub profile">
-                            <GitHubIcon fontSize="medium" />
-                        </a>
-                    </div>
-                </div>
                 <label className={styles['filtering-option']}>
                     <input type="checkbox" aria-label="strict filter" checked={matchAllTags} onChange={() => {
                         toggleMatchAllTags();
@@ -118,6 +98,17 @@ const BlogList = () => {
                 </label>
                 <div className={styles['blog-header']}>
                     <div className={blogWrapperClass}>
+                        {(selectedTags.length !== 0) && (
+                            <button
+                                className={styles["blog-tag_reset"]}
+                                onClick={() => {
+                                    setSelectedTags([])
+                                }}
+                                aria-label={`reset applied filter`}
+                            >
+                                <ClearIcon fontSize="small" />
+                            </button>
+                        )}
                         {blogTags.map((tag) => (
                             <button
                                 key={tag}
@@ -132,17 +123,6 @@ const BlogList = () => {
                                 <span className={styles["blog-tag_count"]}>{tagsCount[tag] || 0}</span>
                             </button>
                         ))}
-                        {(selectedTags.length !== 0) && (
-                            <button
-                                className={styles["blog-tag_reset"]}
-                                onClick={() => {
-                                    setSelectedTags([])
-                                }}
-                                aria-label={`reset applied filter`}
-                            >
-                                reset <ClearIcon fontSize="small" />
-                            </button>
-                        )}
                         {(selectedDate) && (
                             <button
                                 className={styles["blog-tag_reset"]}
@@ -180,7 +160,7 @@ const BlogList = () => {
                             <ArrowBackIosIcon fontSize="small" />
                         </button>
                         <span className={styles["blog-pagination-index"]}>
-                            {presentPageIndex + 1} / {Math.floor(currentBlogs.length / 10) + (currentBlogs.length % 10 !== 0)}
+                            {currentBlogs.length % 10 === 0 ? 0: presentPageIndex + 1} / {Math.floor(currentBlogs.length / 10) + (currentBlogs.length % 10 !== 0)}
                         </span>
                         <button
                             className={styles["blog-pagination-btn"]}
