@@ -18,6 +18,9 @@ export async function generateMetadata() {
       title: 'My Blogs',
       description: 'A collection of my blog posts',
     },
+    other: {
+      'google-site-verification': 'fiu0kiIZiSNGFJkZtBwGLb7Y-R4M4urEVJDFlUA3rxA',
+    },
   };
 }
 

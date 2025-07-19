@@ -44,6 +44,9 @@ export async function generateMetadata({ params }) {
             description: meta.description || "Default description",
             images: imageUrl ? [imageUrl] : undefined,
         },
+        other: {
+            'google-site-verification': 'fiu0kiIZiSNGFJkZtBwGLb7Y-R4M4urEVJDFlUA3rxA',
+        },
     };
 }
 

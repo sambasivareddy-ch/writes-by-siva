@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from "react";
 
 import ClearIcon from '@mui/icons-material/Clear';
 import BlogComponent from '@/components/BlogComponent';
-
 import styles from '@/styles/blog.module.css'
 
 import InstagramIcon from '@mui/icons-material/Instagram';

@@ -1,6 +1,6 @@
 "use client"
 import { TagsProvider } from "@/store/tagsContext";
-
+import { Analytics } from "@vercel/analytics/next"
 import '@/styles/globals.css'
 
 export default function RootLayout({ children }) {
@@ -10,6 +10,7 @@ export default function RootLayout({ children }) {
         <TagsProvider>
           {children}
         </TagsProvider>
+        <Analytics/>
       </body>
     </html>
   );
