@@ -1,4 +1,13 @@
 const blogs = [
+     {
+        'id': 'cp-26',
+        'slug': 'next-permutation',
+        'title': 'Next Permutation',
+        'description': 'Competitive Programming Problem: Given an Array, find the lexicographically next greater permutation',
+        'date': '2025-07-20',
+        'domains': ['competitive-programming', 'array'],
+        'filename': 'competetive-programming/next-permutation.md',
+    },
     {
         'id': 'cp-25',
         'slug': 'remove-nth-node',
