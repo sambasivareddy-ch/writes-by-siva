@@ -516,6 +516,10 @@
     box-sizing: border-box;
 }
 
+.blogs-count {
+    margin: 20px 20px 0;
+}
+
 .blog-comp__link {
     text-decoration: none;
     color: var(--primary-text)

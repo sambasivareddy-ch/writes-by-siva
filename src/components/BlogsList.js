@@ -1,48 +1,63 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 
-import ClearIcon from '@mui/icons-material/Clear';
-import BlogComponent from '@/components/BlogComponent';
-import styles from '@/styles/blog.module.css'
+import ClearIcon from "@mui/icons-material/Clear";
+import BlogComponent from "@/components/BlogComponent";
+import styles from "@/styles/blog.module.css";
 
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import TagsContext from "@/store/tagsContext";
 
 import blogs from "@/blogInfo";
 
 const BlogList = () => {
-    const { selectedTags, matchAllTags, setSelectedTags, removeSelectedTag, toggleMatchAllTags } = useContext(TagsContext);
+    const {
+        selectedTags,
+        matchAllTags,
+        setSelectedTags,
+        removeSelectedTag,
+        toggleMatchAllTags,
+    } = useContext(TagsContext);
 
     const [blogTags, setBlogTags] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
     const [currentBlogs, setCurrentBlogs] = useState(blogs);
     const [showMoreStatus, setShowMoreStatus] = useState(false);
-    const [blogWrapperClass, setBlogWrapperClass] = useState(styles['blog-tags']);
+    const [blogWrapperClass, setBlogWrapperClass] = useState(
+        styles["blog-tags"]
+    );
     const [tagsCount, setTagsCount] = useState({});
     const [presentPageIndex, setPresentPageIndex] = useState(0);
 
     useEffect(() => {
         if (selectedTags) {
             setCurrentBlogs(
-                blogs
-                .filter((blog) => {
+                blogs.filter((blog) => {
                     if (!matchAllTags) {
                         if (selectedTags.length !== 0) {
-                            return selectedTags.some(tag => blog.domains.includes(tag));
+                            return selectedTags.some((tag) =>
+                                blog.domains.includes(tag)
+                            );
                         } else {
-                            return blogTags.some(tag => blog.domains.includes(tag));
+                            return blogTags.some((tag) =>
+                                blog.domains.includes(tag)
+                            );
                         }
                     } else {
                         if (selectedTags.length !== 0) {
-                            return selectedTags.every(tag => blog.domains.includes(tag));
+                            return selectedTags.every((tag) =>
+                                blog.domains.includes(tag)
+                            );
                         } else {
-                            return blogTags.some(tag => blog.domains.includes(tag));
+                            return blogTags.some((tag) =>
+                                blog.domains.includes(tag)
+                            );
                         }
                     }
                 })
-            )
+            );
         } else {
             setCurrentBlogs(blogs);
         }
@@ -50,9 +65,9 @@ const BlogList = () => {
 
     useEffect(() => {
         if (!showMoreStatus) {
-            setBlogWrapperClass(styles['blog-tags']);
+            setBlogWrapperClass(styles["blog-tags"]);
         } else {
-            setBlogWrapperClass(styles['blog-tags_more'])
+            setBlogWrapperClass(styles["blog-tags_more"]);
         }
     }, [showMoreStatus]);
 
@@ -62,19 +77,22 @@ const BlogList = () => {
         } else {
             setCurrentBlogs(blogs);
         }
-    }, [selectedDate])
-
+    }, [selectedDate]);
 
     useEffect(() => {
         // Initialize blogTags with all unique tags from blogs
-        const initialTags = Array.from(new Set(blogs.flatMap(blog => blog.domains)));
+        const initialTags = Array.from(
+            new Set(blogs.flatMap((blog) => blog.domains))
+        );
         initialTags.sort((a, b) => a.localeCompare(b)); // Sort tags alphabetically
         setBlogTags(initialTags);
 
         // Initialize tagsCount with the count of each tag
         const initialTagsCount = {};
-        initialTags.forEach(tag => {
-            initialTagsCount[tag] = currentBlogs.filter(blog => blog.domains.includes(tag)).length;
+        initialTags.forEach((tag) => {
+            initialTagsCount[tag] = currentBlogs.filter((blog) =>
+                blog.domains.includes(tag)
+            ).length;
         });
         setTagsCount(initialTagsCount);
     }, []);
@@ -85,24 +103,29 @@ const BlogList = () => {
         } else {
             setSelectedTags((prevTags) => [...prevTags, tag]);
         }
-    }
+    };
 
     return (
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
-                <label className={styles['filtering-option']}>
-                    <input type="checkbox" aria-label="strict filter" checked={matchAllTags} onChange={() => {
-                        toggleMatchAllTags();
-                    }}/>
+                <label className={styles["filtering-option"]}>
+                    <input
+                        type="checkbox"
+                        aria-label="strict filter"
+                        checked={matchAllTags}
+                        onChange={() => {
+                            toggleMatchAllTags();
+                        }}
+                    />
                     Match All Tags
                 </label>
-                <div className={styles['blog-header']}>
+                <div className={styles["blog-header"]}>
                     <div className={blogWrapperClass}>
-                        {(selectedTags.length !== 0) && (
+                        {selectedTags.length !== 0 && (
                             <button
                                 className={styles["blog-tag_reset"]}
                                 onClick={() => {
-                                    setSelectedTags([])
+                                    setSelectedTags([]);
                                 }}
                                 aria-label={`reset applied filter`}
                             >
@@ -112,22 +135,28 @@ const BlogList = () => {
                         {blogTags.map((tag) => (
                             <button
                                 key={tag}
-                                className={`${styles["blog-tag"]} ${selectedTags.includes(tag) ? styles["active"] : ""}`}
+                                className={`${styles["blog-tag"]} ${
+                                    selectedTags.includes(tag)
+                                        ? styles["active"]
+                                        : ""
+                                }`}
                                 onClick={() => {
                                     handleTagClick(tag);
                                     setPresentPageIndex(0);
                                 }}
                                 aria-label={`${tag} filter`}
                             >
-                                <span>{tag}</span> 
-                                <span className={styles["blog-tag_count"]}>{tagsCount[tag] || 0}</span>
+                                <span>{tag}</span>
+                                <span className={styles["blog-tag_count"]}>
+                                    {tagsCount[tag] || 0}
+                                </span>
                             </button>
                         ))}
-                        {(selectedDate) && (
+                        {selectedDate && (
                             <button
                                 className={styles["blog-tag_reset"]}
                                 onClick={() => {
-                                    setSelectedDate(null)
+                                    setSelectedDate(null);
                                 }}
                                 aria-label={`reset date applied filter`}
                             >
@@ -160,41 +189,56 @@ const BlogList = () => {
                             <ArrowBackIosIcon fontSize="small" />
                         </button>
                         <span className={styles["blog-pagination-index"]}>
-                            {currentBlogs.length % 10 === 0 ? 0: presentPageIndex + 1} / {Math.floor(currentBlogs.length / 10) + (currentBlogs.length % 10 !== 0)}
+                            {currentBlogs.length % 10 === 0
+                                ? 0
+                                : presentPageIndex + 1}{" "}
+                            /{" "}
+                            {Math.floor(currentBlogs.length / 10) +
+                                (currentBlogs.length % 10 !== 0)}
                         </span>
                         <button
                             className={styles["blog-pagination-btn"]}
                             onClick={() => {
-                                if (presentPageIndex < Math.ceil(currentBlogs.length / 10) - 1) {
+                                if (
+                                    presentPageIndex <
+                                    Math.ceil(currentBlogs.length / 10) - 1
+                                ) {
                                     setPresentPageIndex(presentPageIndex + 1);
                                 }
                             }}
-                            disabled={presentPageIndex*10 + 10 >= currentBlogs.length}
+                            disabled={
+                                presentPageIndex * 10 + 10 >=
+                                currentBlogs.length
+                            }
                             aria-label={`next page`}
                         >
                             <ArrowForwardIosIcon fontSize="small" />
                         </button>
                     </div>
                 </div>
+                <div className={styles["blogs-count"]}>
+                    {(presentPageIndex + 1) * 10 > currentBlogs.length
+                        ? <p>{presentPageIndex * 10} - {currentBlogs.length} of { currentBlogs.length } blogs</p>
+                        : <p>{presentPageIndex * 10} - {(presentPageIndex + 1) * 10} of { currentBlogs.length } blogs</p>}
+                </div>
                 <div className={styles["blogs"]}>
-                    {
-                        currentBlogs
-                        .slice(presentPageIndex*10, presentPageIndex*10 + 10)
-                        .map((blog) => { 
+                    {currentBlogs
+                        .slice(
+                            presentPageIndex * 10,
+                            presentPageIndex * 10 + 10
+                        )
+                        .map((blog) => {
                             return (
-                                (
-                                    <BlogComponent
-                                        key={blog.id}
-                                        title={blog.title}
-                                        description={blog.description}
-                                        domains={blog.domains}
-                                        slug={blog.slug}
-                                        date={blog.date}
-                                    />
-                                )
+                                <BlogComponent
+                                    key={blog.id}
+                                    title={blog.title}
+                                    description={blog.description}
+                                    domains={blog.domains}
+                                    slug={blog.slug}
+                                    date={blog.date}
+                                />
                             );
-                        })
-                    }
+                        })}
                 </div>
             </div>
         </div>
