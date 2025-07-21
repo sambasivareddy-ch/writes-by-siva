@@ -1,4 +1,13 @@
 const blogs = [
+    {
+        'id': 'cp-27',
+        'slug': 'merge-overlap-intervals',
+        'title': 'Merge Overlap Intervals',
+        'description': 'Competitive Programming Problem: Given a set of intervals, merge the overlapped intervals',
+        'date': '2025-07-21',
+        'domains': ['competitive-programming', 'array'],
+        'filename': 'competetive-programming/merge-overlap-intervals.md',
+    },
      {
         'id': 'cp-26',
         'slug': 'next-permutation',
