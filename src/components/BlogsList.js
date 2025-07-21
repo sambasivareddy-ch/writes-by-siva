@@ -30,38 +30,74 @@ const BlogList = () => {
     );
     const [tagsCount, setTagsCount] = useState({});
     const [presentPageIndex, setPresentPageIndex] = useState(0);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    // useEffect(() => {
+    //     if (selectedTags) {
+    //         setCurrentBlogs(
+    //             blogs.filter((blog) => {
+    //                 if (!matchAllTags) {
+    //                     if (selectedTags.length !== 0) {
+    //                         return selectedTags.some((tag) =>
+    //                             blog.domains.includes(tag)
+    //                         );
+    //                     } else {
+    //                         return blogTags.some((tag) =>
+    //                             blog.domains.includes(tag)
+    //                         );
+    //                     }
+    //                 } else {
+    //                     if (selectedTags.length !== 0) {
+    //                         return selectedTags.every((tag) =>
+    //                             blog.domains.includes(tag)
+    //                         );
+    //                     } else {
+    //                         return blogTags.some((tag) =>
+    //                             blog.domains.includes(tag)
+    //                         );
+    //                     }
+    //                 }
+    //             }).filter((blog) => {
+    //                 const searchMatch =
+    //                     blog.title.toLowerCase().includes(searchQuery) ||
+    //                     blog.description.toLowerCase().includes(searchQuery) ||
+    //                     blog.domains.some((d) => d.toLowerCase().includes(searchQuery)) ||
+    //                     blog.slug.toLowerCase().includes(searchQuery)
+
+    //                 return searchMatch
+    //             })
+    //         );
+    //     } else {
+    //         setCurrentBlogs(blogs);
+    //     }
+    // }, [selectedTags, matchAllTags, blogTags, searchQuery]);
 
     useEffect(() => {
-        if (selectedTags) {
-            setCurrentBlogs(
-                blogs.filter((blog) => {
-                    if (!matchAllTags) {
-                        if (selectedTags.length !== 0) {
-                            return selectedTags.some((tag) =>
-                                blog.domains.includes(tag)
-                            );
-                        } else {
-                            return blogTags.some((tag) =>
-                                blog.domains.includes(tag)
-                            );
-                        }
-                    } else {
-                        if (selectedTags.length !== 0) {
-                            return selectedTags.every((tag) =>
-                                blog.domains.includes(tag)
-                            );
-                        } else {
-                            return blogTags.some((tag) =>
-                                blog.domains.includes(tag)
-                            );
-                        }
-                    }
-                })
-            );
-        } else {
-            setCurrentBlogs(blogs);
-        }
-    }, [selectedTags, matchAllTags, blogTags]);
+        const query = searchQuery.trim().toLowerCase();
+
+        const filtered = blogs.filter((blog) => {
+            let matchesSearch = true;
+            if (query.length >= 3) {
+                matchesSearch =
+                        blog.title.toLowerCase().includes(query) ||
+                        blog.description.toLowerCase().includes(query) ||
+                        blog.slug.toLowerCase().includes(query) ||
+                        blog.domains.some((d) => d.toLowerCase().includes(query));
+            }
+
+            // Tag match
+            const matchesTags =
+                selectedTags.length === 0
+                    ? true
+                    : matchAllTags
+                    ? selectedTags.every((tag) => blog.domains.includes(tag))
+                    : selectedTags.some((tag) => blog.domains.includes(tag));
+
+            return matchesSearch && matchesTags;
+        });
+
+        setCurrentBlogs(filtered);
+    }, [selectedTags, matchAllTags, searchQuery]);
 
     useEffect(() => {
         if (!showMoreStatus) {
@@ -108,17 +144,29 @@ const BlogList = () => {
     return (
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
-                <label className={styles["filtering-option"]}>
-                    <input
-                        type="checkbox"
-                        aria-label="strict filter"
-                        checked={matchAllTags}
-                        onChange={() => {
-                            toggleMatchAllTags();
-                        }}
-                    />
-                    Match All Tags
-                </label>
+                <div className={styles["blog-input_header"]}>
+                    <label className={styles["filtering-option"]}>
+                        <input
+                            type="checkbox"
+                            aria-label="strict filter"
+                            checked={matchAllTags}
+                            onChange={() => {
+                                toggleMatchAllTags();
+                            }}
+                        />
+                        Match All Tags
+                    </label>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Search Blogs here..."
+                            className={styles["search-input"]}
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value);
+                            }}
+                        />
+                    </div>
+                </div>
                 <div className={styles["blog-header"]}>
                     <div className={blogWrapperClass}>
                         {selectedTags.length !== 0 && (
@@ -217,9 +265,18 @@ const BlogList = () => {
                     </div>
                 </div>
                 <div className={styles["blogs-count"]}>
-                    {(presentPageIndex + 1) * 10 > currentBlogs.length
-                        ? <p>{presentPageIndex * 10} - {currentBlogs.length} of { currentBlogs.length } blogs</p>
-                        : <p>{presentPageIndex * 10} - {(presentPageIndex + 1) * 10} of { currentBlogs.length } blogs</p>}
+                    {(presentPageIndex + 1) * 10 > currentBlogs.length ? (
+                        <p>
+                            {presentPageIndex * 10} - {currentBlogs.length} of{" "}
+                            {currentBlogs.length} blogs
+                        </p>
+                    ) : (
+                        <p>
+                            {presentPageIndex * 10} -{" "}
+                            {(presentPageIndex + 1) * 10} of{" "}
+                            {currentBlogs.length} blogs
+                        </p>
+                    )}
                 </div>
                 <div className={styles["blogs"]}>
                     {currentBlogs
@@ -236,6 +293,7 @@ const BlogList = () => {
                                     domains={blog.domains}
                                     slug={blog.slug}
                                     date={blog.date}
+                                    searchQuery={searchQuery.trim().length >= 3 ? searchQuery: ''}
                                 />
                             );
                         })}

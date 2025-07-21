@@ -55,3 +55,9 @@ pre,
 pre div {
   background-color: transparent !important; /* or any color you want */
 }
+
+mark {
+  background-color: var(--yellow-color);
+  color: #000;
+  border-radius: 5px;
+}
