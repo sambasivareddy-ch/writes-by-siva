@@ -1,5 +1,14 @@
 const blogs = [
     {
+        'id': 'cp-28',
+        'slug': 'unique-paths',
+        'title': 'Grid Unique Paths',
+        'description': 'Competitive Programming Problem: Given a m*n matrix, find number of unique path to reach (m-1,n-1) from (0,0)',
+        'date': '2025-07-22',
+        'domains': ['competitive-programming', 'array', 'dynamic-programming'],
+        'filename': 'competetive-programming/unique-paths.md',
+    },
+    {
         'id': 'js-01',
         'slug': 'polyfills',
         'title': 'Polyfills',
