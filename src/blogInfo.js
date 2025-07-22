@@ -1,5 +1,14 @@
 const blogs = [
     {
+        'id': 'js-01',
+        'slug': 'polyfills',
+        'title': 'Polyfills',
+        'description': 'Learn about the concept of Polyfills in Javascript',
+        'date': '2025-07-22',
+        'domains': ['javascript'],
+        'filename': 'javascript/polyfills.md',
+    },
+    {
         'id': 'cp-27',
         'slug': 'merge-overlap-intervals',
         'title': 'Merge Overlap Intervals',
