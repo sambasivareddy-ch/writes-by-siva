@@ -1,5 +1,14 @@
 const blogs = [
     {
+        'id': 'react-04',
+        'slug': 'react-use-memo',
+        'title': "useMemo Hook & memo()",
+        'description': 'A blog to explain about useMemo hook in React',
+        'date': '2025-07-25',
+        'domains': ['react'],
+        'filename': 'react/react-memo.md',
+    },
+    {
         'id': 'cp-28',
         'slug': 'unique-paths',
         'title': 'Grid Unique Paths',
