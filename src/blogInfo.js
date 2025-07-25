@@ -1,5 +1,14 @@
 const blogs = [
     {
+        'id': 'js-02',
+        'slug': 'this',
+        'title': 'This & Bind Functions',
+        'description': 'Learn about the concept of this, and functions like call, apply & bind in Javascript',
+        'date': '2025-07-25',
+        'domains': ['javascript'],
+        'filename': 'javascript/this.md',
+    },
+    {
         'id': 'react-04',
         'slug': 'react-use-memo',
         'title': "useMemo Hook & memo()",
