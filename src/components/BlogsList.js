@@ -32,46 +32,6 @@ const BlogList = () => {
     const [presentPageIndex, setPresentPageIndex] = useState(0);
     const [searchQuery, setSearchQuery] = useState("");
 
-    // useEffect(() => {
-    //     if (selectedTags) {
-    //         setCurrentBlogs(
-    //             blogs.filter((blog) => {
-    //                 if (!matchAllTags) {
-    //                     if (selectedTags.length !== 0) {
-    //                         return selectedTags.some((tag) =>
-    //                             blog.domains.includes(tag)
-    //                         );
-    //                     } else {
-    //                         return blogTags.some((tag) =>
-    //                             blog.domains.includes(tag)
-    //                         );
-    //                     }
-    //                 } else {
-    //                     if (selectedTags.length !== 0) {
-    //                         return selectedTags.every((tag) =>
-    //                             blog.domains.includes(tag)
-    //                         );
-    //                     } else {
-    //                         return blogTags.some((tag) =>
-    //                             blog.domains.includes(tag)
-    //                         );
-    //                     }
-    //                 }
-    //             }).filter((blog) => {
-    //                 const searchMatch =
-    //                     blog.title.toLowerCase().includes(searchQuery) ||
-    //                     blog.description.toLowerCase().includes(searchQuery) ||
-    //                     blog.domains.some((d) => d.toLowerCase().includes(searchQuery)) ||
-    //                     blog.slug.toLowerCase().includes(searchQuery)
-
-    //                 return searchMatch
-    //             })
-    //         );
-    //     } else {
-    //         setCurrentBlogs(blogs);
-    //     }
-    // }, [selectedTags, matchAllTags, blogTags, searchQuery]);
-
     useEffect(() => {
         const query = searchQuery.trim().toLowerCase();
 
@@ -79,10 +39,10 @@ const BlogList = () => {
             let matchesSearch = true;
             if (query.length >= 3) {
                 matchesSearch =
-                        blog.title.toLowerCase().includes(query) ||
-                        blog.description.toLowerCase().includes(query) ||
-                        blog.slug.toLowerCase().includes(query) ||
-                        blog.domains.some((d) => d.toLowerCase().includes(query));
+                    blog.title.toLowerCase().includes(query) ||
+                    blog.description.toLowerCase().includes(query) ||
+                    blog.slug.toLowerCase().includes(query) ||
+                    blog.domains.some((d) => d.toLowerCase().includes(query));
             }
 
             // Tag match
@@ -237,12 +197,11 @@ const BlogList = () => {
                             <ArrowBackIosIcon fontSize="small" />
                         </button>
                         <span className={styles["blog-pagination-index"]}>
-                            {currentBlogs.length % 10 === 0
-                                ? 0
-                                : presentPageIndex + 1}{" "}
-                            /{" "}
-                            {Math.floor(currentBlogs.length / 10) +
-                                (currentBlogs.length % 10 !== 0)}
+                            {presentPageIndex + 1} /{" "}
+                            {currentBlogs.length === 0
+                                ? 1
+                                : Math.floor(currentBlogs.length / 10) +
+                                  (currentBlogs.length % 10 !== 0)}
                         </span>
                         <button
                             className={styles["blog-pagination-btn"]}
@@ -293,7 +252,11 @@ const BlogList = () => {
                                     domains={blog.domains}
                                     slug={blog.slug}
                                     date={blog.date}
-                                    searchQuery={searchQuery.trim().length >= 3 ? searchQuery: ''}
+                                    searchQuery={
+                                        searchQuery.trim().length >= 3
+                                            ? searchQuery
+                                            : ""
+                                    }
                                 />
                             );
                         })}

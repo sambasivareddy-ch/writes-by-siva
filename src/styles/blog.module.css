@@ -390,7 +390,7 @@
     flex-wrap: wrap;
     gap: 10px;
     margin: 20px 0;
-    max-height: 100px;
+    max-height: 92px;
     overflow: hidden;
 }
 
@@ -574,6 +574,22 @@
     flex-wrap: wrap;
     gap: 5px;
     margin: 10px 0;
+}
+
+.blog-domains {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: var(--font-family-pop);
+    margin: 10px 0 0 0;
+}
+
+.blog-domains .tag {
+    border: solid 1px var(--border-color);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5pc;
 }
 
 @media screen and (min-width: 300px) and (max-width: 600px) {

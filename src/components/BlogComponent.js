@@ -21,7 +21,7 @@ const highlightText = (text, query) => {
 };
 
 const BlogComponent = (props) => {
-    const { slug, title, description, date, searchQuery } = props;
+    const { slug, title, description, date, searchQuery, domains } = props;
 
     return (
         <Link href={`/blog/${slug}`} className={styles["blog-comp__link"]} passHref>
@@ -39,6 +39,11 @@ const BlogComponent = (props) => {
                         <p className={styles["blog-description"]}>
                             {highlightText(description, searchQuery)}
                         </p>
+                        <div className={styles['blog-domains']}>
+                            {domains.map((tag) => {
+                                return <p key={Math.random()} className={styles['tag']}>{tag}</p>
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>
