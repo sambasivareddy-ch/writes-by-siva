@@ -1,6 +1,6 @@
 ---
 title: "Polyfills"
-description: "Learn about Polyfills using Javascript"
+description: "Learn about using Polyfills using Javascript"
 author: "Siva"
 date: 2025-07-22
 tags: ["Javascript"]

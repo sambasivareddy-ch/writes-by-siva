@@ -1,5 +1,14 @@
 const blogs = [
     {
+        'id': 'js-03',
+        'slug': 'promises',
+        'title': 'Promise & Async/Await',
+        'description': 'Learn about the concept of promises, async/await in Javascript',
+        'date': '2025-07-26',
+        'domains': ['javascript'],
+        'filename': 'javascript/promises.md',
+    },
+    {
         'id': 'js-02',
         'slug': 'this',
         'title': 'This & Bind Functions',
