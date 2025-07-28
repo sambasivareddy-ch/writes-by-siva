@@ -1,5 +1,14 @@
 const blogs = [
     {
+        'id': 'js-04',
+        'slug': 'closures',
+        'title': 'Closures and internals',
+        'description': 'Learn about the closures in Javascript',
+        'date': '2025-07-28',
+        'domains': ['javascript'],
+        'filename': 'javascript/closures.md',
+    },
+    {
         'id': 'js-03',
         'slug': 'promises',
         'title': 'Promise & Async/Await',
