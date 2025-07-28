@@ -6,7 +6,7 @@ date: 2025-07-28
 tags: ["JavaScript"]
 canonical_url: "https://bysiva.vercel.app/blog/closures"
 ---
-# Closures
+# Closures & Internals
 
 ## 📑 Table of Contents
 1. [Introduction](#introduction)  
