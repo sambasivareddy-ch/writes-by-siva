@@ -2,7 +2,7 @@
 title: "Polyfills"
 description: "Learn about using Polyfills using Javascript"
 author: "Siva"
-date: 2025-07-22
+date: 2025-07-26
 tags: ["Javascript"]
 canonical_url: "https://bysiva.vercel.app/blog/polyfills"
 ---
