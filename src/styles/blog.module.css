@@ -537,7 +537,7 @@
 
 .filtering-option {
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     font-family: var(--font-family-pop);
     gap: 5px;
     padding: 10px;
