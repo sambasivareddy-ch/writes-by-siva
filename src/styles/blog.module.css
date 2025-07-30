@@ -1,8 +1,8 @@
 .blog-header {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    align-items: flex-start;
+    flex-direction: column;
     
     padding: 10px;
     box-sizing: border-box;
@@ -19,7 +19,13 @@
     justify-content: space-between;
 }
 
-.search-input {
+.no-blogs {
+    font-family: var(--font-family-pop);
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.search-input, .primary-tag_select {
     outline: none;
     border: solid 1px var(--border-color);
     padding: 10px;
@@ -216,6 +222,7 @@
     font-size: 20px;
     font-weight: 600;
     margin: 10px 0;
+    font-family: var(--font-family-pop);
 }
 
 .blog-comp__meta h3 a {
@@ -491,8 +498,14 @@
 
 .blog-header {
     display: flex;
-    align-items: center;
-    gap: 10px
+    /* align-items: center; */
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.primary-tag_select {
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .blog-tag_reset, .show-more_tag_btn {
@@ -524,7 +537,7 @@
 
 .filtering-option {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     font-family: var(--font-family-pop);
     gap: 5px;
     padding: 10px;
@@ -537,7 +550,7 @@
 
 .blog-comp__link {
     text-decoration: none;
-    color: var(--primary-text)
+    color: var(--primary-text);
 }
 
 .heatmap {
@@ -622,6 +635,7 @@
         flex-direction: column-reverse;
         justify-content: flex-start;
         align-items: flex-start;
+        gap: 10px;
     }
     .search-input {
         width: 100%;

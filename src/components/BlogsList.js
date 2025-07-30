@@ -9,6 +9,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import TagsContext from "@/store/tagsContext";
+import useDebounce from "@/hooks/useDebounce";
 
 import blogs from "@/blogInfo";
 
@@ -21,8 +22,9 @@ const BlogList = () => {
         toggleMatchAllTags,
     } = useContext(TagsContext);
 
+    const primaryTags = ["tech", "personal", "tech-events"];
     const [blogTags, setBlogTags] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [topicBasedBlogs, setTopicBasedBlogs] = useState([]);
     const [currentBlogs, setCurrentBlogs] = useState(blogs);
     const [showMoreStatus, setShowMoreStatus] = useState(false);
     const [blogWrapperClass, setBlogWrapperClass] = useState(
@@ -31,11 +33,15 @@ const BlogList = () => {
     const [tagsCount, setTagsCount] = useState({});
     const [presentPageIndex, setPresentPageIndex] = useState(0);
     const [searchQuery, setSearchQuery] = useState("");
+    const debouncedText = useDebounce(searchQuery, 500);
+    const [selectedPrimaryTag, setSelectedPrimaryTag] = useState(
+        primaryTags[0]
+    );
 
     useEffect(() => {
-        const query = searchQuery.trim().toLowerCase();
+        const query = debouncedText.trim().toLowerCase();
 
-        const filtered = blogs.filter((blog) => {
+        const filtered = topicBasedBlogs.filter((blog) => {
             let matchesSearch = true;
             if (query.length >= 3) {
                 matchesSearch =
@@ -57,7 +63,7 @@ const BlogList = () => {
         });
 
         setCurrentBlogs(filtered);
-    }, [selectedTags, matchAllTags, searchQuery]);
+    }, [selectedTags, matchAllTags, debouncedText, topicBasedBlogs, selectedPrimaryTag]);
 
     useEffect(() => {
         if (!showMoreStatus) {
@@ -68,17 +74,12 @@ const BlogList = () => {
     }, [showMoreStatus]);
 
     useEffect(() => {
-        if (selectedDate) {
-            setCurrentBlogs(blogs.filter((blog) => blog.date === selectedDate));
-        } else {
-            setCurrentBlogs(blogs);
-        }
-    }, [selectedDate]);
+        const selectedBlogsBasedOnTopic = blogs.filter((blog) => blog.primary === selectedPrimaryTag);
+        setTopicBasedBlogs(selectedBlogsBasedOnTopic)
 
-    useEffect(() => {
         // Initialize blogTags with all unique tags from blogs
         const initialTags = Array.from(
-            new Set(blogs.flatMap((blog) => blog.domains))
+            new Set(selectedBlogsBasedOnTopic.flatMap((blog) => blog.domains))
         );
         initialTags.sort((a, b) => a.localeCompare(b)); // Sort tags alphabetically
         setBlogTags(initialTags);
@@ -86,12 +87,12 @@ const BlogList = () => {
         // Initialize tagsCount with the count of each tag
         const initialTagsCount = {};
         initialTags.forEach((tag) => {
-            initialTagsCount[tag] = currentBlogs.filter((blog) =>
+            initialTagsCount[tag] = selectedBlogsBasedOnTopic.filter((blog) =>
                 blog.domains.includes(tag)
             ).length;
         });
         setTagsCount(initialTagsCount);
-    }, []);
+    }, [selectedPrimaryTag]);
 
     const handleTagClick = (tag) => {
         if (selectedTags.includes(tag)) {
@@ -105,17 +106,19 @@ const BlogList = () => {
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
                 <div className={styles["blog-input_header"]}>
-                    <label className={styles["filtering-option"]}>
-                        <input
-                            type="checkbox"
-                            aria-label="strict filter"
-                            checked={matchAllTags}
-                            onChange={() => {
-                                toggleMatchAllTags();
-                            }}
-                        />
-                        Match All Tags
-                    </label>
+                    <select
+                        className={styles["primary-tag_select"]}
+                        value={selectedPrimaryTag}
+                        onChange={(e) => setSelectedPrimaryTag(e.target.value)}
+                    >
+                        {primaryTags.map((pTag) => {
+                            return (
+                                <option key={Math.random()} value={pTag}>
+                                    {pTag}
+                                </option>
+                            );
+                        })}
+                    </select>
                     <div>
                         <input
                             type="text"
@@ -127,7 +130,18 @@ const BlogList = () => {
                         />
                     </div>
                 </div>
-                <div className={styles["blog-header"]}>
+                {topicBasedBlogs.length !== 0 && <div className={styles["blog-header"]}>
+                    <label className={styles["filtering-option"]}>
+                        <input
+                            type="checkbox"
+                            aria-label="strict filter"
+                            checked={matchAllTags}
+                            onChange={() => {
+                                toggleMatchAllTags();
+                            }}
+                        />
+                        Match All Tags
+                    </label>
                     <div className={blogWrapperClass}>
                         {selectedTags.length !== 0 && (
                             <button
@@ -160,20 +174,9 @@ const BlogList = () => {
                                 </span>
                             </button>
                         ))}
-                        {selectedDate && (
-                            <button
-                                className={styles["blog-tag_reset"]}
-                                onClick={() => {
-                                    setSelectedDate(null);
-                                }}
-                                aria-label={`reset date applied filter`}
-                            >
-                                reset date <ClearIcon fontSize="small" />
-                            </button>
-                        )}
                     </div>
-                </div>
-                <div className={styles["blog-controls"]}>
+                </div>}
+                {topicBasedBlogs.length !== 0 && <div className={styles["blog-controls"]}>
                     <button
                         className={styles["show-more_tag_btn"]}
                         onClick={() => {
@@ -222,8 +225,8 @@ const BlogList = () => {
                             <ArrowForwardIosIcon fontSize="small" />
                         </button>
                     </div>
-                </div>
-                <div className={styles["blogs-count"]}>
+                </div>}
+                {topicBasedBlogs.length !== 0 && <div className={styles["blogs-count"]}>
                     {(presentPageIndex + 1) * 10 > currentBlogs.length ? (
                         <p>
                             {presentPageIndex * 10} - {currentBlogs.length} of{" "}
@@ -236,9 +239,9 @@ const BlogList = () => {
                             {currentBlogs.length} blogs
                         </p>
                     )}
-                </div>
+                </div>}
                 <div className={styles["blogs"]}>
-                    {currentBlogs
+                    {topicBasedBlogs.length !== 0 && currentBlogs
                         .slice(
                             presentPageIndex * 10,
                             presentPageIndex * 10 + 10
@@ -260,6 +263,9 @@ const BlogList = () => {
                                 />
                             );
                         })}
+                    {topicBasedBlogs.length === 0 && 
+                        <div className={styles['no-blogs']}>Yet to Add blogs on {selectedPrimaryTag} topic.</div>
+                    }
                 </div>
             </div>
         </div>
