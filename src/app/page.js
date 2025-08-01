@@ -7,11 +7,6 @@ export async function generateMetadata() {
     description: 'A collection of my blog posts',
     author: 'Samba Siva Reddy',
     keywords: ['samba siva reddy', 'technical blogs', 'blogging page', 'blogs'],
-    // icons: {
-    //   icon: [
-    //     { url: '/logo.png', type: 'image/png', sizes: '32x32' },
-    //   ],
-    // },
     openGraph: {
       title: 'My Blogs',
       description: 'A collection of my blog posts',

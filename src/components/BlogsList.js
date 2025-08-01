@@ -25,7 +25,7 @@ const BlogList = () => {
     const primaryTags = ["tech", "personal", "tech-events"];
     const [blogTags, setBlogTags] = useState([]);
     const [topicBasedBlogs, setTopicBasedBlogs] = useState([]);
-    const [currentBlogs, setCurrentBlogs] = useState(blogs);
+    const [currentBlogs, setCurrentBlogs] = useState([]);
     const [showMoreStatus, setShowMoreStatus] = useState(false);
     const [blogWrapperClass, setBlogWrapperClass] = useState(
         styles["blog-tags"]
@@ -37,6 +37,20 @@ const BlogList = () => {
     const [selectedPrimaryTag, setSelectedPrimaryTag] = useState(
         primaryTags[0]
     );
+
+    useEffect(() => {
+        const getPosts = async () => {
+            try {
+                const res = await fetch(`${process.env.URL}/api/posts/`);
+                if (!res.ok) return;
+                const data = await res.json();
+                setCurrentBlogs(data.posts)
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        getPosts();
+    }, []);
 
     useEffect(() => {
         const query = debouncedText.trim().toLowerCase();
@@ -255,6 +269,8 @@ const BlogList = () => {
                                     domains={blog.domains}
                                     slug={blog.slug}
                                     date={blog.date}
+                                    likes={blog.likes}
+                                    views={blog.views}
                                     searchQuery={
                                         searchQuery.trim().length >= 3
                                             ? searchQuery
