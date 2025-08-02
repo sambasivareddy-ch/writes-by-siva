@@ -595,14 +595,15 @@
     align-items: center;
     flex-wrap: wrap;
     font-family: var(--font-family-pop);
-    margin: 10px 0 0 0;
+    margin: 15px 0 0 0;
 }
 
-.blog-domains .tag {
+.tag {
     border: solid 1px var(--border-color);
     font-size: 16px;
     padding: 5px 10px;
     border-radius: 5pc;
+    width: fit-content ;
 }
 
 .blog-insights {
@@ -639,6 +640,7 @@
 .blog-component_insights {
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;
     gap: 10px;
 }
 

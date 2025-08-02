@@ -45,11 +45,9 @@ const BlogComponent = (props) => {
                                 <InsightsIcon/>
                                 <p>{views}</p>
                             </div>
-                            <div className={styles['blog-domains']}>
                                 {domains.map((tag) => {
                                     return <p key={Math.random()} className={styles['tag']}>{tag}</p>
                                 })}
-                            </div>
                         </div>
                     </div>
                 </div>
