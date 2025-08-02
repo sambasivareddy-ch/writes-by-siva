@@ -11,8 +11,6 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import TagsContext from "@/store/tagsContext";
 import useDebounce from "@/hooks/useDebounce";
 
-import blogs from "@/blogInfo";
-
 const BlogList = () => {
     const {
         selectedTags,
@@ -24,6 +22,7 @@ const BlogList = () => {
 
     const primaryTags = ["tech", "personal", "tech-events"];
     const [blogTags, setBlogTags] = useState([]);
+    const [blogs, setBlogs] = useState([]);
     const [topicBasedBlogs, setTopicBasedBlogs] = useState([]);
     const [currentBlogs, setCurrentBlogs] = useState(blogs);
     const [showMoreStatus, setShowMoreStatus] = useState(false);
@@ -39,6 +38,25 @@ const BlogList = () => {
     );
 
     useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await fetch(`https://writes-by-siva-server-production.up.railway.app/all`);
+
+                if (!response.ok) {
+                    return
+                }
+
+                const json = await response.json();
+                setBlogs(json.blogs)
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        fetchPosts();
+    }, [])
+
+    useEffect(() => {
         const query = debouncedText.trim().toLowerCase();
 
         const filtered = topicBasedBlogs.filter((blog) => {
@@ -48,7 +66,7 @@ const BlogList = () => {
                     blog.title.toLowerCase().includes(query) ||
                     blog.description.toLowerCase().includes(query) ||
                     blog.slug.toLowerCase().includes(query) ||
-                    blog.domains.some((d) => d.toLowerCase().includes(query));
+                    blog.domains.split(',').some((d) => d.toLowerCase().includes(query));
             }
 
             // Tag match
@@ -56,8 +74,8 @@ const BlogList = () => {
                 selectedTags.length === 0
                     ? true
                     : matchAllTags
-                    ? selectedTags.every((tag) => blog.domains.includes(tag))
-                    : selectedTags.some((tag) => blog.domains.includes(tag));
+                    ? selectedTags.every((tag) => blog.domains.split(',').includes(tag))
+                    : selectedTags.some((tag) => blog.domains.split(',').includes(tag));
 
             return matchesSearch && matchesTags;
         });
@@ -74,25 +92,27 @@ const BlogList = () => {
     }, [showMoreStatus]);
 
     useEffect(() => {
-        const selectedBlogsBasedOnTopic = blogs.filter((blog) => blog.primary === selectedPrimaryTag);
-        setTopicBasedBlogs(selectedBlogsBasedOnTopic)
+        if (blogs) {
+            const selectedBlogsBasedOnTopic = blogs.filter((blog) => blog['primary_category'] === selectedPrimaryTag);
+            setTopicBasedBlogs(selectedBlogsBasedOnTopic)
 
-        // Initialize blogTags with all unique tags from blogs
-        const initialTags = Array.from(
-            new Set(selectedBlogsBasedOnTopic.flatMap((blog) => blog.domains))
-        );
-        initialTags.sort((a, b) => a.localeCompare(b)); // Sort tags alphabetically
-        setBlogTags(initialTags);
+            // Initialize blogTags with all unique tags from blogs
+            const initialTags = Array.from(
+                new Set(selectedBlogsBasedOnTopic.flatMap((blog) => blog.domains.split(',')))
+            );
+            initialTags.sort((a, b) => a.localeCompare(b)); // Sort tags alphabetically
+            setBlogTags(initialTags);
 
-        // Initialize tagsCount with the count of each tag
-        const initialTagsCount = {};
-        initialTags.forEach((tag) => {
-            initialTagsCount[tag] = selectedBlogsBasedOnTopic.filter((blog) =>
-                blog.domains.includes(tag)
-            ).length;
-        });
-        setTagsCount(initialTagsCount);
-    }, [selectedPrimaryTag]);
+            // Initialize tagsCount with the count of each tag
+            const initialTagsCount = {};
+            initialTags.forEach((tag) => {
+                initialTagsCount[tag] = selectedBlogsBasedOnTopic.filter((blog) =>
+                    blog.domains.split(',').includes(tag)
+                ).length;
+            });
+            setTagsCount(initialTagsCount);
+        }
+    }, [selectedPrimaryTag, blogs]);
 
     const handleTagClick = (tag) => {
         if (selectedTags.includes(tag)) {
@@ -252,9 +272,10 @@ const BlogList = () => {
                                     key={blog.id}
                                     title={blog.title}
                                     description={blog.description}
-                                    domains={blog.domains}
+                                    domains={blog.domains.split(',')}
                                     slug={blog.slug}
                                     date={blog.date}
+                                    views={blog.views? blog.views:0}
                                     searchQuery={
                                         searchQuery.trim().length >= 3
                                             ? searchQuery

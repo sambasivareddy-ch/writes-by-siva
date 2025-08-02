@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import InsightsIcon from '@mui/icons-material/Insights';
 import styles from '@/styles/blog.module.css';
 
 const highlightText = (text, query) => {
@@ -21,7 +22,7 @@ const highlightText = (text, query) => {
 };
 
 const BlogComponent = (props) => {
-    const { slug, title, description, date, searchQuery, domains } = props;
+    const { slug, title, description, date, searchQuery, domains, views } = props;
 
     return (
         <Link href={`/blog/${slug}`} className={styles["blog-comp__link"]} passHref>
@@ -39,10 +40,16 @@ const BlogComponent = (props) => {
                         <p className={styles["blog-description"]}>
                             {highlightText(description, searchQuery)}
                         </p>
-                        <div className={styles['blog-domains']}>
-                            {domains.map((tag) => {
-                                return <p key={Math.random()} className={styles['tag']}>{tag}</p>
-                            })}
+                        <div className={styles['blog-component_insights']}>
+                            <div className={styles['blog-insights_view']}>
+                                <InsightsIcon/>
+                                <p>{views}</p>
+                            </div>
+                            <div className={styles['blog-domains']}>
+                                {domains.map((tag) => {
+                                    return <p key={Math.random()} className={styles['tag']}>{tag}</p>
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>
