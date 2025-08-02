@@ -1,32 +1,29 @@
+import Head from "next/head";
+import fs from "fs/promises";
+import matter from "gray-matter";
+import blogs from "@/blogInfo";
 import BlogPost from "@/components/BlogPost";
-
-// Use fetch from Node runtime for server-side fetching
-async function fetchPostData(slug) {
-    const res = await fetch(`${process.env.URL}/api/posts/${slug}`, {
-        cache: "no-store" // ensure fresh content during dev
-    });
-
-    if (!res.ok) {
-        return null;
-    }
-
-    return res.json();
-}
+import path from "path";
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
-    const data = await fetchPostData(slug);
-    if (!data) {
+    const post = blogs.find((p) => p.slug === slug);
+    if (!post) {
         return {
             title: "Post Not Found",
             description: "This blog post could not be found.",
         };
     }
 
-    const { meta } = data;
-    const imageUrl = meta.image?.startsWith("http")
-        ? meta.image
-        : `https://bysiva.blog${meta.image}`;
+    const file = await fs.readFile(path.join(process.cwd(), 'public', 'posts', post.filename), 'utf-8');
+
+    const { data: meta } = matter(file);
+
+    const imageUrl = meta.image
+        ? meta.image.startsWith("http")
+            ? meta.image
+            : `https://bysiva.blog${meta.image}`
+        : null;
 
     return {
         title: meta.title || "My Blog",
@@ -53,13 +50,21 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPage({ params }) {
     const { slug } = await params;
-    const data = await fetchPostData(slug);
+    const post = blogs.find((p) => p.slug === slug);
+    if (!post) return <div>Post not found</div>;
 
-    if (!data) return <div>Post not found</div>;
+    const file = await fs.readFile(path.join(process.cwd(), 'public', 'posts', post.filename), 'utf-8');
+    const { content, data: meta } = matter(file);
+
+    const imageUrl = meta.image
+        ? meta.image.startsWith("http")
+            ? meta.image
+            : `https://bysiva.blog${meta.image}`
+        : null;
 
     return (
         <>
-            <BlogPost slug={slug} />
+            <BlogPost content={content} meta={meta} slug={slug} />
         </>
     );
 }
