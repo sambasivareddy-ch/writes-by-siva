@@ -169,11 +169,16 @@
 
 .blogs {
     width: 100%;
-    /* height: 80vh; */
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     gap: 10px;
     /* overflow: scroll; */
+}
+
+.zero-blogs {
+    justify-content: center;
+    align-items: center;
 }
 
 .blog-comp__wrapper {
@@ -656,11 +661,11 @@
 }
 
 .blog-insights_view svg {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .blog-insights_view p {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 @media screen and (min-width: 300px) and (max-width: 600px) {

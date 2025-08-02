@@ -260,7 +260,7 @@ const BlogList = () => {
                         </p>
                     )}
                 </div>}
-                <div className={styles["blogs"]}>
+                <div className={`${styles["blogs"]} ${topicBasedBlogs.length === 0 && styles['zero-blogs']}`}>
                     {topicBasedBlogs.length !== 0 && currentBlogs
                         .slice(
                             presentPageIndex * 10,
