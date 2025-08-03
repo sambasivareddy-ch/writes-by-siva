@@ -1,6 +1,7 @@
 import Head from "next/head";
 import fs from "fs/promises";
 import matter from "gray-matter";
+import readingTime from "reading-time";
 import BlogPost from "@/components/BlogPost";
 import path from "path";
 
@@ -18,6 +19,28 @@ async function getPost(slug) {
     } catch(err) {
         console.log(err)
         return null;
+    }
+}
+
+async function updateReadTime(slug, readtime) {
+    try {
+        const response = await fetch(`https://writes-by-siva-server-production.up.railway.app/readtime/${slug}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                readtime,
+            })
+        })
+
+        if (!response.ok) {
+            return
+        }
+
+        await response.json();
+    } catch(err) {
+        console.log(err)
     }
 }
 
@@ -85,6 +108,10 @@ export default async function BlogPage({ params }) {
 
     const file = await fs.readFile(path.join(process.cwd(), 'public', 'posts', post.filename), 'utf-8');
     const { content, data: meta } = matter(file);
+
+    const stats = readingTime(content);
+
+    updateReadTime(slug, stats.minutes);
 
     return (
         <>

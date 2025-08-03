@@ -275,7 +275,9 @@ const BlogList = () => {
                                     domains={blog.domains.split(',')}
                                     slug={blog.slug}
                                     date={blog.date}
+                                    likes={blog.likes? blog.likes:0}
                                     views={blog.views? blog.views:0}
+                                    readtime={blog.readtime? blog.readtime:0}
                                     searchQuery={
                                         searchQuery.trim().length >= 3
                                             ? searchQuery
