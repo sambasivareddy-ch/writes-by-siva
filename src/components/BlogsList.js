@@ -9,6 +9,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import TagsContext from "@/store/tagsContext";
+import BlogsContext from "@/store/blogsContext";
 import useDebounce from "@/hooks/useDebounce";
 
 const BlogList = () => {
@@ -20,9 +21,12 @@ const BlogList = () => {
         toggleMatchAllTags,
     } = useContext(TagsContext);
 
+    const {
+        blogs, setBlogs
+    } = useContext(BlogsContext)
+
     const primaryTags = ["tech", "personal", "tech-events"];
     const [blogTags, setBlogTags] = useState([]);
-    const [blogs, setBlogs] = useState([]);
     const [topicBasedBlogs, setTopicBasedBlogs] = useState([]);
     const [currentBlogs, setCurrentBlogs] = useState(blogs);
     const [showMoreStatus, setShowMoreStatus] = useState(false);
@@ -53,7 +57,8 @@ const BlogList = () => {
             }
         }
 
-        fetchPosts();
+        if (blogs.length === 0)
+            fetchPosts();
     }, [])
 
     useEffect(() => {
