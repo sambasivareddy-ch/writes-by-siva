@@ -5,8 +5,8 @@
   --charcoal-color: #101820FF;
   --yellow-color: #FEE715FF;
   --cyan-color: #64FEDB;
-  --font-family-pop: 'Poppins', serif;
-  --font-family-raleway: "Raleway", sans-serif;
+  --font-family-pop: var(--font-poppins), sans-serif;
+  --font-family-raleway: var(--font-raleway), sans-serif;
   --bg-color: #0B192E;
   --text-color: #90a4ae;
   --green-color: #43a047;
