@@ -715,9 +715,14 @@
 }
 
 .menu-btn {
-    border: none;
+    border: solid 1px var(--border-color);
     outline: none;
     cursor: pointer;
+}
+
+.menu-btn svg {
+    width: 30px;
+    height: 30px;
 }
 
 .menu-btn:hover {
