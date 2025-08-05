@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import ClearIcon from "@mui/icons-material/Clear";
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import BlogComponent from "@/components/BlogComponent";
 import styles from "@/styles/blog.module.css";
 
@@ -40,6 +42,7 @@ const BlogList = () => {
     const [selectedPrimaryTag, setSelectedPrimaryTag] = useState(
         primaryTags[0]
     );
+    const [menuOpened, setMenuOpened] = useState(false);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -131,7 +134,7 @@ const BlogList = () => {
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
                 <div className={styles["blog-input_header"]}>
-                    <select
+                    {/* <select
                         className={styles["primary-tag_select"]}
                         value={selectedPrimaryTag}
                         onChange={(e) => setSelectedPrimaryTag(e.target.value)}
@@ -143,7 +146,10 @@ const BlogList = () => {
                                 </option>
                             );
                         })}
-                    </select>
+                    </select> */}
+                    <button className={styles['menu-btn']} onClick={() => {setMenuOpened(!menuOpened)}}>
+                        {!menuOpened ? <MenuIcon/>: <CloseIcon/>}
+                    </button>
                     <div>
                         <input
                             type="text"
@@ -155,6 +161,11 @@ const BlogList = () => {
                         />
                     </div>
                 </div>
+                {menuOpened && <div className={styles['menu']}>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[0])}>Technology</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[1])}>Personal</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[2])}>Tech-Events</button>
+                </div>}
                 {topicBasedBlogs.length !== 0 && <div className={styles["blog-header"]}>
                     <label className={styles["filtering-option"]}>
                         <input
