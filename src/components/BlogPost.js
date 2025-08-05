@@ -114,7 +114,7 @@ export default function BlogPost(props) {
                     ))} 
                 </div>
                 <div className={styles['blog-insights']}>
-                    <button onClick={likeClickHandler}>
+                    <button onClick={likeClickHandler} aria-label="Like">
                         <FavoriteIcon/>
                         <p>{likes}</p>
                     </button>
@@ -152,7 +152,7 @@ export default function BlogPost(props) {
                 <div className={styles["blog-post-footer"]}>
                     <p>Share on:</p>
                     <div className={styles["blog-post-share"]}>
-                        <button onClick={copyToClipboardHandler} className={styles["copy-url-button"]}>
+                        <button onClick={copyToClipboardHandler} className={styles["copy-url-button"]} aria-label="Copy">
                             <ContentCopyIcon/>
                         </button>
                         <a href={`https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`} target="_blank" rel="noopener noreferrer">

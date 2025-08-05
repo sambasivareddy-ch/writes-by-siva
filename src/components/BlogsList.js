@@ -147,7 +147,7 @@ const BlogList = () => {
                             );
                         })}
                     </select> */}
-                    <button className={styles['menu-btn']} onClick={() => {setMenuOpened(!menuOpened)}}>
+                    <button className={styles['menu-btn']} onClick={() => {setMenuOpened(!menuOpened)}} aria-label="Menu">
                         {!menuOpened ? <MenuIcon/>: <CloseIcon/>}
                     </button>
                     <div>
@@ -162,10 +162,10 @@ const BlogList = () => {
                     </div>
                 </div>
                 {menuOpened && <div className={styles['menu']}>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[0])}>All</button>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[1])}>Technology</button>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[2])}>Personal</button>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[3])}>Tech-Events</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[0])} aria-label="All">All</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[1])} aria-label="Technology">Technology</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[2])} aria-label="Personal">Personal</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[3])} aria-label="Tech Events">Tech-Events</button>
                 </div>}
                 {topicBasedBlogs.length !== 0 && <div className={styles["blog-header"]}>
                     <label className={styles["filtering-option"]}>
