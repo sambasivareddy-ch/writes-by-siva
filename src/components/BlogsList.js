@@ -27,7 +27,7 @@ const BlogList = () => {
         blogs, setBlogs
     } = useContext(BlogsContext)
 
-    const primaryTags = ["tech", "personal", "tech-events"];
+    const primaryTags = ["all", "tech", "personal", "tech-events"];
     const [blogTags, setBlogTags] = useState([]);
     const [topicBasedBlogs, setTopicBasedBlogs] = useState([]);
     const [currentBlogs, setCurrentBlogs] = useState(blogs);
@@ -101,7 +101,7 @@ const BlogList = () => {
 
     useEffect(() => {
         if (blogs) {
-            const selectedBlogsBasedOnTopic = blogs.filter((blog) => blog['primary_category'] === selectedPrimaryTag);
+            const selectedBlogsBasedOnTopic = blogs.filter((blog) => selectedPrimaryTag === 'all' || blog['primary_category'] === selectedPrimaryTag);
             setTopicBasedBlogs(selectedBlogsBasedOnTopic)
 
             // Initialize blogTags with all unique tags from blogs
@@ -162,9 +162,10 @@ const BlogList = () => {
                     </div>
                 </div>
                 {menuOpened && <div className={styles['menu']}>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[0])}>Technology</button>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[1])}>Personal</button>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[2])}>Tech-Events</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[0])}>All</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[1])}>Technology</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[2])}>Personal</button>
+                    <button onClick={() => setSelectedPrimaryTag(primaryTags[3])}>Tech-Events</button>
                 </div>}
                 {topicBasedBlogs.length !== 0 && <div className={styles["blog-header"]}>
                     <label className={styles["filtering-option"]}>
