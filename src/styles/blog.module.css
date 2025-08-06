@@ -715,7 +715,7 @@
 }
 
 .menu-btn {
-    border: solid 1px var(--border-color);
+    /* border: solid 1px var(--border-color); */
     outline: none;
     cursor: pointer;
 }
