@@ -13,6 +13,9 @@ export async function generateMetadata() {
       url: 'https://bysiva.blog/',
       type: 'website',
     },
+    icons: {
+      icon: './logo.jpg'
+    },
     twitter: {
       card: 'summary_large_image',
       title: 'My Blogs',

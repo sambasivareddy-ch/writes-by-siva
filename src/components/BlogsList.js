@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
+import Link from "next/link";
 
 import ClearIcon from "@mui/icons-material/Clear";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -147,9 +148,12 @@ const BlogList = () => {
                             );
                         })}
                     </select> */}
-                    <button className={styles['menu-btn']} onClick={() => {setMenuOpened(!menuOpened)}} aria-label="Menu">
-                        {!menuOpened ? <MenuIcon/>: <CloseIcon/>}
-                    </button>
+                    <div className={styles['header-main']}>
+                        <button className={styles['menu-btn']} onClick={() => {setMenuOpened(!menuOpened)}} aria-label="Menu">
+                            {!menuOpened ? <MenuIcon/>: <CloseIcon/>}
+                        </button>
+                        <Link href={`/profile`}>Profile</Link>
+                    </div>
                     <div>
                         <input
                             type="text"
