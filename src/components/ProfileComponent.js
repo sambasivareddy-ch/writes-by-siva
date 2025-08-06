@@ -8,10 +8,10 @@ const ProfileComponent = () => {
         <div className={styles['profile-wrapper']}>
             <Link href={`/`}>Go to Home</Link>
             <div className={styles['profile-intro']}>
-                <h3>Namaste, I'm</h3>
+                <h3>Namaste, I&apos;m</h3>
                 <h1>Samba Siva Reddy</h1>
                 <p>
-                I'm a Full Stack Web Developer with over 2 years of experience working on core PostgreSQL internals, developing distributed systems on top of it. With deep expertise in the MERN stack and backend development using Golang, I focus on building clean, scalable, and maintainable architectures. I'm also well-versed in Docker-based containerization, ensuring efficient development and deployment pipelines. Recently, I’ve expanded into cross-platform mobile development using React Native. Currently, I serve as a Member of Technical Staff at Zoho Corporation, where I work on high-performance software systems that solve complex, real-world problems.
+                I am a Full Stack Web Developer with over 2 years of experience working on core PostgreSQL internals, developing distributed systems on top of it. With deep expertise in the MERN stack and backend development using Golang, I focus on building clean, scalable, and maintainable architectures. I am also well-versed in Docker-based containerization, ensuring efficient development and deployment pipelines. Recently, I’ve expanded into cross-platform mobile development using React Native. Currently, I serve as a Member of Technical Staff at Zoho Corporation, where I work on high-performance software systems that solve complex, real-world problems.
                 </p>
             </div>
             <div className={styles['profile-links']}>
