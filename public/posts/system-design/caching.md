@@ -12,8 +12,8 @@ canonical_url: "https://bysiva.vercel.app/blog/caching"
 ## 📚 Table of Contents
 1. [Definition](#definition)  
 2. [Caching Techniques](#caching-techniques)  
-3. [Cache Strategies](#cahe-strategies)  
-4. [Applications](#applications)
+3. [Cache Strategies](#cache-strategies)  
+4. [Pros & Cons](#pros-and-cons)
 
 ## Definition
 **Caching** is a technique used to store a copy of data or computational results of the requests that can be retrieved quickly later when the user access the application.
