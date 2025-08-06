@@ -718,6 +718,7 @@
     /* border: solid 1px var(--border-color); */
     outline: none;
     cursor: pointer;
+    border: none;
 }
 
 .menu-btn svg {
