@@ -282,7 +282,7 @@ const BlogList = () => {
                     )}
                 </div>}
                 <div className={`${styles["blogs"]} ${topicBasedBlogs.length === 0 && styles['zero-blogs']}`}>
-                    {topicBasedBlogs.length !== 0 && currentBlogs
+                    {topicBasedBlogs.length !== 0 && currentBlogs.length !== 0 ?  currentBlogs
                         .slice(
                             presentPageIndex * 10,
                             presentPageIndex * 10 + 10
@@ -306,7 +306,7 @@ const BlogList = () => {
                                     }
                                 />
                             );
-                        })}
+                        }): <div className={styles['no-blogs_matched']}>Oops!! No Blogs matched with selected tags</div>}
                     {topicBasedBlogs.length === 0 && 
                         <div className={styles['no-blogs']}>Yet to Add blogs on {selectedPrimaryTag} topic.</div>
                     }
