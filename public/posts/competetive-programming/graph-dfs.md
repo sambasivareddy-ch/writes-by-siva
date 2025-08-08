@@ -9,7 +9,7 @@ canonical_url: "https://bysiva.vercel.app/blog/graph-dfs.md"
 
 # Graph BFS Traversal
 ## Problem Statement
-Given an undirected connected graph with V vertices numbered from 0 to V-1, the task is to implement the Depth First Search (BFS) traversal starting from the 0th vertex. The graph is represented using an adjacency list where adj[i] contains a list of vertices connected to vertex i. Visit nodes in the order they appear in the adjacency list.
+Given an undirected connected graph with V vertices numbered from 0 to V-1, the task is to implement the Depth First Search (DFS) traversal starting from the 0th vertex. The graph is represented using an adjacency list where adj[i] contains a list of vertices connected to vertex i. Visit nodes in the order they appear in the adjacency list.
 
 ### Example
 ```tree
