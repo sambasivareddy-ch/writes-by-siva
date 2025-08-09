@@ -2,7 +2,7 @@
 title: "Graph Traversal(BFS)"
 description: "BFS Algorithm to traverse the Graph"
 author: "Siva"
-date: 2025-07-02
+date: 2025-08-02
 tags: ["Competitive Programming", "Graph"]
 canonical_url: "https://bysiva.vercel.app/blog/graph-bfs.md"
 ---
