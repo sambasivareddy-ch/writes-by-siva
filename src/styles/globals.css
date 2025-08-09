@@ -61,3 +61,7 @@ mark {
   color: #000;
   border-radius: 5px;
 }
+
+ul {
+  list-style: none;
+}

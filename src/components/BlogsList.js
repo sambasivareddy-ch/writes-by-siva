@@ -135,19 +135,6 @@ const BlogList = () => {
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
                 <div className={styles["blog-input_header"]}>
-                    {/* <select
-                        className={styles["primary-tag_select"]}
-                        value={selectedPrimaryTag}
-                        onChange={(e) => setSelectedPrimaryTag(e.target.value)}
-                    >
-                        {primaryTags.map((pTag) => {
-                            return (
-                                <option key={Math.random()} value={pTag}>
-                                    {pTag}
-                                </option>
-                            );
-                        })}
-                    </select> */}
                     <div className={styles['header-main']}>
                         <button className={styles['menu-btn']} onClick={() => {setMenuOpened(!menuOpened)}} aria-label="Menu">
                             {!menuOpened ? <MenuIcon/>: <CloseIcon/>}
@@ -299,6 +286,7 @@ const BlogList = () => {
                                     likes={blog.likes? blog.likes:0}
                                     views={blog.views? blog.views:0}
                                     readtime={blog.readtime? blog.readtime:0}
+                                    author={blog.author}
                                     searchQuery={
                                         searchQuery.trim().length >= 3
                                             ? searchQuery
