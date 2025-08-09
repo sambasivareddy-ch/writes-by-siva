@@ -571,6 +571,10 @@
     background-color: var(--border-color);
 }
 
+.blog-tag_reset {
+    background-color: #ff8a80;
+}
+
 .show-more_tag_btn {
     width: fit-content;
     gap: 0;
@@ -581,6 +585,10 @@
 .show-more_tag_btn svg {
     color: var(--primary-text);
     background-color: var(--border-color);
+}
+
+.blog-tag_reset svg {
+    background-color: #ff8a80;
 }
 
 .blog-tag:hover {
