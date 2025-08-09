@@ -7,7 +7,7 @@ tags: ["Competitive Programming", "Graph"]
 canonical_url: "https://bysiva.vercel.app/blog/graph-cycle-bfs"
 ---
 
-# Graph Cycle Detection using DFS
+# Graph Cycle Detection using BFS
 ## Problem Statement
 Given an undirected graph with V vertices labeled from 0 to V-1. The graph is represented using an adjacency list where adj[i] lists all nodes connected to node. Determine if the graph contains any cycles.
 
