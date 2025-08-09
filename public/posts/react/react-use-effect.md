@@ -8,12 +8,11 @@ canonical_url: "https://bysiva.vercel.app/blog/react-use-effect"
 ---
 # React's useEffect Hook
 
-## 📚 Table of Contents
 - [React's useEffect Hook](#reacts-useeffect-hook)
-  - [📚 Table of Contents](#-table-of-contents)
   - [Introduction](#introduction)
   - [Definition](#definition)
   - [Why useEffect Was Introduced](#why-useeffect-was-introduced)
+    - [useEffect was introduced in React 16.8 to:](#useeffect-was-introduced-in-react-168-to)
   - [Points to be remembered](#points-to-be-remembered)
   - [Example](#example)
   - [Common Issue](#common-issue)
@@ -43,7 +42,7 @@ This led to:
 - Scattered logic: Related code was split across multiple lifecycle methods.
 - Repetitive patterns: Mount/update/unmount logic often repeated.
 - Complex state management: Sharing logic between components required higher-order components or render props.
-**useEffect was introduced in React 16.8 to:**
+### useEffect was introduced in React 16.8 to:
 - Combine mount, update, and unmount behavior into one place.
 - Work seamlessly with function components (no need for classes).
 - Make it easier to reuse side-effect logic across components through custom hooks.
