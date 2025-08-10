@@ -572,7 +572,7 @@
 }
 
 .blog-tag_reset {
-    background-color: #ff8a80;
+    background-color: var(--border-color);
 }
 
 .show-more_tag_btn {
@@ -588,7 +588,7 @@
 }
 
 .blog-tag_reset svg {
-    background-color: #ff8a80;
+    background-color: var(--border-color);
 }
 
 .blog-tag:hover {
