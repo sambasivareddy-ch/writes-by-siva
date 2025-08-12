@@ -9,8 +9,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { BarLoader } from "react-spinners";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import InsightsIcon from '@mui/icons-material/Insights';
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -77,7 +78,8 @@ export default function BlogPost(props) {
             }
 
             await response.json();
-            setLikes((prev) => prev+1);
+            setLikes(likes + 1);
+            localStorage.setItem(`liked-${slug}`, "true");
         } catch(err) {
             console.log(err)
         }
@@ -115,7 +117,7 @@ export default function BlogPost(props) {
                 </div>
                 <div className={styles['blog-insights']}>
                     <button onClick={likeClickHandler} aria-label="Like">
-                        <FavoriteIcon/>
+                        {localStorage.getItem(`liked-${slug}`) ? <ThumbUpAltIcon/> : <ThumbUpOffAltIcon/>}
                         <p>{likes}</p>
                     </button>
                     <div className={styles['insights']}>
@@ -160,13 +162,6 @@ export default function BlogPost(props) {
                         </a>
                     </div>
                 </div>
-                {/* <div className={styles["blog-post-tags"]}>
-                    {tags.map((tag, index) => (
-                        <span key={index} className={styles["blog-post-tag"]}>
-                            {tag}
-                        </span>
-                    ))} 
-                </div> */}
             </div>
         </div>
     );
