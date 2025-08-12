@@ -117,7 +117,8 @@ export default function BlogPost(props) {
                 </div>
                 <div className={styles['blog-insights']}>
                     <button onClick={likeClickHandler} aria-label="Like">
-                        {localStorage.getItem(`liked-${slug}`) ? <ThumbUpAltIcon/> : <ThumbUpOffAltIcon/>}
+                        {/* {localStorage.getItem(`liked-${slug}`) ? <ThumbUpAltIcon/> : <ThumbUpOffAltIcon/>} */}
+                        <ThumbUpOffAltIcon/>
                         <p>{likes}</p>
                     </button>
                     <div className={styles['insights']}>
