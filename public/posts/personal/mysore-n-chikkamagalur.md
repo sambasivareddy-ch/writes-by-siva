@@ -49,7 +49,7 @@ We all started from our respective station the day before i.e Aug 13. And We all
 
 > Funny Conversation: Once we started towards the Mysore, we started talking, enjoying & gossipping. And in the flow, I called Harsha with slow voice, which was caught by Swapna & Urmila. And they teased us through out the trip about it.
 
-![Group Pic - 1](https://pub-b8d5ca13188446a08ac9941fcca1304e.r2.dev/group-pic.HEIC)
+![Group Pic - 1](https://pub-b8d5ca13188446a08ac9941fcca1304e.r2.dev/group-pic.jpeg)
 
 ## Day-1 (Mysore)
 ### Payana Car Museum
