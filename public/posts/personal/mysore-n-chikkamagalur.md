@@ -20,7 +20,7 @@ August 14, 2025 to August 17, 2025
 
 ## The Seed
 They say trips helps us to recharge ourselves and helps us to find ourselves. And when that trip happened with the people you **loved the most** will turn into **_Something Wonderful, Rememberable Trip_** ❤️.
-    The first discussion about the trip happened back in **May 2025**, the initial place we thought of is **Ooty, Konoor** but got postponed due to some other reasons to **August 2025** but the places changed to **_Mysore & Chikkamagalur_**.
+    The first discussion about the trip happened back in **May 2025**, the initial place we thought of is **Ooty, Conoor** but got postponed due to some other reasons to **August 2025** but the places changed to **_Mysore & Chikkamagalur_**.
 
 ## Itinerary
 ### August 14 (Mysore)
@@ -57,6 +57,9 @@ Our first stop was the "Payana Car Museum", a paradise of vintage cars, bikes an
 
 ### Mysore Palace 
 We forgot to carry a selfie stick, so we have ordered a selfie stick to Mysore Palace on Blinkit/Zepto. Palace was so beautiful in & out. Took tons of pics and made some reels and laughs while doing them, those laughs are in my mind are still young. Then went on taking the pics in front of Palace, there we have placed the selfie stick on the fence and forget it there. So the life-span of that selfie stick is 2hours 😂.
+
+![Palace](https://pub-b8d5ca13188446a08ac9941fcca1304e.r2.dev/palace.jpeg)
+
 
 ### Church
 I forget to mention, we also visited Cathedral Church, which is the second largest church in Asia. It was my first visit to a church, it was a good experience. Tbh, it looks exactly same as how we see the inside of a church in the movies. Spent some time there before starting to next place.
@@ -116,6 +119,9 @@ As usually, we have waited at the base point for 1-1.5hours to get into the jeep
 ### Z-Point Viewpoint
 And this is the last place on day-3, we went to see the greenary, but as expected that greenary is covered with fog. So spent little time there trying to take the timelapse of clouds moving but no success and then we returned to the stay.
 
+#### UNO & the Cards
+Like a tradition, that day also we played the UNO game and the Cards. I don't how to play the Card, so Harsha and Urmila taught me one of the game, I didn't actually remember the name of the game 😬, and we played for sometime and ofcourse I am last 😎.
+
 ## Day-4 (Chikkamagalur & Bangalore)
 The last day of trip is more of a devotional one where we have covered two temples and a reservoir.
 
@@ -126,9 +132,6 @@ Both the temples visited are architectural wonders. In Belur, the temple is for 
 
 ### Belavadi Temple
 As I said earlier, it has too good architecture, it is home to the **Lord Shiva**, felt pleasant and peaceful in the temple and set there for a long time talked a lot, took the pics. And there is a park adjacent to that temple, and guess what we did there **"Reels"** 🕺, it's been a while I actually tried to dance after did in my school anniversary for 'Ganam Style' 😂. I too actually didn't see the reel even it is recorded in my phone, that's how I dance when I dance, Hope it won't come out in Instagram or anywhere 🏃
-
-
-![Group Pic - 2](https://pub-b8d5ca13188446a08ac9941fcca1304e.r2.dev/group-pic-1.jpeg)
 
 ## Closing Notes
 And that’s how our Mysore & Chikkamagalur trip came to an end — four days filled with rain-soaked treks, endless laughter, lost selfie sticks, missed waterfalls, UNO wars, dances, small fights and so many little moments that will stay with us forever. **More than the places, it was the company that made this journey truly special ❤️.** Trips like these remind me that it’s not just about where we go, but who we go with. Until the next adventure… 🚗✨
