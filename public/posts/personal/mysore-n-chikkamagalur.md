@@ -106,11 +106,6 @@ Kallathigiri Falls is relatively the smaller water falls we visited in the entir
 ### Hebbe Waterfalls 
 As usually, we have waited at the base point for 1-1.5hours to get into the zeep. From the base point, it is nearly **5-6kms** to reach the waterfalls. The zeep ride is nothing short of rollercoaster ride, it is completely a off-road with lots of pits, trees bends into the roads, so we **_dunked, jumped, danced a lot_** but the views are so magnificant. At last we reached the another point, from there we have to walk another 800m to go nearer the waterfalls (I will about it later). And the waterfall is flowing at it's full capacity and it's worth visiting atleast once in the lifetime and I remembered the dialogue **Worth Verma Worth...** ❤️
 
-<video width="600" controls>
-  <source src="https://pub-b8d5ca13188446a08ac9941fcca1304e.r2.dev/IMG_4575.mov" type="video/quicktime">
-  Your browser does not support the video tag.
-</video>
-
 ### The 800m
 Maybe it is over exaggerating but worth mentioning. These 800m felt like a squid game where you have to cross the each huddle to get the reward. Since, it is raining, the path is so slippery, we felt it better to slide then walk to reach the falls, that much slippery it is. We saw people falling on their back, to their front and making their outfits turn into **Brown**. We four formed two teams, Harsha & Swapna, Me & Urmila, the later walked like nothing meant to them, my group walked so slow holding the trees along the path, checking for roots in the path to get the grip, it was such a good and tough experience 🫡.
 
