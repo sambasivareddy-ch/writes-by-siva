@@ -49,8 +49,6 @@ We all started from our respective station the day before i.e Aug 13. And We all
 
 > Funny Conversation: Once we started towards the Mysore, we started talking, enjoying & gossipping. And in the flow, I called Harsha with slow voice, which was caught by Swapna & Urmila. And they teased us through out the trip about it.
 
-<!-- ![Group Pic - 1](/blog_assets/group-pic.jpeg) -->
-
 ## Day-1 (Mysore)
 ### Payana Car Museum
 Our first stop was the "Payana Car Museum", a paradise of vintage cars, bikes and other vehicles. It will be the fest for any car enthuasists or photographers, took some good photos and then we headed straight to **Mysore Palace**.
