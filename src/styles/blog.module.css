@@ -694,7 +694,7 @@
 .blog-insights {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     margin: 20px 0;
 }
 
@@ -893,6 +893,31 @@
 .news-letter_wrapper form button:hover {
     color: #fff;
     background-color: #000;
+}
+
+.tldr-wrapper {
+    margin: 20px 0;
+}
+
+.summarize-btn {
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: solid 1px var(--border-color);
+    border-radius: 5px;
+    font-family: var(--font-family-raleway);
+    background-color: var(--cyan-color);
+    color: #000;
+}
+
+.summarize-btn:hover {
+    transform: scale(0.98);
+}
+
+.summarize-btn svg {
+    fill: var(--cyan-color);
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {
