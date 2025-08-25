@@ -12,7 +12,27 @@ canonical_url: "https://bysiva.vercel.app/blog/wal"
 **WAL** stands for **_Write-Ahead Logging_**. It is a PostgreSQL method to ensure the **ACID** durability; any changes are first written sequentially into the WAL log files before being applied to the Date files (_Heap & Indexes_).
 
 ## Core Principle
-> Never change Data files like **Heap & Indexes** before the corresponding changes are securely logged in the WAL.
+> Never change Data files like **Heap & Indexes** (where the actual data stores) before the corresponding changes are securely logged in the WAL.
+
+```mermaid
+flowchart TD
+    A[Client Transaction] --> B[Shared Buffers<br/>(Dirty Pages in Memory)]
+    B --> C[WAL Buffers]
+    C --> D[WAL Files<br/>($PGDATA/pg_wal/)]
+    D -->|Checkpoint or BG Writer| E[Data Files<br/>(Heap & Indexes)]
+
+    subgraph Commit Flow
+        C --> F[fsync WAL Record]
+        F --> G[COMMIT Acknowledged ✅]
+    end
+
+    subgraph Crash Recovery
+        H[Crash Occurs] --> I[Restart PostgreSQL]
+        I --> J[WAL Replay<br/>Redo INSERT/UPDATE/DELETE]
+        J --> E
+    end
+
+```
 
 ## Why WAL is important?
 1. **Crash Recovery**
@@ -25,7 +45,7 @@ canonical_url: "https://bysiva.vercel.app/blog/wal"
    1. Sequential writes to WAL are much faster than random writes to data pages.
 
 ## WAL Workflow: Simplified Version
-- A transaction modifies the rows in memory in **_Shared Buffers_**.
+- A transaction modifies the rows in memory (**_Shared Buffers_**).
 - Before flushing these dirty pages to the Disk, PostgreSQL writes a corresponding records to the WAL buffers.
 - On **`COMMIT`**:
   - WAL is flushed to the disk (`fsync`)
@@ -82,17 +102,6 @@ We’ll do three things:
 - Files are usually **`16MB`** each, and can be configurable at build time.
 - Records inside WAL describe the changes like **_Insert tuple in Page X at Offset Y_**
 
-## Inspect the WAL files
-At the OS level (assuming cluster at /var/lib/postgresql/data):
-```bash
-    pg_waldump -f -n 10 /var/lib/postgresql/data/pg_wal/
-```
-You’ll see records like:
-```makefile
-RMGR: Transaction ...
-RMGR: Heap  action: INSERT ...
-```
-
 ## Practical Usage & Tuning
 WAL is not just a crash recovery mechanism; it is central to PostgreSQL performance and high availability. Here are some key areas where WAL plays a role:
 1. Replication & PITR
@@ -111,3 +120,71 @@ WAL is not just a crash recovery mechanism; it is central to PostgreSQL performa
    3. archive_mode & archive_command: Enables WAL archiving for PITR.
    4. `synchronous_commit`: Controls whether to wait for WAL fsync on COMMIT. Can be relaxed for higher throughput.
    5. `wal_compression`: Compresses WAL records, reducing disk usage at the cost of CPU.
+
+## Understanding WAL files and Sequence Numbers
+### Log Sequence Number (LSN)
+PostgreSQL create WAL records for the each transaction executed in the database and append them to the WAL logfiles. The position where the current record placed is called as the **_Log Sequence Number (LSN)_**. The difference between two LSN values gives you the amount of WAL generated between those in bytes. 
+The LSN is a `64-bit` integer, representing it's position in the WAL log. This 64-bit LSN integer is splited into equal segments of 32-bit integers and we call them **High 32 bits** and **Low 32 bits**. And the common representation of the LSN is _two hexadecimal numbers separated by a slash_ **`XXXXXXXX/YYZZZZZZ`**, where 'X' represent the high bits, 'Y' is the high 8bits of the lower 32-bits section and finally 'Z' represents the record's offset position in the file. And each element is a **_Hexadecimal Number_**.
+
+### WAL File
+The WAL file name is in the format _`TTTTTTTTXXXXXXXXYYYYYYYY`_. Here 'T' is the timeline, 'X' is the high 32-bits part of LSN similarly 'Y' is the low 32-bits part of LSN.
+
+#### Example
+```makefile
+    LSN: 0/3F8B660
+    Here, Higher Bits: 0
+          Low-High 8Bits: 03 (or 3)
+
+    WAL File: 00000001 00000000 00000003
+    Timeline: 00000001
+    LSN Higher Bits: 00000000
+    LSN Low-High Bits: 00000003 (6 Leading Zeroes)
+```
+#### Current WAL LSN and insert LSN
+We have helper functions to get the current WAL LSN and insert LSN like `pg_current_wal_lsn` which gives the location of the **_last write_**. The `pg_current_wal_insert_lsn` is the logical location reflects **_data in the buffer that has not been written to the disk_**.
+```sql
+postgres=# select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
+ pg_current_wal_lsn | pg_current_wal_insert_lsn 
+--------------------+---------------------------
+ 0/3F8C580          | 0/3F8C580
+(1 row)
+```
+
+
+## Inspect the WAL files
+```sql
+postgres=# select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
+ pg_current_wal_lsn | pg_current_wal_insert_lsn 
+--------------------+---------------------------
+ 0/3F8C580          | 0/3F8C580
+(1 row)
+
+postgres=# insert into wal_demo (data) values ('sample');
+INSERT 0 1
+
+postgres=# select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
+ pg_current_wal_lsn | pg_current_wal_insert_lsn 
+--------------------+---------------------------
+ 0/3F8C820          | 0/3F8C820
+(1 row)
+```
+With the information we captured in the previous steps, use `pg_waldump` to get a human readable summary of the WAL segment contents. In the following command the starting position `(-s)` and ending position `(-e)` are specified along with the WAL file name (000000010000000000000003). The start position was the current_wal_lsn before our INSERT and the ending position was the current_wal_lsn after our insert. 
+```makefile
+pg_waldump -s 76/7E000060 -e 76/7E000108 00000001000000760000007E
+
+RMGR: Transaction ...
+RMGR: Heap  action: INSERT ...
+```
+
+## Official Docs
+- [Postgres Docs](https://www.postgresql.org/docs/current/wal-intro.html)
+- [pg_waldump](https://www.postgresql.org/docs/current/pgwaldump.html)
+
+## Closing Notes
+Write-Ahead Logging (WAL) is the foundation of PostgreSQL’s durability and reliability. By ensuring that every change is first recorded sequentially in the WAL before touching the actual data files, PostgreSQL guarantees:
+- Crash safety → replay WAL to restore consistency.
+- Durability → COMMIT is acknowledged only after WAL is safely flushed.
+- High availability → WAL powers replication and point-in-time recovery.
+- Performance → sequential WAL writes are faster than random heap writes.
+In short, WAL is PostgreSQL’s journal of truth — the reason your data survives crashes, powers replication, and scales reliably.
+If you’re tuning PostgreSQL or setting up HA (High Availability) systems, understanding WAL is not optional — it’s central to getting durability, performance, and resilience right.
