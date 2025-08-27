@@ -67,9 +67,9 @@ const BlogComponent = (props) => {
                     </Link>
                     <div className={styles["blog-meta"]}>
                         {author && <div className={styles["blog-insights_author"]}>
-                            <PersonOutlineIcon />
+                            {/* <PersonOutlineIcon /> */}
                             <p>
-                                {author[0].toUpperCase() + author.substring(1)}
+                                By: {author[0].toUpperCase() + author.substring(1)}
                             </p>
                         </div>}
                         <p className={styles["blog-date"]}>
