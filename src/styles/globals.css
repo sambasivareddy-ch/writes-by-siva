@@ -12,11 +12,25 @@
   --green-color: #43a047;
   --white-color: #fff;
 
+  /* Dark Theme Colors */
   --primary-color: #252525;
   --primary-text: #FFFFFF;
   --secondary-text: #cacaca;
   --border-color: #585858;
   --accent-color: #2C2C2C;
+  --highlight-color: #64FEDB;
+  --yellow-color: #FEE715FF;
+}
+
+[data-theme="light"] {
+  /* Light Theme Colors */
+  --primary-color: #FFFFFF;
+  --primary-text: #252525;
+  --secondary-text: #000;
+  --border-color: #EEE;
+  --accent-color: #000000;
+  --highlight-color: #757DE8;
+  --yellow-color: #c0ca33;
 }
 
 
@@ -28,7 +42,7 @@
 }
 
 ::selection {
-  background: var(--cyan-color); 
+  background: var(--highlight-color); 
   color: #000;         
 }
 
