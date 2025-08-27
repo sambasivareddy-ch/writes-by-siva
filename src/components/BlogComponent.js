@@ -66,12 +66,12 @@ const BlogComponent = (props) => {
                         <h3>{highlightText(title, searchQuery)}</h3>
                     </Link>
                     <div className={styles["blog-meta"]}>
-                        <div className={styles["blog-insights_author"]}>
+                        {author && <div className={styles["blog-insights_author"]}>
                             <PersonOutlineIcon />
                             <p>
                                 {author[0].toUpperCase() + author.substring(1)}
                             </p>
-                        </div>
+                        </div>}
                         <p className={styles["blog-date"]}>
                             {new Date(date).toLocaleDateString("en-US", {
                                 year: "numeric",

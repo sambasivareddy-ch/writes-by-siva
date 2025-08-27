@@ -11,7 +11,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InsightsIcon from "@mui/icons-material/Insights";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import FunctionsIcon from '@mui/icons-material/Functions';
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt"
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -26,11 +26,19 @@ export default function BlogPost(props) {
     const [views, setViews] = useState(post.views ? post.views : 0);
     const [tldr, setTldr] = useState(null);
     const [showTldr, setShowTldr] = useState(false);
+    const [alreadyLiked, setAlreadyLiked] = useState(false);
 
-    // Set the URL to the current page's URL
+    // Set the URL to the current page's URL & check whether the blog is liked or not
     useEffect(() => {
         setUrl(window.location.href);
+        const liked = localStorage.getItem(`liked-${slug}`);
+        setAlreadyLiked(liked !== null && liked !== '');
     }, []);
+
+    useEffect(() => {
+        const liked = localStorage.getItem(`liked-${slug}`);
+        setAlreadyLiked(liked !== null && liked !== '');
+    }, [likes]);
 
     const summarizeBlogHandler = async () => {
         if (!showTldr) {
@@ -77,9 +85,11 @@ export default function BlogPost(props) {
                     return;
                 }
 
-                await response.json();
-                sessionStorage.setItem(`viewed-${slug}`, "true");
-                setViews((prev) => prev + 1);
+                const json = await response.json();
+                if (json.success) {
+                    sessionStorage.setItem(`viewed-${slug}`, "true");
+                    setViews((prev) => prev + 1);
+                }
             } catch (err) {
                 console.log(err);
             }
@@ -89,6 +99,9 @@ export default function BlogPost(props) {
     }, []);
 
     const likeClickHandler = async () => {
+        if (alreadyLiked) {
+            return;
+        }
         try {
             const response = await fetch(
                 `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
@@ -107,9 +120,11 @@ export default function BlogPost(props) {
                 return;
             }
 
-            await response.json();
-            setLikes(likes + 1);
-            localStorage.setItem(`liked-${slug}`, "true");
+            const json = await response.json();
+            if (json.success) {
+                setLikes(likes + 1);
+                localStorage.setItem(`liked-${slug}`, "true");
+            }
         } catch (err) {
             console.log(err);
         }
@@ -149,9 +164,8 @@ export default function BlogPost(props) {
                     ))}
                 </div>
                 <div className={styles["blog-insights"]}>
-                    <button onClick={likeClickHandler} aria-label="Like">
-                        {/* {localStorage.getItem(`liked-${slug}`) ? <ThumbUpAltIcon/> : <ThumbUpOffAltIcon/>} */}
-                        <ThumbUpOffAltIcon />
+                    <button onClick={likeClickHandler} aria-label="Like" className={alreadyLiked? styles['liked']: styles['not-liked']}>
+                        {alreadyLiked ? <ThumbUpAltIcon/> : <ThumbUpOffAltIcon/>}
                         <p>{likes}</p>
                     </button>
                     <button className={styles['summarize-btn']} onClick={summarizeBlogHandler}>
