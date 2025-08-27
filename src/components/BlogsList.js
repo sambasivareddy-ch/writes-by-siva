@@ -7,6 +7,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import BlogComponent from "@/components/BlogComponent";
 import styles from "@/styles/blog.module.css";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -44,6 +46,17 @@ const BlogList = () => {
         primaryTags[0]
     );
     const [menuOpened, setMenuOpened] = useState(false);
+    const [theme, setTheme] = useState('dark');
+
+    useEffect(() => {
+        const theme = localStorage.getItem('blog-theme');
+        if (theme)
+            setTheme(theme);
+        else
+            localStorage.setItem('blog-theme', 'dark');
+
+        document.documentElement.setAttribute("data-theme", theme);
+    }, []);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -131,6 +144,13 @@ const BlogList = () => {
         }
     };
 
+    const toggleThemeHandler = () => {
+        const newTheme = theme === 'dark'? 'light': 'dark';
+        setTheme(newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('blog-theme', newTheme);
+    }
+
     return (
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
@@ -139,9 +159,11 @@ const BlogList = () => {
                         <button className={styles['menu-btn']} onClick={() => {setMenuOpened(!menuOpened)}} aria-label="Menu">
                             {!menuOpened ? <MenuIcon/>: <CloseIcon/>}
                         </button>
-                        <Link href={`/profile`}>Profile</Link>
                     </div>
-                    <div>
+                    <div className={styles['controls-wrapper']}>
+                        <button onClick={toggleThemeHandler}>
+                            {theme == 'dark' ? <LightModeIcon/>: <DarkModeIcon/>}
+                        </button>
                         <input
                             type="text"
                             placeholder="Search Blogs here..."
@@ -157,6 +179,7 @@ const BlogList = () => {
                     <button onClick={() => setSelectedPrimaryTag(primaryTags[1])} aria-label="Technology">Technology</button>
                     <button onClick={() => setSelectedPrimaryTag(primaryTags[2])} aria-label="Personal">Personal</button>
                     <button onClick={() => setSelectedPrimaryTag(primaryTags[3])} aria-label="Tech Events">Tech-Events</button>
+                    <Link href={`/profile`}>Profile</Link>
                 </div>}
                 {topicBasedBlogs.length !== 0 && <div className={styles["blog-header"]}>
                     <label className={styles["filtering-option"]}>

@@ -18,16 +18,16 @@
   --secondary-text: #cacaca;
   --border-color: #585858;
   --accent-color: #2C2C2C;
-  --highlight-color: #64FEDB;
+  --highlight-color: #757DE8;
   --yellow-color: #FEE715FF;
 }
 
 [data-theme="light"] {
   /* Light Theme Colors */
-  --primary-color: #FFFFFF;
+  --primary-color: #FFFCF9;
   --primary-text: #252525;
   --secondary-text: #000;
-  --border-color: #EEE;
+  --border-color: #E9E9E9;
   --accent-color: #000000;
   --highlight-color: #757DE8;
   --yellow-color: #c0ca33;
