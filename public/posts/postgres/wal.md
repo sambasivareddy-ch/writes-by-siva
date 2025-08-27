@@ -8,6 +8,27 @@ canonical_url: "https://bysiva.vercel.app/blog/wal"
 ---
 
 # Write-Ahead Logging (WAL)
+
+## Table of Contents
+- [Write-Ahead Logging (WAL)](#write-ahead-logging-wal)
+  - [Table of Contents](#table-of-contents)
+  - [Definition](#definition)
+  - [Core Principle](#core-principle)
+  - [Why WAL is important?](#why-wal-is-important)
+  - [WAL Workflow: Simplified Version](#wal-workflow-simplified-version)
+  - [Example](#example)
+  - [Crash Simulation](#crash-simulation)
+  - [WAL File Structure](#wal-file-structure)
+  - [Practical Usage \& Tuning](#practical-usage--tuning)
+  - [Understanding WAL files and Sequence Numbers](#understanding-wal-files-and-sequence-numbers)
+    - [Log Sequence Number (LSN)](#log-sequence-number-lsn)
+    - [WAL File](#wal-file)
+      - [Example](#example-1)
+      - [Current WAL LSN and insert LSN](#current-wal-lsn-and-insert-lsn)
+  - [Inspect the WAL files](#inspect-the-wal-files)
+  - [Official Docs](#official-docs)
+  - [Closing Notes](#closing-notes)
+
 ## Definition
 **WAL** stands for **_Write-Ahead Logging_**. It is a PostgreSQL method to ensure the **ACID** durability; any changes are first written sequentially into the WAL log files before being applied to the Date files (_Heap & Indexes_).
 

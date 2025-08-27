@@ -8,6 +8,18 @@ canonical_url: "https://bysiva.vercel.app/blog/materialized-views"
 ---
 
 # Materialized Views
+
+## Table of Contents
+- [Materialized Views](#materialized-views)
+  - [Table of Contents](#table-of-contents)
+  - [Definition](#definition)
+  - [Example](#example)
+  - [Common Problem](#common-problem)
+    - [Example](#example-1)
+  - [Difference between Materialized Views and Normal Views](#difference-between-materialized-views-and-normal-views)
+  - [Practical Usage](#practical-usage)
+  - [Official Docs](#official-docs)
+
 ## Definition
 A **`Materialized View`** in PostgreSQL is a database object which **_stores the result of a query physically on disk_**, unlike normal VIEWs which saves the `query definition`.
 - It acts like a **snapshot** of the query result.

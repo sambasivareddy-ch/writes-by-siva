@@ -8,6 +8,15 @@ canonical_url: "https://bysiva.vercel.app/blog/clock-sweep"
 ---
 
 # Clock Sweep Algorithm in PostgreSQL
+
+## Table of Content
+- [Clock Sweep Algorithm in PostgreSQL](#clock-sweep-algorithm-in-postgresql)
+  - [Table of Content](#table-of-content)
+  - [Definition](#definition)
+  - [Implementation (PostgreSQL)](#implementation-postgresql)
+    - [How the Algorithm Works](#how-the-algorithm-works)
+  - [Why It Was Introduced?](#why-it-was-introduced)
+
 ## Definition
 The **Clock Sweep Algorithm** is a page replacement algorithm used in postgreSQL to manage the buffer pool. 
 - The purpose of this algorithm is to efficiently select a buffer (i.e., a page in shared memory) to evict when the buffer pool is full for a new page, balancing performance and memory usage.
