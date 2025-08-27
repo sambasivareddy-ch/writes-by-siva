@@ -9,18 +9,18 @@ canonical_url: "https://bysiva.vercel.app/blog/materialized-views"
 
 # Materialized Views
 ## Definition
-A **`Materialized View`** in PostgreSQL is a database object which **_stores the result of a query physically on disk_**, unlike normal VIEW which saves the `query definition`.
+A **`Materialized View`** in PostgreSQL is a database object which **_stores the result of a query physically on disk_**, unlike normal VIEWs which saves the `query definition`.
 - It acts like a **snapshot** of the query result.
 - Useful for the expensive operations like joins, aggregates etc.. that **don't need to be recalculated every time**.
 - Can be refreshed to keep the data up to time.
 
-## Demonstration
-- Create a table called **_'SALES'_**
+## Example
+- Let's create a table called **_'SALES'_** which stores the sales happened on each product.
 ```sql
     CREATE TABLE SALES (ID INT, PRODUCT_ID INT, PRODUCT TEXT, PRICE INT, PRIMARY KEY (ID, PRODUCT_ID));
 ```
 
-- Insert 2M roles for products with Product_IDs 1 & 2. 1M for each product.
+- Now we are inserting **_2M_** rows for products with Product_IDs 1 & 2 that is `1M` for each product.
 ```sql
     -- Product 1
     INSERT INTO SALES (ID, PRODUCT_ID, PRODUCT, PRICE)
@@ -33,9 +33,9 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
     FROM generate_series(1, 1000000) gs;
 ```
 
-- Now I want to know for each product, how many sales happened and what is money generated from that.
+- Now the user wants to know _how many sales happened and what is money generated for each product_.
 ```sql
-    postgres=# SELECT product_id, count(*), sum(price) FROM sales GROUP BY product_id;
+    SELECT product_id, count(*), sum(price) FROM sales GROUP BY product_id;
     product_id |  count  |   sum    
     ------------+---------+----------
             1 | 1000000 | 50968137
@@ -43,9 +43,9 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
     (2 rows)
     Time: 98.024 ms
 ```
-  - This query took `98.024ms`. But in real world, query can be more complex and it can work on more complex data.
+This query took `98.024ms` to return the results. But in the real world, query can be more complex includes Aggregates, Joins etc.. and can take more time.
   
-- Let's see, can we decrease the time from 98.024ms further using Materialized View. Creating a materialized view called **money_generated**.
+- Let's see, how can we improve the performance of the same query using Materialized View. Let's create a materialized view called **money_generated**.
 ```sql
     CREATE MATERIALIZED VIEW money_generated 
     AS
@@ -53,11 +53,11 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
         FROM sales 
         GROUP BY product_id;
 ```
-    - Now the materialized view run the query and stores the results of the query in the disk or say cache the result. So that whenever the user runs the query again, materialized view simply returns the cached results without executing the query.
+Now that materialized view run the query and **_stores the results of it in the disk or say cache the result_**. So that whenever the user runs the same query again, materialized view simply returns the cached results without executing the query.
 
-- Now run the query
+- Now run the following query
 ```sql
-    postgres=# SELECT * FROM money_generated;
+    SELECT * FROM money_generated;
     product_id |  count  |   sum    
     ------------+---------+----------
             1 | 1000000 | 50968137
@@ -66,11 +66,11 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
 
     Time: 0.169 ms
 ```
-    - Now, we can see that query rans at around 500% faster.
+See the results are returned in just `0.169ms` which **500%** faster then the original query.
 
 ## Common Problem
-- In real-world applications, data will be continously inserted into the tables, means that the materialized view should be return the most recent data.
-- But the materialized view executes the query only once and stores the results, to re-compute the results we can **_refresh_** the materialized view.
+- In most of the real-world applications, data will be continously inserted into the tables or data will be updated regularly, means that the materialized view should be return the most recent data, but it will return already computed results.
+- And to re-compute the results we can **_refresh_** the materialized view.
 ```sql
     -- Refresh the materialized view (to update with latest data)
     REFRESH MATERIALIZED VIEW money_generated;
@@ -78,23 +78,22 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
     -- Optionally refresh concurrently (non-blocking, requires unique index)
     REFRESH MATERIALIZED VIEW CONCURRENTLY sales_summary;
 ```
-  - REFRESH MATERIALIZED VIEW replaces the old data with fresh results.
-  - CONCURRENTLY allows refreshing without blocking reads (but you must have a unique index on the view).
+**REFRESH MATERIALIZED VIEW** replaces the old data with fresh results. **CONCURRENTLY** allows refreshing without blocking reads (but you must have a unique index on the view).
 ### Example
 ```sql
-    postgres=# delete from sales where product_id = 1;
+    DELETE FROM sales WHERE product_id = 1;
     DELETE 1000000
 
-    postgres=# SELECT product_id, count(*), sum(price)
-               FROM sales
-               GROUP BY product_id;
+    SELECT product_id, count(*), sum(price)
+    FROM sales
+    GROUP BY product_id;
     product_id |  count  |   sum    
     ------------+---------+----------
             2 | 1000000 | 50984014
     (1 row)
     Time: 64.052 ms
 
-    postgres=# select * from total;
+    SELECT * FROM money_generated;
     product_id |  count  |   sum    
     ------------+---------+----------
             1 | 1000000 | 50968137
@@ -102,10 +101,10 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
     (2 rows)
     Time: 0.376 ms
 
-    -- Now you see, still the view returning old data, so we ran refresh on materialized view
+    -- Now you see, still the materialized view returning old data, so we ran refresh on materialized view
     REFRESH MATERIALIZED VIEW money_generated;
 
-    postgres=# select * from total;
+    SELECT * FROM money_generated;
     product_id |  count  |   sum    
     ------------+---------+----------
             2 | 1000000 | 50984014
@@ -124,3 +123,6 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
 - Caching: Speed up queries that join multiple large tables.
 - Pre-computation: Store expensive calculations (like analytics or ML features).
 - API/Frontend optimization: Provide pre-aggregated results for dashboards.
+
+## Official Docs
+- [Postgres Docs](https://www.postgresql.org/docs/current/rules-materializedviews.html)
