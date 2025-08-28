@@ -20,6 +20,7 @@
   --accent-color: #2C2C2C;
   --highlight-color: #757DE8;
   --yellow-color: #FEE715FF;
+  --glass-color: rgba(38, 38, 38, 0.75);
 }
 
 [data-theme="light"] {
@@ -31,6 +32,7 @@
   --accent-color: #000000;
   --highlight-color: #757DE8;
   --yellow-color: #c0ca33;
+  --glass-color: rgb(255, 252, 250, 0.75);
 }
 
 

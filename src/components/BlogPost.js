@@ -12,6 +12,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InsightsIcon from "@mui/icons-material/Insights";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt"
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -27,13 +28,27 @@ export default function BlogPost(props) {
     const [tldr, setTldr] = useState(null);
     const [showTldr, setShowTldr] = useState(false);
     const [alreadyLiked, setAlreadyLiked] = useState(false);
+    const [isScrollVisible, setIsScrollVisible] = useState(false);
 
     // Set the URL to the current page's URL & check whether the blog is liked or not
     useEffect(() => {
         setUrl(window.location.href);
+
+        // Fetch the like status of this blog
         const liked = localStorage.getItem(`liked-${slug}`);
         setAlreadyLiked(liked !== null && liked !== '');
+
+        const toggleVisibility = () => {
+            setIsScrollVisible(window.scrollY > 200);
+        }
+        window.addEventListener('scroll', toggleVisibility);
+
+        return () => window.removeEventListener('scroll', toggleVisibility);
     }, []);
+
+    const scrollToTopHandler = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     useEffect(() => {
         const liked = localStorage.getItem(`liked-${slug}`);
@@ -232,6 +247,9 @@ export default function BlogPost(props) {
             >
                 {content}
             </ReactMarkdown>
+            {isScrollVisible && <button onClick={scrollToTopHandler} className={styles['scroll-top_btn']}>
+                <ArrowUpwardIcon/>
+            </button>}
             <div className={styles["post-footer"]}>
                 <div className={styles["blog-post-footer"]}>
                     <p>Share on:</p>
