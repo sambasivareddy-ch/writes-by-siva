@@ -104,16 +104,20 @@
 }
 
 .blog-wrapper,
-.footer-wrapper {
+.footer-wrapper, .footer-wrapper-highlight {
     width: 100%;
     display: grid;
     place-items: center;
 }
 
-.footer-wrapper {
+.footer-wrapper, .footer-wrapper-highlight {
     margin: 20px 0;
     font-family: var(--font-family-pop);
     font-size: 14px;
+}
+
+.footer-wrapper-highlight {
+    background-color: var(--border-color);
 }
 
 .blog-main,
@@ -861,27 +865,49 @@
     flex-direction: column;
     gap: 10px 0;
     width: 300px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
-.news-letter_wrapper h3 {
+.news-letter_wrapper-highlight {
+    display: flex;
+    flex-direction: column;
+    gap: 10px 0;
+    width: 300px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border: solid 1px var(--border-color);
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.news-letter_wrapper h3,
+.news-letter_wrapper-highlight h3 {
     font-family: var(--font-family-raleway);
+    background-color: transparent;
 }
 
-.news-letter_wrapper form {
+.news-letter_wrapper form,
+.news-letter_wrapper-highlight form {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    background-color: transparent;
 }
 
-.news-letter_wrapper form input {
+.news-letter_wrapper form input,
+.news-letter_wrapper-highlight form input {
     padding: 10px 20px;
     box-sizing: border-box;
     border: solid 1px var(--border-color);
     color: #fff;
     border-radius: 5px;
+    background-color: transparent;
 }
 
-.news-letter_wrapper form button {
+.news-letter_wrapper form button,
+.news-letter_wrapper-highlight form button {
     outline: none;
     border: solid 1px var(--border-color);
     padding: 10px;
@@ -891,7 +917,8 @@
     border-radius: 5px;
 }
 
-.news-letter_wrapper form button:hover {
+.news-letter_wrapper form button:hover,
+.news-letter_wrapper-highlight form button:hover {
     color: #fff;
     background-color: #000;
 }
@@ -942,6 +969,39 @@
 .controls-wrapper button {
     outline: none;
     border: none;
+}
+
+.subscribe-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    text-decoration: none;
+    font-family: var(--font-family-raleway);
+    padding: 15px;
+    border: solid 1px var(--border-color);
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    border-color: var(--highlight-color);
+    color: var(--highlight-color);
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-weight: bold;
+}
+
+.subscribe-btn svg {
+    background-color: transparent;
+    fill: var(--highlight-color);
+}
+
+.subscribe-btn:hover {
+    background-color: var(--highlight-color);
+    color: var(--primary-text);
+}
+
+.subscribe-btn:hover svg {
+    fill: var(--primary-text);
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {

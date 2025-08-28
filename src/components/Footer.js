@@ -1,5 +1,7 @@
 "use client"
 
+import { useContext } from 'react';
+
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -11,8 +13,9 @@ import Newsletter from '@/components/Newsletter';
 import styles from '@/styles/blog.module.css';
 
 const Footer = () => {
+
     return (
-        <div className={styles['footer-wrapper']}>
+        <div className={styles['footer-wrapper']} id='footer'>
             <div className={styles['footer']}>
                 <div className={styles['contact-info']}>
                     <p>&copy; 2025 BySiva. All rights reserved.</p>

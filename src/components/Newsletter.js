@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import styles from '@/styles/blog.module.css';
+import BlogsContext from "@/store/blogsContext";
 
 const Newsletter = () => {
+    const { highlightFooter } = useContext(BlogsContext);
+    const classes = highlightFooter ? styles['news-letter_wrapper-highlight']: styles['news-letter_wrapper']
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
@@ -44,7 +47,7 @@ const Newsletter = () => {
     }
 
     return (
-        <div className={styles['news-letter_wrapper']}>
+        <div className={classes}>
             <h3>Join our Newsletter</h3>
             <form onSubmit={formSubmitHandler}>
                 <input 
