@@ -164,7 +164,7 @@ The WAL file name is in the format _`TTTTTTTTXXXXXXXXYYYYYYYY`_. Here 'T' is the
 #### Current WAL LSN and insert LSN
 We have helper functions to get the current WAL LSN and insert LSN like `pg_current_wal_lsn` which gives the location of the **_last write_**. The `pg_current_wal_insert_lsn` is the logical location reflects **_data in the buffer that has not been written to the disk_**.
 ```sql
-postgres=# select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
+select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
  pg_current_wal_lsn | pg_current_wal_insert_lsn 
 --------------------+---------------------------
  0/3F8C580          | 0/3F8C580
@@ -174,16 +174,16 @@ postgres=# select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
 
 ## Inspect the WAL files
 ```sql
-postgres=# select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
+select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
  pg_current_wal_lsn | pg_current_wal_insert_lsn 
 --------------------+---------------------------
  0/3F8C580          | 0/3F8C580
 (1 row)
 
-postgres=# insert into wal_demo (data) values ('sample');
+insert into wal_demo (data) values ('sample');
 INSERT 0 1
 
-postgres=# select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
+select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
  pg_current_wal_lsn | pg_current_wal_insert_lsn 
 --------------------+---------------------------
  0/3F8C820          | 0/3F8C820
