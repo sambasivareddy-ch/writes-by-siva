@@ -9,14 +9,14 @@ canonical_url: "https://bysiva.vercel.app/blog/variables"
 # Variables
 In most of our modern applications built on the top of javascript needs to store some kind of information. That information can be:
 1. User's wishlist products in an E-commerce application.
-2. Storing user balance amount in their bank account
+2. Storing user balance amount in their bank account.
 **Variables** can be used to store that information
 
 ## Definition
-A Variable is a **_named storage_** to store the data in the Javascript. We can use these variables to store any type of information an application needed.
+A Variable is a **_named storage_** used to store the data in the Javascript. We can use these variables to store any type of information an application needed that can be Numbers, Strings, Text and Object etc.
 ### Let
 One way to create a variable in Javascript by using `let` keyword.
-Let's declare a variable called "message" using let. And initialize a value to it.
+Let's declare a variable called "message" using _let_. And initialize a value to it.
 ```javascript
     let message;
     message = "Hello Everyone!!";
@@ -40,10 +40,10 @@ In older javascript script, **_var_** keyword is used to declare a variable like
     var message = "Hello Everyone!!";
     console.log(message); // Hello Everyone!!
 ```
-- Var is almost same to Let in terms of functionality with little difference, we will discuss about it later.
+- Var is almost same to Let in terms of functionality with little difference, we will discuss about it later in "Let v/s Var" section.
 
 ### Const
-In certain cases, we **don't want the value in a variable to change**, in these cases we can use **_const_** keyword to declare the constant variables.
+In certain cases, we **don't want the value in a variable to change everytime but same value through out**, in these cases we can use **_const_** keyword to declare the constant variables.
 #### Example:
 ```javascript
     const MY_BIRTH_DAY = "24/10/2000"
@@ -66,9 +66,9 @@ Valid variable names
 ```
 
 ## Let v/s Var
-The biggest differences between let and var are scope and hoisting.
+The biggest differences between let and var are **_scope_** and **_hoisting_**.
 ### Scope
-- **let is block-scoped**: accessible only inside the {} block where it is declared.
+- **let is block-scoped**: accessible only inside the `{}` block where it is declared.
 - **var is function-scoped**: accessible throughout the function where it is declared.
 #### Example
 ```javascript
@@ -91,3 +91,7 @@ The biggest differences between let and var are scope and hoisting.
     console.log(b); // ❌ Error: Cannot access 'b' before initialization
     let b = 10;
 ```
+
+## Resources
+- [Javascript.info - Variables](https://javascript.info/variables)
+- [Javascript.info - Var](https://javascript.info/var)
