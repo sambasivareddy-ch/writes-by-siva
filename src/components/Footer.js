@@ -1,7 +1,5 @@
 "use client"
 
-import { useContext } from 'react';
-
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -10,7 +8,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 import Newsletter from '@/components/Newsletter';
 
-import styles from '@/styles/blog.module.css';
+import styles from '@/styles/footer.module.css';
 
 const Footer = () => {
 

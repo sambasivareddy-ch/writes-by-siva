@@ -6,7 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import BlogComponent from "@/components/BlogComponent";
-import styles from "@/styles/blog.module.css";
+import styles from "@/styles/bloglist.module.css";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 
-import styles from '@/styles/blog.module.css';
+import styles from '@/styles/newsletter.module.css';
 import BlogsContext from "@/store/blogsContext";
 
 const Newsletter = () => {

@@ -3,8 +3,7 @@ import Link from "next/link";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import styles from "@/styles/blog.module.css";
+import styles from "@/styles/component.module.css";
 
 import TagsContext from "@/store/tagsContext";
 

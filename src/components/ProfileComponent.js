@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import styles from '../styles/blog.module.css';
+import styles from '../styles/profile.module.css';
 
 const ProfileComponent = () => {
     return (
