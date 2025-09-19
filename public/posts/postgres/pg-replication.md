@@ -13,16 +13,18 @@ canonical_url: "https://bysiva.vercel.app/blog/pg-replication"
   - [Definition](#definition)
   - [Why Replication is important?](#why-replication-is-important)
   - [Types of Replication](#types-of-replication)
-        - [Ufff!! That's lot of theory, let's get our hands dirty!!](#ufff-thats-lot-of-theory-lets-get-our-hands-dirty)
+    - [Physical Replication](#physical-replication)
+    - [Logical Replication](#logical-replication)
+    - [Synchronous vs Asynchronous Replication](#synchronous-vs-asynchronous-replication)
   - [Cluster](#cluster)
-  - [Physical Replication](#physical-replication)
-    - [**On Primary Cluster**](#on-primary-cluster)
-    - [**On Replica Cluster**](#on-replica-cluster)
-    - [**Testing / Verification**](#testing--verification)
-  - [Logical Replication](#logical-replication)
-    - [**On Primary Cluster**](#on-primary-cluster-1)
-    - [**On Replica Cluster**](#on-replica-cluster-1)
-    - [**Verification**](#verification)
+  - [Physical Replication](#physical-replication-1)
+    - [On Primary Cluster](#on-primary-cluster)
+    - [On Replica Cluster](#on-replica-cluster)
+    - [Testing / Verification](#testing--verification)
+  - [Logical Replication](#logical-replication-1)
+    - [On Primary Cluster](#on-primary-cluster-1)
+    - [On Replica Cluster](#on-replica-cluster-1)
+    - [Verification](#verification)
   - [When to Consider Replication?](#when-to-consider-replication)
   - [Conclusion](#conclusion)
   
@@ -37,23 +39,23 @@ canonical_url: "https://bysiva.vercel.app/blog/pg-replication"
 4. **Minimal Downtime**: Upgrades can be done without much downtime.
 
 ## Types of Replication
-- **Physical Replication**:
+### Physical Replication
   - Works at **Binary Level**.
   - Replica will be an **Exact Copy** of the Master Database Cluster.
   - Can be run Asynchronously or Synchronously.
   - Uses the **streaming** replication, where the data changes recorded in WAL of master will be streamed to replica in real-time.
-- **Logical Replication**:
+### Logical Replication
   - Works at **Table/Data** Level.
   - Master publishes the changes (INSERT/UPDATE/DELETE etc..) to the subscribers (replicas).
   - Flexible: unlike physical replication can replicate only some tables.
   - Useful for migrations, warehousing and multi-version upgrades.
-- **Synchronous vs Asynchronous Replication**:
+### Synchronous vs Asynchronous Replication
   - **Synchronous**: Transaction on primary is considered committed only after replica confirms. Guarantees no data loss, but slower.
   - **Asynchronous**: Primary doesnâ€™t wait for replica. Faster, but risk of data loss if primary fails before replica catches up.  
 
 ![Replication](https://pub-b8d5ca13188446a08ac9941fcca1304e.r2.dev/replication.png)
 
-##### Ufff!! That's lot of theory, let's get our hands dirty!!
+**Ufff!! That's lot of theory, let's get our hands dirty!!**
 ## Cluster
 Let's initialize a **Primary Cluster**
 ```bash
@@ -62,7 +64,7 @@ Let's initialize a **Primary Cluster**
 - I am going with PORT 6432 instead of default port 5432 (anything is fine). To change the port, change `port` variable in `postgresql.conf` file and restart the postgres to get that applied
 
 ## Physical Replication
-### **On Primary Cluster** 
+### On Primary Cluster 
   - Edit the `postgresql.conf`:
     ```ini
         wal_level = replica
@@ -83,7 +85,7 @@ Let's initialize a **Primary Cluster**
         pg_ctl -D /Users/samba-17793/Documents/distdb/experiments/master -l logfile restart
     ```
 
-### **On Replica Cluster**
+### On Replica Cluster
   - Stop PostgreSQl
   - Clone data from primary using pg_basebackup:
     ```bash
@@ -99,7 +101,7 @@ Let's initialize a **Primary Cluster**
   - Edit the **_postgresql.conf_** by changing the `PORT` to 6433.
   - Start the PostgreSQL
 
-### **Testing / Verification**
+### Testing / Verification
 - **On Primary Cluster**
   ```sql
     SELECT client_addr, state FROM pg_stat_replication;
@@ -128,7 +130,7 @@ Let's initialize a **Primary Cluster**
 
 ## Logical Replication
 This is row-level replication (table-based). Replicas can be read-write and donâ€™t have to be identical.
-### **On Primary Cluster**
+### On Primary Cluster
   - Edit the `postgresql.conf`:
   ```ini
     wal_level = logical
@@ -141,7 +143,7 @@ This is row-level replication (table-based). Replicas can be read-write and donâ
     CREATE PUBLICATION my_pub FOR TABLE employees, departments;
   ```
 
-### **On Replica Cluster**
+### On Replica Cluster
   - Ensure the same schema exists (tables must exist, but data may be copied).
   - Create a subscription:
   ```sql
@@ -151,7 +153,7 @@ This is row-level replication (table-based). Replicas can be read-write and donâ
   ```
   - Now inserts/updates/deletes on employees or departments in primary will replicate to the replica.
 
-### **Verification**
+### Verification
 - On replica:
 ```sql
     SELECT * FROM pg_subscription;
