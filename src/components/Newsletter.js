@@ -8,6 +8,7 @@ const Newsletter = () => {
     const classes = highlightFooter ? styles['news-letter_wrapper-highlight']: styles['news-letter_wrapper']
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [subscribedFor, setSubscribedFor] = useState('all');
 
     useEffect(() => {
         setTimeout(() => {
@@ -29,7 +30,8 @@ const Newsletter = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email
+                    email,
+                    subscribedFor
                 })
             })
 
@@ -57,6 +59,16 @@ const Newsletter = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
+                <label htmlFor="select">
+                    <p>Subscribe for:</p>
+                </label>
+                <select name="select" defaultValue={"all"} onChange={(e) => {
+                    setSubscribedFor(e.target.value)
+                }}>
+                    <option value="all">All</option>
+                    <option value="tech">Tech</option>
+                    <option value="personal">Personal</option>
+                </select>
                 <p>{message.length !== 0 && message}</p>
                 <button type="submit">Subscribe</button>
             </form>
