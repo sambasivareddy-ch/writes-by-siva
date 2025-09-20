@@ -144,13 +144,6 @@ const BlogList = () => {
         }
     };
 
-    const toggleThemeHandler = () => {
-        const newTheme = theme === 'dark'? 'light': 'dark';
-        setTheme(newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('blog-theme', newTheme);
-    }
-
     return (
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
@@ -161,9 +154,6 @@ const BlogList = () => {
                         </button>
                     </div>
                     <div className={styles['controls-wrapper']}>
-                        <button onClick={toggleThemeHandler}>
-                            {theme == 'dark' ? <LightModeIcon/>: <DarkModeIcon/>}
-                        </button>
                         <input
                             type="text"
                             placeholder="Search Blogs here..."

@@ -364,36 +364,53 @@
     background-color: transparent;
 }
 
-.subscribe-btn {
+.tool-btn {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 9999;
     text-decoration: none;
     font-family: var(--font-family-raleway);
-    padding: 15px;
-    border: solid 1px var(--border-color);
-    border-radius: 10px;
     background-color: var(--primary-color);
     border-color: var(--highlight-color);
     color: var(--highlight-color);
+    
     display: flex;
-    gap: 5px;
     align-items: center;
-    font-weight: bold;
+    gap: 5px;
 }
 
-.subscribe-btn svg {
+.tool-btn button {
+    outline: none;
+    padding: 10px;
+    border: solid 1px var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tool-btn svg {
     background-color: transparent;
     fill: var(--highlight-color);
 }
 
-.subscribe-btn:hover {
-    background-color: var(--highlight-color);
-    color: var(--primary-text);
+.subscribe-btn {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 10px;
+    border: solid 1px var(--border-color);
+    border-radius: 10px;
+    color: var(--highlight-color);
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.subscribe-btn:hover svg {
+.subscribe-btn:hover, .tool-btn button:hover {
+    color: var(--primary-text);
+    background-color: var(--highlight-color);
+}
+
+.subscribe-btn:hover svg, .tool-btn button:hover svg {
     fill: var(--primary-text);
 }
 
