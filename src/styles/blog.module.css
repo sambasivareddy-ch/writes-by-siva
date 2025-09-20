@@ -366,8 +366,8 @@
 
 .tool-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
     z-index: 9999;
     text-decoration: none;
     font-family: var(--font-family-raleway);
