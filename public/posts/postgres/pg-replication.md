@@ -1,6 +1,6 @@
 ---
 title: "Replication in Postgres"
-description: "In this blog, we will discuss about replication, and how it works in PostgreSQL"
+description: "In this blog, we will discuss about replication, and how to test it"
 author: "Siva"
 date: 2025-09-18
 tags: ["PostgreSQL"]
