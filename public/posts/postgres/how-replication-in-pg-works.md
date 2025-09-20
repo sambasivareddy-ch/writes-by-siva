@@ -7,9 +7,9 @@ tags: ["PostgreSQL"]
 canonical_url: "https://bysiva.vercel.app/blog/how-replication-in-pg-works"
 ---
 
-# How Replication in PostgreSQL Works
+# How Replication in PostgreSQL Works (Part-2)
 
-- [How Replication in PostgreSQL Works](#how-replication-in-postgresql-works)
+- [How Replication in PostgreSQL Works (Part-2)](#how-replication-in-postgresql-works-part-2)
   - [Pre Reads](#pre-reads)
   - [Definition](#definition)
   - [Replication Working](#replication-working)
