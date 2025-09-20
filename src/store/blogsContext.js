@@ -57,7 +57,7 @@ export const BlogsProvider = ({ children }) => {
             {children}
             <div className={styles['tool-btn']}>
                 <a href="#footer" className={styles['subscribe-btn']} onClick={() => setHightLightFooter(true)}>
-                    <MailIcon/> Subscribe
+                    <MailIcon/>
                 </a>
                 <button onClick={toggleThemeHandler}>
                     {theme == 'dark' ? <LightModeIcon/>: <DarkModeIcon/>}
