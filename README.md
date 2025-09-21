@@ -43,7 +43,7 @@ This project was built to demonstrate:
 - Optimized for performance with lazy rendering
 
 ✅ **Stats**
-- Now users can like the blog, see the views and who wrote that blog.
+- Now users can like the blog, see the views and who wrote that blog and readtime
 
 ✅ **Responsive Design**
 - Works seamlessly on mobile, tablet, and desktop
