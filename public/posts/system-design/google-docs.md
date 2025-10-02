@@ -60,13 +60,6 @@ Before discussing the "High-Level" and "Low-Level" design of this system, lets g
   - 200,000 KB / 1024 = `195.3125 MB` of pure session memory (plus doc state, OS, JVM/container overhead).
 -  Provision **_~8–16 GB RAM_** per server depending on number of hot docs, language runtime, and caching.
 
-| Assumption | Value |
-|------------|-------|
-| Daily Active Users | 500,000 |
-| Concurrent Editors | 10,000 |
-| Ops/sec (peak) | 5,000 |
-| Network Payload | 86.4 GB/day |
-| Servers Needed (with redundancy) | 10 |
 ---
 
 ## CRDT
