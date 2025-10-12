@@ -17,12 +17,6 @@ const ProfileComponent = () => {
             <div className={styles['profile-links']}>
                 <h2>Links</h2>
                 <span>
-                    Phone: <a href="tel:+917337375243" aria-label="phone">(+91)73373 75243</a>
-                </span>
-                <span>
-                    Email: <a href="mailto:sambasivareddychinta@gmail.com" aria-label="email">sambasivareddychinta@gmail.com</a>
-                </span>
-                <span>
                     Github: <a href="https://github.com/sambasivareddy-ch" aria-label="github" target="_blank" referrerPolicy="no-referrer">sambasivareddy-ch</a>
                 </span>
                 <p>For more details, please visit my portfolio at ⤵️</p>
