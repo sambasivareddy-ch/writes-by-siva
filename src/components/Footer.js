@@ -21,17 +21,11 @@ const Footer = () => {
                         <a href="https://sambasiva.vercel.app" target="_blank" rel="noreferrer" aria-label="Portfolio profile">
                             <PersonOutlineIcon fontSize="medium" />
                         </a>
-                        <a href="https://www.instagram.com/samsr.ch/" target="_blank" rel="noreferrer" aria-label="Instagram profile">
-                            <InstagramIcon fontSize="medium" />
-                        </a>
                         <a href="https://www.linkedin.com/in/v-n-g-samba-siva-reddy-chinta-78a9651b2/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
                             <LinkedInIcon fontSize="medium" />
                         </a>
                         <a href="https://www.github.com/sambasivareddy-ch" target="_blank" rel="noreferrer" aria-label="GitHub profile">
                             <GitHubIcon fontSize="medium" />
-                        </a>
-                        <a href="mailto:sambasivareddychinta@gmail.com" target="_blank" rel="noreferrer" aria-label="GitHub profile">
-                            <MailOutlineIcon fontSize="medium" />
                         </a>
                     </div>
                     <p>Made with ❤️ by V.N.G Samba Siva Reddy</p>
