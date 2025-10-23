@@ -9,10 +9,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BarLoader } from "react-spinners";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import InsightsIcon from "@mui/icons-material/Insights";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt"
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGrinTears, faFire, faHeart, faFaceAngry } from "@fortawesome/free-solid-svg-icons"
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -24,10 +23,16 @@ export default function BlogPost(props) {
     const [url, setUrl] = useState("");
     const [tags, setTags] = useState(meta?.tags);
     const [likes, setLikes] = useState(post.likes ? post.likes : 0);
+    const [fires, setFires] = useState(post.fires ? post.fires: 0);
+    const [laughs, setLaughs] = useState(post.laugh ? post.laugh: 0);
+    const [anger, setAnger] = useState(post.anger ? post.anger: 0);
     const [views, setViews] = useState(post.views ? post.views : 0);
     const [tldr, setTldr] = useState(null);
     const [showTldr, setShowTldr] = useState(false);
     const [alreadyLiked, setAlreadyLiked] = useState(false);
+    const [alreadyFired, setAlreadyFired] = useState(false);
+    const [alreadyLaughed, setAlreadyLaughed] = useState(false);
+    const [alreadyAnger, setAlreadyAnger] = useState(false);
     const [isScrollVisible, setIsScrollVisible] = useState(false);
 
     // Set the URL to the current page's URL & check whether the blog is liked or not
@@ -37,6 +42,18 @@ export default function BlogPost(props) {
         // Fetch the like status of this blog
         const liked = localStorage.getItem(`liked-${slug}`);
         setAlreadyLiked(liked !== null && liked !== '');
+
+        // Fetch the fire status of this blog
+        const fired = localStorage.getItem(`fired-${slug}`);
+        setAlreadyFired(fired !== null && fired !== '');
+
+        // Fetch the laugh status of this blog
+        const laughed = localStorage.getItem(`laughed-${slug}`);
+        setAlreadyLaughed(laughed !== null && laughed !== '');
+
+        // Fetch the laugh status of this blog
+        const angered = localStorage.getItem(`angered-${slug}`);
+        setAlreadyAnger(angered !== null && angered !== '');
 
         const toggleVisibility = () => {
             setIsScrollVisible(window.scrollY > 200);
@@ -53,6 +70,21 @@ export default function BlogPost(props) {
     useEffect(() => {
         const liked = localStorage.getItem(`liked-${slug}`);
         setAlreadyLiked(liked !== null && liked !== '');
+    }, [likes]);
+
+    useEffect(() => {
+        const fired = localStorage.getItem(`fired-${slug}`);
+        setAlreadyFired(fired !== null && fired !== '');
+    }, [likes]);
+
+    useEffect(() => {
+        const laughed = localStorage.getItem(`laughed-${slug}`);
+        setAlreadyLaughed(laughed !== null && laughed !== '');
+    }, [likes]);
+
+    useEffect(() => {
+        const angered = localStorage.getItem(`angered-${slug}`);
+        setAlreadyAnger(angered !== null && angered !== '');
     }, [likes]);
 
     const summarizeBlogHandler = async () => {
@@ -145,6 +177,102 @@ export default function BlogPost(props) {
         }
     };
 
+    const fireClickHandler = async () => {
+        if (alreadyFired) {
+            return;
+        }
+        try {
+            const response = await fetch(
+                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        type: "fires",
+                    }),
+                }
+            );
+
+            if (!response.ok) {
+                return;
+            }
+
+            const json = await response.json();
+            if (json.success) {
+                setFires(fires + 1);
+                localStorage.setItem(`fired-${slug}`, "true");
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const laughClickHandler = async () => {
+        if (alreadyLaughed) {
+            return;
+        }
+        try {
+            const response = await fetch(
+                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        type: "laugh",
+                    }),
+                }
+            );
+
+            if (!response.ok) {
+                return;
+            }
+
+            const json = await response.json();
+            if (json.success) {
+                setLaughs(laughs + 1);
+                localStorage.setItem(`laughed-${slug}`, "true");
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const angerClickHandler = async () => {
+        if (alreadyAnger) {
+            return;
+        }
+        try {
+            const response = await fetch(
+                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        type: "anger",
+                    }),
+                }
+            );
+
+            if (!response.ok) {
+                return;
+            }
+
+            const json = await response.json();
+            if (json.success) {
+                setAnger(anger + 1);
+                localStorage.setItem(`angered-${slug}`, "true");
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const copyToClipboardHandler = () => {
         navigator.clipboard
             .writeText(url)
@@ -179,17 +307,29 @@ export default function BlogPost(props) {
                     ))}
                 </div>
                 <div className={styles["blog-insights"]}>
-                    <button onClick={likeClickHandler} aria-label="Like" className={alreadyLiked? styles['liked']: styles['not-liked']}>
-                        {alreadyLiked ? <ThumbUpAltIcon/> : <ThumbUpOffAltIcon/>}
+                    <button onClick={likeClickHandler} aria-label="Like">
+                        <FontAwesomeIcon icon={faHeart} color={alreadyLiked ? '#f44336' : '#aaa'}/>
                         <p>{likes}</p>
                     </button>
-                    <button className={styles['summarize-btn']} onClick={summarizeBlogHandler}>
-                        {showTldr ? 'Hide': 'Show'} Summary
+                    <button onClick={fireClickHandler} aria-label="fire">
+                        <FontAwesomeIcon icon={faFire} color={'#ffb300'} />
+                        <p>{fires}</p>
                     </button>
-                    <div className={styles["insights"]}>
+                    <button onClick={laughClickHandler} aria-label="laugh">
+                        <FontAwesomeIcon icon={faGrinTears} />
+                        <p>{laughs}</p>
+                    </button>
+                    <button onClick={angerClickHandler} aria-label="anger">
+                        <FontAwesomeIcon icon={faFaceAngry} />
+                        <p>{anger}</p>
+                    </button>
+                    {/* <button className={styles['summarize-btn']} onClick={summarizeBlogHandler}>
+                        {showTldr ? 'Hide': 'Show'} Summary
+                    </button> */}
+                    {/* <div className={styles["insights"]}>
                         <InsightsIcon />
                         <p>{views} Views</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className={styles["tldr-wrapper"]}>

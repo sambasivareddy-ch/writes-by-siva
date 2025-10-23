@@ -298,6 +298,9 @@ const BlogList = () => {
                                     date={blog.date}
                                     likes={blog.likes? blog.likes:0}
                                     views={blog.views? blog.views:0}
+                                    fires={blog.fires? blog.fires:0}
+                                    laugh={blog.laugh? blog.laugh:0}
+                                    anger={blog.anger? blog.anger:0}
                                     readtime={blog.readtime? blog.readtime:0}
                                     author={blog.author}
                                     searchQuery={

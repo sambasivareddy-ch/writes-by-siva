@@ -150,6 +150,29 @@
     background-color: var(--highlight-color);
 }
 
+.blog-reactions {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+  
+.reactionIcon {
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.15);
+    margin-left: -8px; 
+    transition: transform 0.2s ease, z-index 0.2s ease;
+    cursor: pointer;
+}
+
+.reactionIcon:first-child {
+    margin-left: 0;               /* no overlap on first */
+}
+
+.reactionIcon:hover {
+    transform: scale(1.3);
+    z-index: 2;                   /* bring forward when hovered */
+}
+
 @media screen and (min-width: 300px) and (max-width: 700px) {
     .blog-comp__wrapper {
         display: flex;

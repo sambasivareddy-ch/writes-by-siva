@@ -297,7 +297,7 @@
 .blog-insights {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 4;
     margin: 20px 0;
 }
 
@@ -313,13 +313,14 @@
 }
 
 .blog-insights button {
-    border: solid 1px var(--border-color);
     padding: 5px;
-    border-radius: 5px;
+    display: flex;
+    gap: 5;
 }
 
 .blog-insights button:hover {
     background-color: var(--border-color);
+    border-radius: 5px;
 }
 
 .blog-insights button:hover svg,
@@ -350,14 +351,6 @@
 
 .summarize-btn svg {
     fill: var(--highlight-color);
-}
-
-.liked {
-    background-color: var(--border-color);
-}
-
-.liked svg {
-    background-color: var(--border-color);
 }
 
 .liked p {
