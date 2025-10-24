@@ -173,6 +173,22 @@
     z-index: 2;                   /* bring forward when hovered */
 }
 
+.reactionIcon:nth-child(1):hover path{
+    color: #e53935;
+}
+
+.reactionIcon:nth-child(2):hover path{
+    color: #ffc107;
+}
+
+.reactionIcon:nth-child(3):hover path{
+    color: #ffd600;
+}
+
+.reactionIcon:nth-child(4):hover path{
+    color: #dd2c00;
+}
+
 @media screen and (min-width: 300px) and (max-width: 700px) {
     .blog-comp__wrapper {
         display: flex;

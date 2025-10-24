@@ -4,7 +4,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGrinTears, faFire, faHeart, faFaceAngry, faLaugh } from "@fortawesome/free-solid-svg-icons"
+import { faGrinTears, faFire, faHeart, faFaceAngry } from "@fortawesome/free-solid-svg-icons"
 import styles from "@/styles/component.module.css";
 
 import TagsContext from "@/store/tagsContext";
@@ -114,8 +114,8 @@ const BlogComponent = (props) => {
                             <div className={styles['blog-reactions']}>
                                 <FontAwesomeIcon icon={faHeart} className={styles.reactionIcon}/>
                                 <FontAwesomeIcon icon={faFire} className={styles.reactionIcon}/>
-                                <FontAwesomeIcon icon={faLaugh} className={styles.reactionIcon}/>
                                 <FontAwesomeIcon icon={faGrinTears} className={styles.reactionIcon}/>
+                                <FontAwesomeIcon icon={faFaceAngry} className={styles.reactionIcon}/>
                             </div>
                             <p>{likes + fires + laugh + anger}</p>
                         </div>

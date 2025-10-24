@@ -9,9 +9,15 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BarLoader } from "react-spinners";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGrinTears, faFire, faHeart, faFaceAngry } from "@fortawesome/free-solid-svg-icons"
+import {
+    faGrinTears,
+    faFire,
+    faHeart,
+    faFaceAngry
+} from "@fortawesome/free-solid-svg-icons";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -23,9 +29,9 @@ export default function BlogPost(props) {
     const [url, setUrl] = useState("");
     const [tags, setTags] = useState(meta?.tags);
     const [likes, setLikes] = useState(post.likes ? post.likes : 0);
-    const [fires, setFires] = useState(post.fires ? post.fires: 0);
-    const [laughs, setLaughs] = useState(post.laugh ? post.laugh: 0);
-    const [anger, setAnger] = useState(post.anger ? post.anger: 0);
+    const [fires, setFires] = useState(post.fires ? post.fires : 0);
+    const [laughs, setLaughs] = useState(post.laugh ? post.laugh : 0);
+    const [anger, setAnger] = useState(post.anger ? post.anger : 0);
     const [views, setViews] = useState(post.views ? post.views : 0);
     const [tldr, setTldr] = useState(null);
     const [showTldr, setShowTldr] = useState(false);
@@ -41,51 +47,51 @@ export default function BlogPost(props) {
 
         // Fetch the like status of this blog
         const liked = localStorage.getItem(`liked-${slug}`);
-        setAlreadyLiked(liked !== null && liked !== '');
+        setAlreadyLiked(liked !== null && liked !== "");
 
         // Fetch the fire status of this blog
         const fired = localStorage.getItem(`fired-${slug}`);
-        setAlreadyFired(fired !== null && fired !== '');
+        setAlreadyFired(fired !== null && fired !== "");
 
         // Fetch the laugh status of this blog
         const laughed = localStorage.getItem(`laughed-${slug}`);
-        setAlreadyLaughed(laughed !== null && laughed !== '');
+        setAlreadyLaughed(laughed !== null && laughed !== "");
 
         // Fetch the laugh status of this blog
         const angered = localStorage.getItem(`angered-${slug}`);
-        setAlreadyAnger(angered !== null && angered !== '');
+        setAlreadyAnger(angered !== null && angered !== "");
 
         const toggleVisibility = () => {
             setIsScrollVisible(window.scrollY > 200);
-        }
-        window.addEventListener('scroll', toggleVisibility);
+        };
+        window.addEventListener("scroll", toggleVisibility);
 
-        return () => window.removeEventListener('scroll', toggleVisibility);
+        return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
 
     const scrollToTopHandler = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
     useEffect(() => {
         const liked = localStorage.getItem(`liked-${slug}`);
-        setAlreadyLiked(liked !== null && liked !== '');
+        setAlreadyLiked(liked !== null && liked !== "");
     }, [likes]);
 
     useEffect(() => {
         const fired = localStorage.getItem(`fired-${slug}`);
-        setAlreadyFired(fired !== null && fired !== '');
-    }, [likes]);
+        setAlreadyFired(fired !== null && fired !== "");
+    }, [fires]);
 
     useEffect(() => {
         const laughed = localStorage.getItem(`laughed-${slug}`);
-        setAlreadyLaughed(laughed !== null && laughed !== '');
-    }, [likes]);
+        setAlreadyLaughed(laughed !== null && laughed !== "");
+    }, [laughs]);
 
     useEffect(() => {
         const angered = localStorage.getItem(`angered-${slug}`);
-        setAlreadyAnger(angered !== null && angered !== '');
-    }, [likes]);
+        setAlreadyAnger(angered !== null && angered !== "");
+    }, [anger]);
 
     const summarizeBlogHandler = async () => {
         if (!showTldr) {
@@ -94,11 +100,11 @@ export default function BlogPost(props) {
                 const response = await fetch(
                     `https://writes-by-siva-server-production.up.railway.app/summarize/${slug}`
                 );
-    
+
                 if (!response.ok) {
                     return;
                 }
-    
+
                 const json = await response.json();
                 setTldr(json.text);
             } catch (err) {
@@ -307,61 +313,114 @@ export default function BlogPost(props) {
                     ))}
                 </div>
                 <div className={styles["blog-insights"]}>
-                    <button onClick={likeClickHandler} aria-label="Like">
-                        <FontAwesomeIcon icon={faHeart} color={alreadyLiked ? '#f44336' : '#aaa'}/>
+                    <button
+                        onClick={likeClickHandler}
+                        aria-label="Like"
+                        className={
+                            alreadyLiked
+                                ? styles["reacted"]
+                                : styles["not-reacted"]
+                        }
+                    >
+                        <FontAwesomeIcon icon={faHeart} />
                         <p>{likes}</p>
                     </button>
-                    <button onClick={fireClickHandler} aria-label="fire">
-                        <FontAwesomeIcon icon={faFire} color={'#ffb300'} />
+                    <button
+                        onClick={fireClickHandler}
+                        aria-label="fire"
+                        className={
+                            alreadyFired
+                                ? styles["reacted"]
+                                : styles["not-reacted"]
+                        }
+                    >
+                        <FontAwesomeIcon icon={faFire} color={"#ffb300"} />
                         <p>{fires}</p>
                     </button>
-                    <button onClick={laughClickHandler} aria-label="laugh">
+                    <button
+                        onClick={laughClickHandler}
+                        aria-label="laugh"
+                        className={
+                            alreadyLaughed
+                                ? styles["reacted"]
+                                : styles["not-reacted"]
+                        }
+                    >
                         <FontAwesomeIcon icon={faGrinTears} />
                         <p>{laughs}</p>
                     </button>
-                    <button onClick={angerClickHandler} aria-label="anger">
+                    <button
+                        onClick={angerClickHandler}
+                        aria-label="anger"
+                        className={
+                            alreadyAnger
+                                ? styles["reacted"]
+                                : styles["not-reacted"]
+                        }
+                    >
                         <FontAwesomeIcon icon={faFaceAngry} />
                         <p>{anger}</p>
                     </button>
                     {/* <button className={styles['summarize-btn']} onClick={summarizeBlogHandler}>
                         {showTldr ? 'Hide': 'Show'} Summary
                     </button> */}
-                    {/* <div className={styles["insights"]}>
-                        <InsightsIcon />
+                    <div className={styles["insights"]}>
+                        <VisibilityIcon />
                         <p>{views} Views</p>
-                    </div> */}
+                    </div>
                 </div>
             </div>
             <div className={styles["tldr-wrapper"]}>
-                {showTldr && <div className={styles["tldr"]}>
-                    <h1>tl;dr</h1>
-                    {tldr ? 
-                        <ReactMarkdown
-                        rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}
-                        components={{
-                            code({ node, inline, className, children, ...props }) {
-                                const match = /language-(\w+)/.exec(className || "");
-                                return !inline && match ? (
-                                    <SyntaxHighlighter
-                                        style={oneDark}
-                                        language={match[1]}
-                                        PreTag="div"
-                                        {...props}
-                                    >
-                                        {String(children).replace(/\n$/, "")}
-                                    </SyntaxHighlighter>
-                                ) : (
-                                    <code className={className} {...props}>
-                                        {children}
-                                    </code>
-                                );
-                            },
-                        }}
-                    >
-                        {tldr}
-                    </ReactMarkdown>
-                    : "Loading...."}
-                </div>}
+                {showTldr && (
+                    <div className={styles["tldr"]}>
+                        <h1>tl;dr</h1>
+                        {tldr ? (
+                            <ReactMarkdown
+                                rehypePlugins={[
+                                    rehypeSlug,
+                                    rehypeAutolinkHeadings,
+                                ]}
+                                components={{
+                                    code({
+                                        node,
+                                        inline,
+                                        className,
+                                        children,
+                                        ...props
+                                    }) {
+                                        const match = /language-(\w+)/.exec(
+                                            className || ""
+                                        );
+                                        return !inline && match ? (
+                                            <SyntaxHighlighter
+                                                style={oneDark}
+                                                language={match[1]}
+                                                PreTag="div"
+                                                {...props}
+                                            >
+                                                {String(children).replace(
+                                                    /\n$/,
+                                                    ""
+                                                )}
+                                            </SyntaxHighlighter>
+                                        ) : (
+                                            <code
+                                                className={className}
+                                                {...props}
+                                            >
+                                                {children}
+                                            </code>
+                                        );
+                                    },
+                                }}
+                            >
+                                {tldr}
+                            </ReactMarkdown>
+                        ) : (
+                            "Loading...."
+                        )}
+                    </div>
+                )}
             </div>
             <ReactMarkdown
                 rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}
@@ -387,9 +446,14 @@ export default function BlogPost(props) {
             >
                 {content}
             </ReactMarkdown>
-            {isScrollVisible && <button onClick={scrollToTopHandler} className={styles['scroll-top_btn']}>
-                <ArrowUpwardIcon/>
-            </button>}
+            {isScrollVisible && (
+                <button
+                    onClick={scrollToTopHandler}
+                    className={styles["scroll-top_btn"]}
+                >
+                    <ArrowUpwardIcon />
+                </button>
+            )}
             <div className={styles["post-footer"]}>
                 <div className={styles["blog-post-footer"]}>
                     <p>Share on:</p>

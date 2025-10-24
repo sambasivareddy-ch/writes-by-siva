@@ -312,10 +312,16 @@
     cursor: pointer;
 }
 
+.insights {
+    margin-left: 15px;
+}
+
 .blog-insights button {
     padding: 5px;
     display: flex;
     gap: 5;
+    border-radius: 5px;
+    border: solid 1px var(--border-color);
 }
 
 .blog-insights button:hover {
@@ -326,6 +332,56 @@
 .blog-insights button:hover svg,
 .blog-insights button:hover p {
     background-color: var(--border-color);
+}
+
+.blog-insights button:nth-child(1).reacted {
+    border: solid 1px #e53935;
+}
+
+.blog-insights button:nth-child(1).reacted svg path {
+    fill: #e53935;
+}
+
+.blog-insights button:nth-child(1).reacted p {
+    color: #e53935;
+}
+
+.blog-insights button:nth-child(2).reacted {
+    border: solid 1px #ffc107;
+}
+
+.blog-insights button:nth-child(2).reacted svg path {
+    fill: #ffc107;
+}
+
+.blog-insights button:nth-child(2).reacted p {
+    color: #ffc107;
+}
+
+.blog-insights button:nth-child(3).reacted {
+    fill: #ffd600;
+    border: solid 1px #ffd600;
+}
+
+.blog-insights button:nth-child(3).reacted svg path {
+    fill: #ffd600;
+}
+
+.blog-insights button:nth-child(3).reacted p {
+    color: #ffd600;
+}
+
+.blog-insights button:nth-child(4).reacted {
+    fill: #dd2c00;
+    border: solid 1px #dd2c00;
+}
+
+.blog-insights button:nth-child(4).reacted svg path {
+    fill: #dd2c00;
+}
+
+.blog-insights button:nth-child(4).reacted p {
+    color: #dd2c00;
 }
 
 .tldr-wrapper {
