@@ -9,6 +9,10 @@ import BlogComponent from "@/components/BlogComponent";
 import styles from "@/styles/bloglist.module.css";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import SwapVertIcon from '@mui/icons-material/SwapVert';
+import InterestsIcon from '@mui/icons-material/Interests';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -47,6 +51,75 @@ const BlogList = () => {
     );
     const [menuOpened, setMenuOpened] = useState(false);
     const [theme, setTheme] = useState('dark');
+    const [sortOption, setSortOption] = useState('default');
+
+    // helper: safe timestamp extractor
+    const getTime = (b) => {
+        try {
+        return b.date ? new Date(b.date).getTime() : 0;
+        } catch {
+        return 0;
+        }
+    };
+    
+    // helper: total reactions (adjust fields if needed)
+    const getReactions = (b) =>
+        (Number(b.likes) || 0) +
+        (Number(b.fires) || 0) +
+        (Number(b.laugh) || 0) +
+        (Number(b.anger) || 0);
+    
+    // reusable sort function — sorts a copy and returns it
+    const applySort = (listToSort, option = sortOption) => {
+        const arr = [...listToSort];
+    
+        switch (option) {
+        case "date-posted-asc":
+            arr.sort((a, b) => getTime(a) - getTime(b));
+            break;
+    
+        case "most-reacted":
+            arr.sort((a, b) => {
+            const rA = getReactions(a);
+            const rB = getReactions(b);
+            if (rB !== rA) return rB - rA;
+            return getTime(b) - getTime(a);
+            });
+            break;
+    
+        case "most-viewed":
+            arr.sort((a, b) => {
+            const vA = Number(a.views) || 0;
+            const vB = Number(b.views) || 0;
+            if (vB !== vA) return vB - vA;
+            return getTime(b) - getTime(a);
+            });
+            break;
+    
+        case "default":
+        default:
+            // default -> date desc (latest first)
+            arr.sort((a, b) => getTime(b) - getTime(a));
+            break;
+        }
+    
+        return arr;
+    };
+
+    const filterChangeHandler = (e) => {
+        const optionChoosed = e.target.value;
+        setSortOption(optionChoosed);
+
+        // Decide base list: if any filters active -> currentBlogs, else topicBasedBlogs
+        const hasFiltersActive =
+            (selectedTags && selectedTags.length > 0) ||
+            (searchQuery && searchQuery.trim().length >= 3);
+        const base = hasFiltersActive ? currentBlogs : topicBasedBlogs;
+        const sorted = applySort(base, optionChoosed);
+
+        setCurrentBlogs(sorted);
+        setPresentPageIndex(0);
+    }
 
     useEffect(() => {
         const theme = localStorage.getItem('blog-theme');
@@ -102,7 +175,10 @@ const BlogList = () => {
             return matchesSearch && matchesTags;
         });
 
-        setCurrentBlogs(filtered);
+        // apply currently selected sort to the filtered results
+        const sortedFiltered = applySort(filtered, sortOption);
+
+        setCurrentBlogs(sortedFiltered);
     }, [selectedTags, matchAllTags, debouncedText, topicBasedBlogs, selectedPrimaryTag]);
 
     useEffect(() => {
@@ -267,7 +343,19 @@ const BlogList = () => {
                         </button>
                     </div>
                 </div>}
-                {topicBasedBlogs.length !== 0 && <div className={styles["blogs-count"]}>
+                {topicBasedBlogs.length !== 0 && <div className={styles['blog-ops']}>
+                    <p className={styles['sort-icon']}>
+                        <SwapVertIcon/>
+                        Sort By:
+                    </p>
+                    <select defaultValue={sortOption} onChange={filterChangeHandler}>
+                        <option value={'default'}>Default</option>
+                        <option value={'date-posted-asc'}>Date Posted (Asc)</option>
+                        <option value={'most-reacted'}>Most Reacted</option>
+                        <option value={'most-viewed'}>Most Viewed</option>
+                    </select>
+                </div>}
+                {/* {topicBasedBlogs.length !== 0 && <div className={styles["blogs-count"]}>
                     {(presentPageIndex + 1) * 10 > currentBlogs.length ? (
                         <p>
                             {presentPageIndex * 10} - {currentBlogs.length} of{" "}
@@ -280,7 +368,7 @@ const BlogList = () => {
                             {currentBlogs.length} blogs
                         </p>
                     )}
-                </div>}
+                </div>} */}
                 <div className={`${styles["blogs"]} ${topicBasedBlogs.length === 0 && styles['zero-blogs']}`}>
                     {topicBasedBlogs.length !== 0 && currentBlogs.length !== 0 ?  currentBlogs
                         .slice(

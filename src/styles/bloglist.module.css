@@ -171,7 +171,8 @@
 }
 
 .blog-tag_reset {
-    background-color: var(--border-color);
+    background-color: #ef4444;
+    border-color: #ef4444;
 }
 
 .blog-tag_reset svg,
@@ -181,7 +182,7 @@
 }
 
 .blog-tag_reset svg {
-    background-color: var(--border-color);
+    background-color: #ef4444;
 }
 
 .blog-tag {
@@ -200,12 +201,12 @@
 }
 
 .blog-tag:hover {
-    background-color: var(--border-color);
+    background-color: var(--highlight-color);
     color: #000;
 }
 
 .blog-tag:hover span {
-    background-color: var(--border-color);
+    background-color: var(--highlight-color);
 }
 
 .blog-controls {
@@ -280,11 +281,27 @@
 }
 
 .active {
-    background-color: var(--border-color);
+    /* background-color: var(--border-color); */
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
 }
 
 .active span {
-    background-color: var(--border-color);
+    /* background-color: var(--border-color); */
+    background-color: var(--highlight-color);
+}
+
+.blog-ops {
+    width: 100%;
+    margin: 20px 10px 0;
+    display: flex;
+    gap: 10;
+    font-family: var(--font-family-raleway);
+}
+
+.blog-ops .sort-icon {
+    display: flex;
+    align-items: center;
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {

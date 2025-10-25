@@ -4,7 +4,12 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGrinTears, faFire, faHeart, faFaceAngry } from "@fortawesome/free-solid-svg-icons"
+import {
+    faGrinTears,
+    faFire,
+    faHeart,
+    faFaceAngry,
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/component.module.css";
 
 import TagsContext from "@/store/tagsContext";
@@ -28,11 +33,8 @@ const highlightText = (text, query) => {
 };
 
 const BlogComponent = (props) => {
-    const {
-        selectedTags,
-        setSelectedTags,
-        removeSelectedTag
-    } = useContext(TagsContext);
+    const { selectedTags, setSelectedTags, removeSelectedTag } =
+        useContext(TagsContext);
 
     const {
         slug,
@@ -47,8 +49,10 @@ const BlogComponent = (props) => {
         author,
         fires,
         laugh,
-        anger
+        anger,
     } = props;
+
+    const [hovered, setHovered] = useState(null);
 
     const handleClickHandler = (tag) => {
         if (selectedTags.includes(tag)) {
@@ -56,7 +60,7 @@ const BlogComponent = (props) => {
         } else {
             setSelectedTags((prevTags) => [...prevTags, tag]);
         }
-    }
+    };
 
     return (
         <div className={styles["blog-comp__wrapper"]}>
@@ -70,12 +74,16 @@ const BlogComponent = (props) => {
                         <h3>{highlightText(title, searchQuery)}</h3>
                     </Link>
                     <div className={styles["blog-meta"]}>
-                        {author && <div className={styles["blog-insights_author"]}>
-                            {/* <PersonOutlineIcon /> */}
-                            <p>
-                                By: {author[0].toUpperCase() + author.substring(1)}
-                            </p>
-                        </div>}
+                        {author && (
+                            <div className={styles["blog-insights_author"]}>
+                                {/* <PersonOutlineIcon /> */}
+                                <p>
+                                    By:{" "}
+                                    {author[0].toUpperCase() +
+                                        author.substring(1)}
+                                </p>
+                            </div>
+                        )}
                         <p className={styles["blog-date"]}>
                             {new Date(date).toLocaleDateString("en-US", {
                                 year: "numeric",
@@ -88,17 +96,66 @@ const BlogComponent = (props) => {
                         {highlightText(description, searchQuery)}
                     </p>
                     <div className={styles["blog-component_insights"]}>
+                        <div className={styles["blog-insights"]}>
+                            <div className={styles["blog-insights_read"]}>
+                                <MenuBookIcon />
+                                <p>{readtime} Min</p>
+                            </div>
+                            <div className={styles["blog-reactions"]}>
+                                <FontAwesomeIcon
+                                    icon={faHeart}
+                                    className={styles.reactionIcon}
+                                    onMouseEnter={() => setHovered("likes")}
+                                    onMouseLeave={() => setHovered(null)}
+                                />
+                                <FontAwesomeIcon
+                                    icon={faFire}
+                                    className={styles.reactionIcon}
+                                    onMouseEnter={() => setHovered("fires")}
+                                    onMouseLeave={() => setHovered(null)}
+                                />
+                                <FontAwesomeIcon
+                                    icon={faGrinTears}
+                                    className={styles.reactionIcon}
+                                    onMouseEnter={() => setHovered("laugh")}
+                                    onMouseLeave={() => setHovered(null)}
+                                />
+                                <FontAwesomeIcon
+                                    icon={faFaceAngry}
+                                    className={styles.reactionIcon}
+                                    onMouseEnter={() => setHovered("anger")}
+                                    onMouseLeave={() => setHovered(null)}
+                                />
+                                <p>
+                                    {hovered === null && likes + fires + laugh + anger}
+                                    {hovered === 'likes' && likes}
+                                    {hovered === 'fires' && fires}
+                                    {hovered === 'laugh' && laugh}
+                                    {hovered === 'anger' && anger}
+                                </p>
+                            </div>
+                            <div className={styles["blog-insights_view"]}>
+                                <VisibilityIcon />
+                                <p>{views}</p>
+                            </div>
+                        </div>
                         {domains && domains.length > 0 && (
                             <div>
                                 <ul>
                                     {domains.map((domain, index) => (
-                                        <li
-                                            key={index}
-                                        >
+                                        <li key={index}>
                                             <button
-                                                onClick={() => handleClickHandler(domain)}
-                                                className={`${styles["blog-insights_domains"]} ${
-                                                    selectedTags.includes(domain)
+                                                onClick={() =>
+                                                    handleClickHandler(domain)
+                                                }
+                                                className={`${
+                                                    styles[
+                                                        "blog-insights_domains"
+                                                    ]
+                                                } ${
+                                                    selectedTags.includes(
+                                                        domain
+                                                    )
                                                         ? styles["active_btn"]
                                                         : ""
                                                 }`}
@@ -110,23 +167,6 @@ const BlogComponent = (props) => {
                                 </ul>
                             </div>
                         )}
-                        <div className={styles["blog-insights_like"]}>
-                            <div className={styles['blog-reactions']}>
-                                <FontAwesomeIcon icon={faHeart} className={styles.reactionIcon}/>
-                                <FontAwesomeIcon icon={faFire} className={styles.reactionIcon}/>
-                                <FontAwesomeIcon icon={faGrinTears} className={styles.reactionIcon}/>
-                                <FontAwesomeIcon icon={faFaceAngry} className={styles.reactionIcon}/>
-                            </div>
-                            <p>{likes + fires + laugh + anger}</p>
-                        </div>
-                        <div className={styles["blog-insights_view"]}>
-                            <VisibilityIcon />
-                            <p>{views}</p>
-                        </div>
-                        <div className={styles["blog-insights_read"]}>
-                            <MenuBookIcon />
-                            <p>{readtime} Min</p>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -253,12 +253,12 @@
 }
 
 .blog-tag:hover {
-    background-color: var(--border-color);
+    background-color: var(--highlight-color);
     color: #000;
 }
 
 .blog-tag:hover span {
-    background-color: var(--border-color);
+    background-color: var(--highlight-color);
 }
 
 .blog-loading {
