@@ -40,6 +40,7 @@ export default function BlogPost(props) {
     const [alreadyLaughed, setAlreadyLaughed] = useState(false);
     const [alreadyAnger, setAlreadyAnger] = useState(false);
     const [isScrollVisible, setIsScrollVisible] = useState(false);
+    const [theme, setTheme] = useState('dark');
 
     // Set the URL to the current page's URL & check whether the blog is liked or not
     useEffect(() => {
@@ -66,8 +67,38 @@ export default function BlogPost(props) {
         };
         window.addEventListener("scroll", toggleVisibility);
 
+        const theme = localStorage.getItem('blog-theme');
+        if (theme)
+            setTheme(theme);
+
         return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
+
+    useEffect(() => {
+        if (!url) return;
+  
+        // IMPORTANT: make sure this host and site_id match your docker-compose env
+        window.remark_config = {
+          host: "https://comments.bysiva.blog",
+          site_id: "bysiva",
+          url: url,
+          theme: theme,
+          components: ["embed"]
+        };
+  
+        const script = document.createElement("script");
+        script.src = `${window.remark_config.host}/web/embed.js`;
+        script.async = true;
+        document.body.appendChild(script);
+  
+        return () => {
+          // cleanup: remove injected script and widget content
+          try { document.body.removeChild(script); } catch (e) {}
+          const widget = document.getElementById("remark42");
+          if (widget) widget.innerHTML = "";
+          try { delete window.remark_config; } catch (e) { window.remark_config = undefined; }
+        };
+    }, [url]);
 
     const scrollToTopHandler = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -477,6 +508,7 @@ export default function BlogPost(props) {
                     </div>
                 </div>
             </div>
+            <div id="remark42" />
         </div>
     );
 }
