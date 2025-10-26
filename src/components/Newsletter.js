@@ -59,16 +59,18 @@ const Newsletter = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <label htmlFor="select">
-                    <p>Subscribe for:</p>
-                </label>
-                <select name="select" defaultValue={"all"} onChange={(e) => {
-                    setSubscribedFor(e.target.value)
-                }}>
-                    <option value="all">All</option>
-                    <option value="tech">Tech</option>
-                    <option value="personal">Personal</option>
-                </select>
+                <div className={styles['sub-for']}>
+                    <label htmlFor="select">
+                        <p>Subscribe for:</p>
+                    </label>
+                    <select name="select" defaultValue={"all"} onChange={(e) => {
+                        setSubscribedFor(e.target.value)
+                    }}>
+                        <option value="all">All</option>
+                        <option value="tech">Tech</option>
+                        <option value="personal">Personal</option>
+                    </select>
+                </div>
                 <p>{message.length !== 0 && message}</p>
                 <button type="submit">Subscribe</button>
             </form>
