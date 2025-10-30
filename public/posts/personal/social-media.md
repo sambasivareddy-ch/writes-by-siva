@@ -1,5 +1,5 @@
 ---
-title: "Social (~~Media~~) Being"
+title: "Social (Media) Being"
 description: "A blog on my reflections about social media"
 author: "Siva"
 date: 2025-10-30
@@ -7,7 +7,7 @@ tags: ["Personal"]
 canonical_url: "https://bysiva.vercel.app/blog/social-media"
 ---
 
-# Social (~~Media~~) Being
+# Social (Media) Being
 Title is a bit weird, right ? Well, I thought of the same… but ehhh, I am going with it 😅. By seeing the title, you might have an idea of **“What was going to be part of this blog?”**, yes, that’s right. Indeed, this blog is about **_“Social Media”_**.
 
 > **Disclaimer**: I am no expert in Human Psychology or any field to write a blog on Social Media, this blog is purely about my reflections on it or at-least about what level of influence social media has on me.
