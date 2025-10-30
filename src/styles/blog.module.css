@@ -233,6 +233,10 @@
     color: #fff;
 }
 
+.blog-post-wrapper p {
+    margin: 25px 0;
+}
+
 .blog-post-tag {
     height: fit-content;
     padding: 10px 20px;

@@ -354,7 +354,7 @@ export default function BlogPost(props) {
                         }
                     >
                         <FontAwesomeIcon icon={faHeart} />
-                        <p>{likes}</p>
+                        <span>{likes}</span>
                     </button>
                     <button
                         onClick={fireClickHandler}
@@ -366,7 +366,7 @@ export default function BlogPost(props) {
                         }
                     >
                         <FontAwesomeIcon icon={faFire} color={"#ffb300"} />
-                        <p>{fires}</p>
+                        <span>{fires}</span>
                     </button>
                     <button
                         onClick={laughClickHandler}
@@ -378,7 +378,7 @@ export default function BlogPost(props) {
                         }
                     >
                         <FontAwesomeIcon icon={faGrinTears} />
-                        <p>{laughs}</p>
+                        <span>{laughs}</span>
                     </button>
                     <button
                         onClick={angerClickHandler}
@@ -390,14 +390,14 @@ export default function BlogPost(props) {
                         }
                     >
                         <FontAwesomeIcon icon={faFaceAngry} />
-                        <p>{anger}</p>
+                        <span>{anger}</span>
                     </button>
                     {/* <button className={styles['summarize-btn']} onClick={summarizeBlogHandler}>
                         {showTldr ? 'Hide': 'Show'} Summary
                     </button> */}
                     <div className={styles["insights"]}>
                         <VisibilityIcon />
-                        <p>{views} Views</p>
+                        <span>{views} Views</span>
                     </div>
                 </div>
             </div>
