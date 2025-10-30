@@ -1,6 +1,6 @@
 ---
 title: "Social (~~Media~~) Being"
-description: "A blog on my 25th birthday and reflections on my life"
+description: "A blog on my reflections about social media"
 author: "Siva"
 date: 2025-10-30
 tags: ["Personal"]
