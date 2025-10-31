@@ -9,9 +9,9 @@ const Suggestions = ({ primary, domains }) => {
         const getTopBlogs = async () => {
             try {
                 const response = await fetch(
-                    `https://writes-by-siva-server-production.up.railway.app/topblogs/${primary}`,
+                    `https://writes-by-siva-server-production.up.railway.app/topblogs/${primary}/`,
                     {
-                        method: "GET",
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },

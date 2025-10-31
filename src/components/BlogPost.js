@@ -512,7 +512,7 @@ export default function BlogPost(props) {
                 </div>
                 <div id="remark42" />
             </div>
-            <Suggestions primary={primary}/>
+            <Suggestions primary={primary} domains={domains}/>
         </div>
     );
 }
