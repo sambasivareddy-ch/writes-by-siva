@@ -1,0 +1,22 @@
+.suggestion-wrapper {
+    margin: 20px 0;
+}
+
+.suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.suggestions .top-blog {
+    width: fit-content;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .suggestions {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -115,7 +115,7 @@ export default async function BlogPage({ params }) {
 
     return (
         <>
-            <BlogPost content={content} meta={meta} slug={slug} post={post}/>
+            <BlogPost content={content} meta={meta} slug={slug} post={post} primary={post['primary_category']}/>
         </>
     );
 }

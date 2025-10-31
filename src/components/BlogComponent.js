@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faGrinTears,

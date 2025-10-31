@@ -22,10 +22,12 @@ import {
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+import Suggestions from "@/components/Suggestions";
+
 import styles from "@/styles/blog.module.css";
 
 export default function BlogPost(props) {
-    const { slug, content, meta, post } = props;
+    const { slug, content, meta, post, primary } = props;
     const [url, setUrl] = useState("");
     const [tags, setTags] = useState(meta?.tags);
     const [likes, setLikes] = useState(post.likes ? post.likes : 0);
@@ -83,7 +85,8 @@ export default function BlogPost(props) {
           site_id: "bysiva",
           url: url,
           theme: theme,
-          components: ["embed"]
+          components: ["embed"],
+          no_footer: true
         };
   
         const script = document.createElement("script");
@@ -507,8 +510,9 @@ export default function BlogPost(props) {
                         </a>
                     </div>
                 </div>
+                <div id="remark42" />
             </div>
-            <div id="remark42" />
+            <Suggestions primary={primary}/>
         </div>
     );
 }
