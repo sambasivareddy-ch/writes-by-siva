@@ -109,6 +109,7 @@
 
 .menu button:hover {
     transform: scale(0.95);
+    color: var(--highlight-color);
 }
 
 .menu a {
