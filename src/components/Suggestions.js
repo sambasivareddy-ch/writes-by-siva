@@ -2,14 +2,23 @@ import React, { useState, useEffect } from "react";
 
 import styles from "../styles/suggestions.module.css";
 
-const Suggestions = ({ primary }) => {
+const Suggestions = ({ primary, domains }) => {
     const [suggestedBlogs, setSuggestedBlogs] = useState([]);
 
     useEffect(() => {
         const getTopBlogs = async () => {
             try {
                 const response = await fetch(
-                    `https://writes-by-siva-server-production.up.railway.app/topblogs/${primary}`
+                    `https://writes-by-siva-server-production.up.railway.app/topblogs/${primary}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            domains,
+                        }),
+                    }
                 );
 
                 if (!response.ok) {
@@ -25,7 +34,7 @@ const Suggestions = ({ primary }) => {
         };
 
         getTopBlogs();
-    }, [primary]);
+    }, [primary, domains]);
 
     return (
         <div className={styles["suggestion-wrapper"]}>

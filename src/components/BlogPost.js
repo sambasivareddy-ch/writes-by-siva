@@ -27,7 +27,7 @@ import Suggestions from "@/components/Suggestions";
 import styles from "@/styles/blog.module.css";
 
 export default function BlogPost(props) {
-    const { slug, content, meta, post, primary } = props;
+    const { slug, content, meta, post, primary, domains } = props;
     const [url, setUrl] = useState("");
     const [tags, setTags] = useState(meta?.tags);
     const [likes, setLikes] = useState(post.likes ? post.likes : 0);
