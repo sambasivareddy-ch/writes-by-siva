@@ -27,7 +27,7 @@ const Suggestions = ({ primary, domains }) => {
 
                 const json = await response.json();
 
-                setSuggestedBlogs(json?.posts.slice(0, 4));
+                setSuggestedBlogs(json?.posts);
             } catch (err) {
                 console.log(err);
             }
