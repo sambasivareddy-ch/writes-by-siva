@@ -3,16 +3,11 @@ import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 
 import ClearIcon from "@mui/icons-material/Clear";
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import BlogComponent from "@/components/BlogComponent";
 import styles from "@/styles/bloglist.module.css";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import SwapVertIcon from '@mui/icons-material/SwapVert';
-import InterestsIcon from '@mui/icons-material/Interests';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -30,9 +25,7 @@ const BlogList = () => {
         toggleMatchAllTags,
     } = useContext(TagsContext);
 
-    const {
-        blogs, setBlogs
-    } = useContext(BlogsContext)
+    const { blogs, setBlogs } = useContext(BlogsContext);
 
     const primaryTags = ["all", "tech", "personal", "tech-events"];
     const [blogTags, setBlogTags] = useState([]);
@@ -50,59 +43,59 @@ const BlogList = () => {
         primaryTags[0]
     );
     const [menuOpened, setMenuOpened] = useState(false);
-    const [theme, setTheme] = useState('dark');
-    const [sortOption, setSortOption] = useState('default');
+    const [theme, setTheme] = useState("dark");
+    const [sortOption, setSortOption] = useState("default");
 
     // helper: safe timestamp extractor
     const getTime = (b) => {
         try {
-        return b.date ? new Date(b.date).getTime() : 0;
+            return b.date ? new Date(b.date).getTime() : 0;
         } catch {
-        return 0;
+            return 0;
         }
     };
-    
+
     // helper: total reactions (adjust fields if needed)
     const getReactions = (b) =>
         (Number(b.likes) || 0) +
         (Number(b.fires) || 0) +
         (Number(b.laugh) || 0) +
         (Number(b.anger) || 0);
-    
+
     // reusable sort function — sorts a copy and returns it
     const applySort = (listToSort, option = sortOption) => {
         const arr = [...listToSort];
-    
+
         switch (option) {
-        case "date-posted-asc":
-            arr.sort((a, b) => getTime(a) - getTime(b));
-            break;
-    
-        case "most-reacted":
-            arr.sort((a, b) => {
-            const rA = getReactions(a);
-            const rB = getReactions(b);
-            if (rB !== rA) return rB - rA;
-            return getTime(b) - getTime(a);
-            });
-            break;
-    
-        case "most-viewed":
-            arr.sort((a, b) => {
-            const vA = Number(a.views) || 0;
-            const vB = Number(b.views) || 0;
-            if (vB !== vA) return vB - vA;
-            return getTime(b) - getTime(a);
-            });
-            break;
-    
-        case "default":
-        default:
-            // default -> date desc (latest first)
-            arr.sort((a, b) => getTime(b) - getTime(a));
-            break;
+            case "date-posted-asc":
+                arr.sort((a, b) => getTime(a) - getTime(b));
+                break;
+
+            case "most-reacted":
+                arr.sort((a, b) => {
+                    const rA = getReactions(a);
+                    const rB = getReactions(b);
+                    if (rB !== rA) return rB - rA;
+                    return getTime(b) - getTime(a);
+                });
+                break;
+
+            case "most-viewed":
+                arr.sort((a, b) => {
+                    const vA = Number(a.views) || 0;
+                    const vB = Number(b.views) || 0;
+                    if (vB !== vA) return vB - vA;
+                    return getTime(b) - getTime(a);
+                });
+                break;
+
+            case "default":
+            default:
+                // default -> date desc (latest first)
+                arr.sort((a, b) => getTime(b) - getTime(a));
+                break;
         }
-    
+
         return arr;
     };
 
@@ -119,14 +112,12 @@ const BlogList = () => {
 
         setCurrentBlogs(sorted);
         setPresentPageIndex(0);
-    }
+    };
 
     useEffect(() => {
-        const theme = localStorage.getItem('blog-theme');
-        if (theme)
-            setTheme(theme);
-        else
-            localStorage.setItem('blog-theme', 'dark');
+        const theme = localStorage.getItem("blog-theme");
+        if (theme) setTheme(theme);
+        else localStorage.setItem("blog-theme", "dark");
 
         document.documentElement.setAttribute("data-theme", theme);
     }, []);
@@ -134,22 +125,23 @@ const BlogList = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch(`https://writes-by-siva-server-production.up.railway.app/all`);
+                const response = await fetch(
+                    `https://writes-by-siva-server-production.up.railway.app/all`
+                );
 
                 if (!response.ok) {
-                    return
+                    return;
                 }
 
                 const json = await response.json();
-                setBlogs(json.blogs)
-            } catch(err) {
+                setBlogs(json.blogs);
+            } catch (err) {
                 console.log(err);
             }
-        }
+        };
 
-        if (blogs.length === 0)
-            fetchPosts();
-    }, [])
+        if (blogs.length === 0) fetchPosts();
+    }, []);
 
     useEffect(() => {
         const query = debouncedText.trim().toLowerCase();
@@ -161,7 +153,9 @@ const BlogList = () => {
                     blog.title.toLowerCase().includes(query) ||
                     blog.description.toLowerCase().includes(query) ||
                     blog.slug.toLowerCase().includes(query) ||
-                    blog.domains.split(',').some((d) => d.toLowerCase().includes(query));
+                    blog.domains
+                        .split(",")
+                        .some((d) => d.toLowerCase().includes(query));
             }
 
             // Tag match
@@ -169,8 +163,12 @@ const BlogList = () => {
                 selectedTags.length === 0
                     ? true
                     : matchAllTags
-                    ? selectedTags.every((tag) => blog.domains.split(',').includes(tag))
-                    : selectedTags.some((tag) => blog.domains.split(',').includes(tag));
+                    ? selectedTags.every((tag) =>
+                          blog.domains.split(",").includes(tag)
+                      )
+                    : selectedTags.some((tag) =>
+                          blog.domains.split(",").includes(tag)
+                      );
 
             return matchesSearch && matchesTags;
         });
@@ -179,7 +177,13 @@ const BlogList = () => {
         const sortedFiltered = applySort(filtered, sortOption);
 
         setCurrentBlogs(sortedFiltered);
-    }, [selectedTags, matchAllTags, debouncedText, topicBasedBlogs, selectedPrimaryTag]);
+    }, [
+        selectedTags,
+        matchAllTags,
+        debouncedText,
+        topicBasedBlogs,
+        selectedPrimaryTag,
+    ]);
 
     useEffect(() => {
         if (!showMoreStatus) {
@@ -191,12 +195,20 @@ const BlogList = () => {
 
     useEffect(() => {
         if (blogs) {
-            const selectedBlogsBasedOnTopic = blogs.filter((blog) => selectedPrimaryTag === 'all' || blog['primary_category'] === selectedPrimaryTag);
-            setTopicBasedBlogs(selectedBlogsBasedOnTopic)
+            const selectedBlogsBasedOnTopic = blogs.filter(
+                (blog) =>
+                    selectedPrimaryTag === "all" ||
+                    blog["primary_category"] === selectedPrimaryTag
+            );
+            setTopicBasedBlogs(selectedBlogsBasedOnTopic);
 
             // Initialize blogTags with all unique tags from blogs
             const initialTags = Array.from(
-                new Set(selectedBlogsBasedOnTopic.flatMap((blog) => blog.domains.split(',')))
+                new Set(
+                    selectedBlogsBasedOnTopic.flatMap((blog) =>
+                        blog.domains.split(",")
+                    )
+                )
             );
             initialTags.sort((a, b) => a.localeCompare(b)); // Sort tags alphabetically
             setBlogTags(initialTags);
@@ -204,8 +216,8 @@ const BlogList = () => {
             // Initialize tagsCount with the count of each tag
             const initialTagsCount = {};
             initialTags.forEach((tag) => {
-                initialTagsCount[tag] = selectedBlogsBasedOnTopic.filter((blog) =>
-                    blog.domains.split(',').includes(tag)
+                initialTagsCount[tag] = selectedBlogsBasedOnTopic.filter(
+                    (blog) => blog.domains.split(",").includes(tag)
                 ).length;
             });
             setTagsCount(initialTagsCount);
@@ -224,12 +236,18 @@ const BlogList = () => {
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
                 <div className={styles["blog-input_header"]}>
-                    <div className={styles['header-main']}>
-                        <button className={styles['menu-btn']} onClick={() => {setMenuOpened(!menuOpened)}} aria-label="Menu">
-                            {!menuOpened ? <MenuIcon/>: <CloseIcon/>}
+                    <div className={styles["header-main"]}>
+                        <button
+                            className={styles["menu-btn"]}
+                            onClick={() => {
+                                setMenuOpened(!menuOpened);
+                            }}
+                            aria-label="Menu"
+                        >
+                            {!menuOpened ? <MenuIcon /> : <CloseIcon />}
                         </button>
                     </div>
-                    <div className={styles['controls-wrapper']}>
+                    <div className={styles["controls-wrapper"]}>
                         <input
                             type="text"
                             placeholder="Search Blogs here..."
@@ -240,122 +258,167 @@ const BlogList = () => {
                         />
                     </div>
                 </div>
-                {menuOpened && <div className={styles['menu']}>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[0])} aria-label="All">All</button>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[1])} aria-label="Technology">Technology</button>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[2])} aria-label="Personal">Personal</button>
-                    <button onClick={() => setSelectedPrimaryTag(primaryTags[3])} aria-label="Tech Events">Tech-Events</button>
-                    <Link href={`/profile`}>Profile</Link>
-                </div>}
-                {topicBasedBlogs.length !== 0 && <div className={styles["blog-header"]}>
-                    <label className={styles["filtering-option"]}>
-                        <input
-                            type="checkbox"
-                            aria-label="strict filter"
-                            checked={matchAllTags}
-                            onChange={() => {
-                                toggleMatchAllTags();
-                            }}
-                        />
-                        Match All Tags
-                    </label>
-                    <div className={blogWrapperClass}>
-                        {selectedTags.length !== 0 && (
-                            <button
-                                className={styles["blog-tag_reset"]}
-                                onClick={() => {
-                                    setSelectedTags([]);
-                                }}
-                                aria-label={`reset applied filter`}
-                            >
-                                <ClearIcon fontSize="small" />
-                            </button>
-                        )}
-                        {blogTags.map((tag) => (
-                            <button
-                                key={tag}
-                                className={`${styles["blog-tag"]} ${
-                                    selectedTags.includes(tag)
-                                        ? styles["active"]
-                                        : ""
-                                }`}
-                                onClick={() => {
-                                    handleTagClick(tag);
-                                    setPresentPageIndex(0);
-                                }}
-                                aria-label={`${tag} filter`}
-                            >
-                                <span>{tag}</span>
-                                <span className={styles["blog-tag_count"]}>
-                                    {tagsCount[tag] || 0}
-                                </span>
-                            </button>
-                        ))}
-                    </div>
-                </div>}
-                {topicBasedBlogs.length !== 0 && <div className={styles["blog-controls"]}>
-                    <button
-                        className={styles["show-more_tag_btn"]}
-                        onClick={() => {
-                            setShowMoreStatus(!showMoreStatus);
-                        }}
-                        aria-label={`show more tags`}
-                    >
-                        {!showMoreStatus ? "More Tags" : "Less Tags"}
-                    </button>
-                    <div className={styles["blog-pagination"]}>
+                {menuOpened && (
+                    <div className={styles["menu"]}>
                         <button
-                            className={styles["blog-pagination-btn"]}
-                            onClick={() => {
-                                if (presentPageIndex > 0) {
-                                    setPresentPageIndex(presentPageIndex - 1);
-                                }
-                            }}
-                            disabled={presentPageIndex === 0}
-                            aria-label={`previous page`}
-                        >
-                            <ArrowBackIosIcon fontSize="small" />
-                        </button>
-                        <span className={styles["blog-pagination-index"]}>
-                            {presentPageIndex + 1} /{" "}
-                            {currentBlogs.length === 0
-                                ? 1
-                                : Math.floor(currentBlogs.length / 10) +
-                                  (currentBlogs.length % 10 !== 0)}
-                        </span>
-                        <button
-                            className={styles["blog-pagination-btn"]}
-                            onClick={() => {
-                                if (
-                                    presentPageIndex <
-                                    Math.ceil(currentBlogs.length / 10) - 1
-                                ) {
-                                    setPresentPageIndex(presentPageIndex + 1);
-                                }
-                            }}
-                            disabled={
-                                presentPageIndex * 10 + 10 >=
-                                currentBlogs.length
+                            onClick={() =>
+                                setSelectedPrimaryTag(primaryTags[0])
                             }
-                            aria-label={`next page`}
+                            aria-label="All"
                         >
-                            <ArrowForwardIosIcon fontSize="small" />
+                            All
                         </button>
+                        <button
+                            onClick={() =>
+                                setSelectedPrimaryTag(primaryTags[1])
+                            }
+                            aria-label="Technology"
+                        >
+                            Technology
+                        </button>
+                        <button
+                            onClick={() =>
+                                setSelectedPrimaryTag(primaryTags[2])
+                            }
+                            aria-label="Personal"
+                        >
+                            Personal
+                        </button>
+                        <button
+                            onClick={() =>
+                                setSelectedPrimaryTag(primaryTags[3])
+                            }
+                            aria-label="Tech Events"
+                        >
+                            Tech-Events
+                        </button>
+                        <Link href={`/profile`}>Profile</Link>
                     </div>
-                </div>}
-                {topicBasedBlogs.length !== 0 && <div className={styles['blog-ops']}>
-                    <p className={styles['sort-icon']}>
-                        <SwapVertIcon/>
-                        Sort By:
-                    </p>
-                    <select defaultValue={sortOption} onChange={filterChangeHandler}>
-                        <option value={'default'}>Default</option>
-                        <option value={'date-posted-asc'}>Date Posted (Asc)</option>
-                        <option value={'most-reacted'}>Most Reacted</option>
-                        <option value={'most-viewed'}>Most Viewed</option>
-                    </select>
-                </div>}
-                {/* {topicBasedBlogs.length !== 0 && <div className={styles["blogs-count"]}>
+                )}
+                {topicBasedBlogs.length !== 0 && (
+                    <div className={styles["blog-header"]}>
+                        <label className={styles["filtering-option"]}>
+                            <input
+                                type="checkbox"
+                                aria-label="strict filter"
+                                checked={matchAllTags}
+                                onChange={() => {
+                                    toggleMatchAllTags();
+                                }}
+                            />
+                            Match All Tags
+                        </label>
+                        <div className={blogWrapperClass}>
+                            {selectedTags.length !== 0 && (
+                                <button
+                                    className={styles["blog-tag_reset"]}
+                                    onClick={() => {
+                                        setSelectedTags([]);
+                                    }}
+                                    aria-label={`reset applied filter`}
+                                >
+                                    <ClearIcon fontSize="small" />
+                                </button>
+                            )}
+                            {blogTags.map((tag) => (
+                                <button
+                                    key={tag}
+                                    className={`${styles["blog-tag"]} ${
+                                        selectedTags.includes(tag)
+                                            ? styles["active"]
+                                            : ""
+                                    }`}
+                                    onClick={() => {
+                                        handleTagClick(tag);
+                                        setPresentPageIndex(0);
+                                    }}
+                                    aria-label={`${tag} filter`}
+                                >
+                                    <span>{tag}</span>
+                                    <span className={styles["blog-tag_count"]}>
+                                        {tagsCount[tag] || 0}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+                {topicBasedBlogs.length !== 0 && (
+                    <div className={styles["blog-controls"]}>
+                        <button
+                            className={styles["show-more_tag_btn"]}
+                            onClick={() => {
+                                setShowMoreStatus(!showMoreStatus);
+                            }}
+                            aria-label={`show more tags`}
+                        >
+                            {!showMoreStatus ? "More Tags" : "Less Tags"}
+                        </button>
+                        <div className={styles["blog-pagination"]}>
+                            <button
+                                className={styles["blog-pagination-btn"]}
+                                onClick={() => {
+                                    if (presentPageIndex > 0) {
+                                        setPresentPageIndex(
+                                            presentPageIndex - 1
+                                        );
+                                    }
+                                }}
+                                disabled={presentPageIndex === 0}
+                                aria-label={`previous page`}
+                            >
+                                <ArrowBackIosIcon fontSize="small" />
+                            </button>
+                            <span className={styles["blog-pagination-index"]}>
+                                {presentPageIndex + 1} /{" "}
+                                {currentBlogs.length === 0
+                                    ? 1
+                                    : Math.floor(currentBlogs.length / 10) +
+                                      (currentBlogs.length % 10 !== 0)}
+                            </span>
+                            <button
+                                className={styles["blog-pagination-btn"]}
+                                onClick={() => {
+                                    if (
+                                        presentPageIndex <
+                                        Math.ceil(currentBlogs.length / 10) - 1
+                                    ) {
+                                        setPresentPageIndex(
+                                            presentPageIndex + 1
+                                        );
+                                    }
+                                }}
+                                disabled={
+                                    presentPageIndex * 10 + 10 >=
+                                    currentBlogs.length
+                                }
+                                aria-label={`next page`}
+                            >
+                                <ArrowForwardIosIcon fontSize="small" />
+                            </button>
+                        </div>
+                    </div>
+                )}
+                {topicBasedBlogs.length !== 0 && (
+                    <div className={styles["blog-ops"]}>
+                        <p className={styles["sort-icon"]}>
+                            <SwapVertIcon />
+                            Sort By:
+                        </p>
+                        <select
+                            defaultValue={sortOption}
+                            onChange={filterChangeHandler}
+                        >
+                            <option value={"default"}>Default</option>
+                            <option value={"date-posted-asc"}>
+                                Date Posted (Asc)
+                            </option>
+                            <option value={"most-reacted"}>Most Reacted</option>
+                            <option value={"most-viewed"}>Most Viewed</option>
+                        </select>
+                    </div>
+                )}
+                {topicBasedBlogs.length !== 0 && <div className={styles["blogs-count"]}>
                     {(presentPageIndex + 1) * 10 > currentBlogs.length ? (
                         <p>
                             {presentPageIndex * 10} - {currentBlogs.length} of{" "}
@@ -368,40 +431,53 @@ const BlogList = () => {
                             {currentBlogs.length} blogs
                         </p>
                     )}
-                </div>} */}
-                <div className={`${styles["blogs"]} ${topicBasedBlogs.length === 0 && styles['zero-blogs']}`}>
-                    {topicBasedBlogs.length !== 0 && currentBlogs.length !== 0 ?  currentBlogs
-                        .slice(
-                            presentPageIndex * 10,
-                            presentPageIndex * 10 + 10
-                        )
-                        .map((blog) => {
-                            return (
-                                <BlogComponent
-                                    key={blog.id}
-                                    title={blog.title}
-                                    description={blog.description}
-                                    domains={blog.domains.split(',')}
-                                    slug={blog.slug}
-                                    date={blog.date}
-                                    likes={blog.likes? blog.likes:0}
-                                    views={blog.views? blog.views:0}
-                                    fires={blog.fires? blog.fires:0}
-                                    laugh={blog.laugh? blog.laugh:0}
-                                    anger={blog.anger? blog.anger:0}
-                                    readtime={blog.readtime? blog.readtime:0}
-                                    author={blog.author}
-                                    searchQuery={
-                                        searchQuery.trim().length >= 3
-                                            ? searchQuery
-                                            : ""
-                                    }
-                                />
-                            );
-                        }): <div className={styles['no-blogs_matched']}>Oops!! No Blogs matched with selected tags</div>}
-                    {topicBasedBlogs.length === 0 && 
-                        <div className={styles['no-blogs']}>Yet to Add blogs on {selectedPrimaryTag} topic.</div>
-                    }
+                </div>}
+                <div
+                    className={`${styles["blogs"]} ${
+                        topicBasedBlogs.length === 0 && styles["zero-blogs"]
+                    }`}
+                >
+                    {topicBasedBlogs.length !== 0 &&
+                        currentBlogs.length !== 0 &&
+                        currentBlogs
+                            .slice(
+                                presentPageIndex * 10,
+                                presentPageIndex * 10 + 10
+                            )
+                            .map((blog) => {
+                                return (
+                                    <BlogComponent
+                                        key={blog.id}
+                                        title={blog.title}
+                                        description={blog.description}
+                                        domains={blog.domains.split(",")}
+                                        slug={blog.slug}
+                                        date={blog.date}
+                                        likes={blog.likes ? blog.likes : 0}
+                                        views={blog.views ? blog.views : 0}
+                                        fires={blog.fires ? blog.fires : 0}
+                                        laugh={blog.laugh ? blog.laugh : 0}
+                                        anger={blog.anger ? blog.anger : 0}
+                                        readtime={
+                                            blog.readtime ? blog.readtime : 0
+                                        }
+                                        author={blog.author}
+                                        searchQuery={
+                                            searchQuery.trim().length >= 3
+                                                ? searchQuery
+                                                : ""
+                                        }
+                                    />
+                                );
+                            })}
+                    {topicBasedBlogs.length === 0 && (
+                        <div className={styles["no-blogs"]}>
+                            Oops, 404: Blogs not Found{" "}
+                            {selectedPrimaryTag !== 'all' && <span className={styles["no-blogs_topic"]}>
+                              on topic: {selectedPrimaryTag}
+                            </span>}{" "}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

@@ -63,7 +63,7 @@
 .news-letter_wrapper form button:hover,
 .news-letter_wrapper-highlight form button:hover {
     color: #fff;
-    background-color: #000;
+    background-color: var(--highlight-color);
 }
 
 .news-letter_wrapper select, 

@@ -9,6 +9,11 @@
     font-family: var(--font-family-pop);
 }
 
+.profile-wrapper a {
+    text-decoration: none;
+    color: var(--highlight-color);
+}
+
 .profile-intro {
     margin: 20px 0;
     line-height: 1.8;
@@ -16,10 +21,13 @@
 
 .profile-intro h1 {
     font-family: var(--font-family-raleway);
+    margin: 10px 0;
 }
 
 .profile-intro p {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 2.2;
+    font-weight: 100;
 }
 
 .profile-links {
