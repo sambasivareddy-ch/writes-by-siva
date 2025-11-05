@@ -74,7 +74,7 @@ Typical anomalies in this mode:
 - Write-skew is type of anamoly that can happen here.
 #### Example
 ```sql
-    BEGIN; -- Txn 1                                         |
+    BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ; -- Txn1                                         |
     SELECT COUNT(*) FROM TASKS; -- Sees 10 rows             |
                                                             |   BEGIN; -- Txn 2 (executing concurrent to txn 1)
                                                             |   INSERT INTO TASKS VALUES(11, 'OPEN');

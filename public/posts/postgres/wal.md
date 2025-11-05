@@ -37,10 +37,10 @@ canonical_url: "https://bysiva.vercel.app/blog/wal"
 
 ```mermaid
 flowchart TD
-    A[Client Transaction] --> B[Shared Buffers<br/>(Dirty Pages in Memory)]
+    A[Client Transaction] --> B[Shared Buffers(Dirty Pages in Memory)]
     B --> C[WAL Buffers]
-    C --> D[WAL Files<br/>($PGDATA/pg_wal/)]
-    D -->|Checkpoint or BG Writer| E[Data Files<br/>(Heap & Indexes)]
+    C --> D[WAL Files($PGDATA/pg_wal/)]
+    D -->|Checkpoint or BG Writer| E[Data Files(Heap & Indexes)]
 
     subgraph Commit Flow
         C --> F[fsync WAL Record]
@@ -49,7 +49,7 @@ flowchart TD
 
     subgraph Crash Recovery
         H[Crash Occurs] --> I[Restart PostgreSQL]
-        I --> J[WAL Replay<br/>Redo INSERT/UPDATE/DELETE]
+        I --> J[WAL Replay(Redo INSERT/UPDATE/DELETE)]
         J --> E
     end
 

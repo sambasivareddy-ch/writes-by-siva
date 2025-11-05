@@ -46,7 +46,7 @@ SQL --> Parser --> Analyzer --> Planner/Optimizer --> Executor --> Results
 - It do certain checks on the query like:
   - Syntax (`SELECT` vs `SELEC` ?)
   - Also checks for valid column names, functions exists (like avg(), sum()) etc.
-- At the end of this stage, we will posses a raw **parse tree* based on syntax (not optimized).
+- At the end of this stage, we will posses a raw *parse tree* based on syntax (not optimized).
 #### Example
 ```sql
     SELECT id, first_name FROM users WHERE age > 30;
@@ -62,7 +62,7 @@ At this stage, PG only cares that:
 - In this stage, PostgreSQL rewriter tries to apply the transformation rules defined [here](https://www.postgresql.org/docs/current/rules.html). Few examples:
   - **Views** --> replaced with theire underlying query definition.
   - **Rules** --> rewrite logic applied
-- At the end of this stage, rewriter convers the parse tree into query tree on bases of semantics (not optimized)
+- At the end of this stage, rewriter converts the parse tree into query tree on bases of semantics (not optimized)
 #### Example (based on view)
 ```sql
     CREATE VIEW active_users AS SELECT * FROM users WHERE active = true;  -- active_users view
@@ -77,7 +77,7 @@ Now, the rewriter will transforms the above query into something like:
 
 ### C. Planner/Optimizer
 - The main master mind in the whole execution pipeline.
-- It takes the query tree as input and generates the **multiple candidata execution plans** for the query.
+- It takes the query tree as input and generates the **multiple candidate execution plans** for the query.
 - It estimates the **_cost_** of each plan generated using table statistics and selects the **cheapest** one among the all.
 - But the cost estimated is based purely on stats available, it might not 100% accurate.
 - Cost Factors:
