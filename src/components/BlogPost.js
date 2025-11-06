@@ -23,6 +23,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import Suggestions from "@/components/Suggestions";
+import Comments from "@/components/Comments";
 
 import styles from "@/styles/blog.module.css";
 
@@ -510,8 +511,8 @@ export default function BlogPost(props) {
                         </a>
                     </div>
                 </div>
-                <div id="remark42" />
             </div>
+            <Comments/>
             <Suggestions primary={primary} domains={domains}/>
         </div>
     );
