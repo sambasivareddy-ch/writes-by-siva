@@ -1,0 +1,172 @@
+.comment-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comment-form textarea {
+    outline: none;
+    padding: 10px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: solid 3px var(--border-color);
+    font-family: var(--font-family-raleway);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.comment-form textarea:read-only {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+
+.comment-form button {
+    padding: 10px;
+    text-align: center;
+    font-family: var(--font-family-pop);
+    border: solid 2px var(--border-color);
+    background-color: var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.comment-form button:disabled {
+    cursor: not-allowed;
+}
+
+.comment-form button:hover,
+.reply-form button:hover {
+    border-color: var(--highlight-color);
+    background-color: var(--highlight-color);
+}
+
+.comment-form button:disabled:hover {
+    border-color: var(--border-color);
+    background-color: var(--border-color);
+}
+
+.comment {
+    margin: 1rem 0;
+}
+
+.comment-content {
+    display: flex;
+    height: fit-content;
+    gap: 0 10px;
+}
+
+.comment-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-avthar {
+    padding: 1px 10px;
+    box-sizing: border-box;
+    background-color: var(--highlight-color);
+    border-radius: 5px;
+    align-self: center;
+    height: 50px;
+    width: 50px;
+    display: grid;
+    place-items: center;
+}
+
+.user-name {
+    font-size: 16px;
+    font-family: var(--font-family-raleway);
+    font-weight: bold;
+    /* text-decoration: underline; */
+    color: var(--highlight-color);
+}
+
+.comment-thread {
+    margin-left: 1.25rem;
+    border-left: 1px solid var(--border-color);
+    padding-left: 1rem;
+}
+
+.comment-actions {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    gap: 0 10px;
+    font-size: 14px;
+}
+
+.comment-actions button {
+    outline: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.comment-actions .like-btn {
+    display: flex;
+    align-items: center;
+    gap: 0 3px;
+}
+
+.comment-actions button:hover {
+    text-decoration: underline;
+}
+
+.reply-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    gap: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.reply-form input {
+    padding: 10px;
+    border: solid 1px var(--border-color);
+    border-radius: 8px;
+    font-family: var(--font-family-pop);
+}
+
+.reply-form button {
+    border: solid 1px var(--border-color);
+    background-color: var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.login-user, .show-replies {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.show-replies {
+    gap: 5px;
+}
+
+.login-user button {
+    outline: none;
+    border: solid 1px var(--border-color);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.login-user button:hover {
+    background-color: var(--border-color);
+}
+
+.login-user button:hover svg {
+    background-color: var(--border-color);
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.message {
+    font-size: 14px;
+    font-family: var(--font-family-raleway);
+}

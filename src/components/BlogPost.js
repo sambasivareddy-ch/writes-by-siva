@@ -23,6 +23,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import Suggestions from "@/components/Suggestions";
+import Comments from "@/components/Comments";
 
 import styles from "@/styles/blog.module.css";
 
@@ -76,33 +77,6 @@ export default function BlogPost(props) {
         return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
 
-    useEffect(() => {
-        if (!url) return;
-  
-        // IMPORTANT: make sure this host and site_id match your docker-compose env
-        window.remark_config = {
-          host: "https://comments.bysiva.blog",
-          site_id: "bysiva",
-          url: url,
-          theme: theme,
-          components: ["embed"],
-          no_footer: true
-        };
-  
-        const script = document.createElement("script");
-        script.src = `${window.remark_config.host}/web/embed.js`;
-        script.async = true;
-        document.body.appendChild(script);
-  
-        return () => {
-          // cleanup: remove injected script and widget content
-          try { document.body.removeChild(script); } catch (e) {}
-          const widget = document.getElementById("remark42");
-          if (widget) widget.innerHTML = "";
-          try { delete window.remark_config; } catch (e) { window.remark_config = undefined; }
-        };
-    }, [url]);
-
     const scrollToTopHandler = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -132,7 +106,7 @@ export default function BlogPost(props) {
             setShowTldr(true);
             try {
                 const response = await fetch(
-                    `https://writes-by-siva-server-production.up.railway.app/summarize/${slug}`
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}/summarize/${slug}`
                 );
 
                 if (!response.ok) {
@@ -156,7 +130,7 @@ export default function BlogPost(props) {
             }
             try {
                 const response = await fetch(
-                    `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                     {
                         method: "PATCH",
                         headers: {
@@ -191,7 +165,7 @@ export default function BlogPost(props) {
         }
         try {
             const response = await fetch(
-                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -223,7 +197,7 @@ export default function BlogPost(props) {
         }
         try {
             const response = await fetch(
-                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -255,7 +229,7 @@ export default function BlogPost(props) {
         }
         try {
             const response = await fetch(
-                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -287,7 +261,7 @@ export default function BlogPost(props) {
         }
         try {
             const response = await fetch(
-                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -510,8 +484,8 @@ export default function BlogPost(props) {
                         </a>
                     </div>
                 </div>
-                <div id="remark42" />
             </div>
+            <Comments post_slug_id={slug}/>
             <Suggestions primary={primary} domains={domains}/>
         </div>
     );
