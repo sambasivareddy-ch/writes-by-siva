@@ -18,6 +18,8 @@
     "@mui/material": "^5.11.10",
     "@vercel/analytics": "^1.5.0",
     "buffer": "^6.0.3",
+    "firebase": "^12.5.0",
+    "firebase-admin": "^13.6.0",
     "gray-matter": "^4.0.3",
     "next": "^16.0.0",
     "react": "19.1.0",

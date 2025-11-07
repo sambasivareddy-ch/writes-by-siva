@@ -16,6 +16,11 @@
     font-size: 16px;
 }
 
+.comment-form textarea:read-only {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+
 .comment-form button {
     padding: 10px;
     text-align: center;
@@ -26,10 +31,19 @@
     cursor: pointer;
 }
 
+.comment-form button:disabled {
+    cursor: not-allowed;
+}
+
 .comment-form button:hover,
 .reply-form button:hover {
     border-color: var(--highlight-color);
     background-color: var(--highlight-color);
+}
+
+.comment-form button:disabled:hover {
+    border-color: var(--border-color);
+    background-color: var(--border-color);
 }
 
 .comment {
@@ -39,7 +53,7 @@
 .comment-content {
     display: flex;
     height: fit-content;
-    gap: 10px;
+    gap: 0 10px;
 }
 
 .comment-meta {
@@ -75,9 +89,11 @@
 }
 
 .comment-actions {
+    height: fit-content;
     display: flex;
+    align-items: center;
     margin: 0.5rem 0;
-    gap: 10px;
+    gap: 0 10px;
     font-size: 14px;
 }
 
@@ -86,6 +102,12 @@
     border: none;
     font-size: 14px;
     cursor: pointer;
+}
+
+.comment-actions .like-btn {
+    display: flex;
+    align-items: center;
+    gap: 0 3px;
 }
 
 .comment-actions button:hover {
@@ -112,4 +134,34 @@
     background-color: var(--border-color);
     border-radius: 8px;
     cursor: pointer;
+}
+
+.login-user, .show-replies {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.show-replies {
+    gap: 5px;
+}
+
+.login-user button {
+    outline: none;
+    border: solid 1px var(--border-color);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.login-user button:hover {
+    background-color: var(--border-color);
+}
+
+.login-user button:hover svg {
+    background-color: var(--border-color);
+}
+
+button:disabled {
+    cursor: not-allowed;
 }
