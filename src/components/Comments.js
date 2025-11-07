@@ -24,21 +24,21 @@ const COMMENTS_SAMPLE = [
     {
         comment_id: 1,
         message: "Comment 1",
-        user: "User 1",
+        username: "User 1",
         likes: 0,
         created_at: '2025/11/05',
         thread: [
             {
                 comment_id: 2,
                 message: "Comment 2",
-                user: "User 2",
+                username: "User 2",
                 likes: 0,
                 created_at: '2025/11/02',
                 thread: [
                     {
                         comment_id: 3,
                         message: "Comment 3",
-                        user: "User 3",
+                        username: "User 3",
                         likes: 0,
                         created_at: '2025/11/04',
                     },
@@ -47,7 +47,7 @@ const COMMENTS_SAMPLE = [
             {
                 comment_id: 4,
                 message: "Comment 4",
-                user: "User 4",
+                username: "User 4",
                 likes: 0,
                 created_at: '2025/11/01',
             },
@@ -56,15 +56,15 @@ const COMMENTS_SAMPLE = [
     {
         comment_id: 5,
         message: "Comment 5",
-        user: "User 5",
+        username: "User 5",
         likes: 0,
         created_at: '2025/11/03',
     },
 ];
 
 // Recursive comment renderer
-const Comment = ({ user, message, likes, thread, created_at }) => {
-    const avtharBg = getUserColor(user);
+const Comment = ({ username, message, likes, thread, created_at }) => {
+    const avtharBg = getUserColor(username);
     const [replyClicked, setReplyClicked] = useState(false);
     const [commentLikes, setCommentLikes] = useState(likes);
     const [showReplies, setShowReplies] = useState(false);
@@ -78,10 +78,10 @@ const Comment = ({ user, message, likes, thread, created_at }) => {
                     className={styles["user-avthar"]}
                     style={{ backgroundColor: avtharBg }}
                 >
-                    {user[0].toUpperCase()}
+                    {username[0].toUpperCase()}
                 </span>
                 <div className={styles["comment-meta"]}>
-                    <span className={styles["user-name"]}>{user}</span>
+                    <span className={styles["user-name"]}>{username}</span>
                     <span>{message}</span>
                 </div>
             </div>
@@ -116,7 +116,7 @@ const Comment = ({ user, message, likes, thread, created_at }) => {
                     {thread.map((child) => (
                         <Comment
                             key={child.comment_id}
-                            user={child.user}
+                            username={child.username}
                             message={child.message}
                             thread={child.thread}
                             likes={child.likes}
@@ -177,7 +177,7 @@ const Comments = () => {
                 {COMMENTS_SAMPLE.map((comment) => (
                     <Comment
                         key={comment.comment_id}
-                        user={comment.user}
+                        username={comment.username}
                         message={comment.message}
                         thread={comment.thread}
                         likes={comment.likes}
