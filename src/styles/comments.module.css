@@ -165,3 +165,8 @@
 button:disabled {
     cursor: not-allowed;
 }
+
+.message {
+    font-size: 14px;
+    font-family: var(--font-family-raleway);
+}
