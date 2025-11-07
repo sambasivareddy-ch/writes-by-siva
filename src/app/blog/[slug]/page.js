@@ -7,7 +7,7 @@ import path from "path";
 
 async function getPost(slug) {
     try {
-        const response = await fetch(`https://writes-by-siva-server-production.up.railway.app/blog/${slug}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog/${slug}`);
         
         if (!response.ok) {
             return null
@@ -24,7 +24,7 @@ async function getPost(slug) {
 
 async function updateReadTime(slug, readtime) {
     try {
-        const response = await fetch(`https://writes-by-siva-server-production.up.railway.app/readtime/${slug}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/readtime/${slug}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

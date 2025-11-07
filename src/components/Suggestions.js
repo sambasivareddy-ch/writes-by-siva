@@ -9,7 +9,7 @@ const Suggestions = ({ primary, domains }) => {
         const getTopBlogs = async () => {
             try {
                 const response = await fetch(
-                    `https://writes-by-siva-server-production.up.railway.app/topblogs/${primary}/`,
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}/topblogs/${primary}/`,
                     {
                         method: "POST",
                         headers: {

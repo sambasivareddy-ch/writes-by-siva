@@ -24,7 +24,7 @@ const Newsletter = () => {
         }
 
         try {
-            const response = await fetch(`https://writes-by-siva-server-production.up.railway.app/subscribe`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/subscribe`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

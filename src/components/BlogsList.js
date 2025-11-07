@@ -126,7 +126,7 @@ const BlogList = () => {
         const fetchPosts = async () => {
             try {
                 const response = await fetch(
-                    `https://writes-by-siva-server-production.up.railway.app/all`
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}/all`
                 );
 
                 if (!response.ok) {

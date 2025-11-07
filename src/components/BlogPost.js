@@ -106,7 +106,7 @@ export default function BlogPost(props) {
             setShowTldr(true);
             try {
                 const response = await fetch(
-                    `https://writes-by-siva-server-production.up.railway.app/summarize/${slug}`
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}/summarize/${slug}`
                 );
 
                 if (!response.ok) {
@@ -130,7 +130,7 @@ export default function BlogPost(props) {
             }
             try {
                 const response = await fetch(
-                    `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                     {
                         method: "PATCH",
                         headers: {
@@ -165,7 +165,7 @@ export default function BlogPost(props) {
         }
         try {
             const response = await fetch(
-                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -197,7 +197,7 @@ export default function BlogPost(props) {
         }
         try {
             const response = await fetch(
-                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -229,7 +229,7 @@ export default function BlogPost(props) {
         }
         try {
             const response = await fetch(
-                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -261,7 +261,7 @@ export default function BlogPost(props) {
         }
         try {
             const response = await fetch(
-                `https://writes-by-siva-server-production.up.railway.app/analytics/${slug}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/analytics/${slug}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -485,7 +485,7 @@ export default function BlogPost(props) {
                     </div>
                 </div>
             </div>
-            <Comments/>
+            <Comments post_slug_id={slug}/>
             <Suggestions primary={primary} domains={domains}/>
         </div>
     );
