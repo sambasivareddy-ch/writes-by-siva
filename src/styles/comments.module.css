@@ -64,7 +64,8 @@
     font-size: 16px;
     font-family: var(--font-family-raleway);
     font-weight: bold;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    color: var(--highlight-color);
 }
 
 .comment-thread {
@@ -77,11 +78,13 @@
     display: flex;
     margin: 0.5rem 0;
     gap: 10px;
+    font-size: 14px;
 }
 
 .comment-actions button {
     outline: none;
     border: none;
+    font-size: 14px;
     cursor: pointer;
 }
 

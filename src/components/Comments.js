@@ -13,16 +13,19 @@ const COMMENTS_SAMPLE = [
         comment_id: 1,
         message: "Comment 1",
         user: "User 1",
+        likes: 0,
         thread: [
             {
                 comment_id: 2,
                 message: "Comment 2",
                 user: "User 2",
+                likes: 0,
                 thread: [
                     {
                         comment_id: 3,
                         message: "Comment 3",
                         user: "User 3",
+                        likes: 0,
                     },
                 ],
             },
@@ -30,6 +33,7 @@ const COMMENTS_SAMPLE = [
                 comment_id: 4,
                 message: "Comment 4",
                 user: "User 4",
+                likes: 0,
             },
         ],
     },
@@ -37,13 +41,15 @@ const COMMENTS_SAMPLE = [
         comment_id: 5,
         message: "Comment 5",
         user: "User 5",
+        likes: 0,
     },
 ];
 
 // Recursive comment renderer
-const Comment = ({ user, message, thread }) => {
+const Comment = ({ user, message, likes, thread }) => {
     const avtharBg = getUserColor(user);
     const [replyClicked, setReplyClicked] = useState(false);
+    const [commentLikes, setCommentLikes] = useState(likes);
 
     return (
         <div className={styles.comment}>
@@ -60,7 +66,8 @@ const Comment = ({ user, message, thread }) => {
                 </div>
             </div>
             <div className={styles["comment-actions"]}>
-                <button>Like</button>
+                <span>{new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}</span>
+                <button onClick={() => setCommentLikes((prev) => prev + 1)}>Like ({commentLikes})</button>
                 <button onClick={() => setReplyClicked(!replyClicked)}>{replyClicked ? "Cancel": "Reply"}</button>
             </div>
             {replyClicked && <form className={styles['reply-form']}>
@@ -76,6 +83,7 @@ const Comment = ({ user, message, thread }) => {
                             user={child.user}
                             message={child.message}
                             thread={child.thread}
+                            likes={child.likes}
                         />
                     ))}
                 </div>
@@ -104,6 +112,7 @@ const Comments = () => {
                         user={comment.user}
                         message={comment.message}
                         thread={comment.thread}
+                        likes={comment.likes}
                     />
                 ))}
             </div>
