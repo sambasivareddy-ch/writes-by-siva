@@ -81,7 +81,6 @@ const Comment = ({ username, message, likes, thread, created_at, post_slug_id, c
     }
 
     const commentLikeHandler = async () => {
-        e.preventDefault();
 
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${comment_id}/like`, {
