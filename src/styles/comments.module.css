@@ -117,9 +117,10 @@
 .reply-form {
     width: 100%;
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 70% 28%;
     gap: 10px;
     transition: all 0.2s ease-in-out;
+    justify-content: space-around;
 }
 
 .reply-form input {
@@ -142,6 +143,11 @@
     gap: 10px;
 }
 
+.login-user {
+    margin: 1rem 0;
+    font-size: 16px;
+}
+
 .show-replies {
     gap: 5px;
 }
@@ -150,8 +156,12 @@
     outline: none;
     border: solid 1px var(--border-color);
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
     border-radius: 8px;
+}
+
+.login-user button svg {
+    font-size: 16px;
 }
 
 .login-user button:hover {
@@ -169,4 +179,12 @@ button:disabled {
 .message {
     font-size: 14px;
     font-family: var(--font-family-raleway);
+}
+
+.comments-list {
+    margin: 2rem 0;
+}
+
+.delete-btn svg {
+    font-size: 14px;
 }

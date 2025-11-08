@@ -20,14 +20,14 @@ To ensure a safe and spam-free environment, users are now required to sign in be
 Show appreciation for insightful comments with a simple Like! You can also reply directly to others’ thoughts, sparking meaningful discussions right beneath each post.   
 
 ### 🧑‍💻 4. Privacy First — Always
-We value your privacy. Our system does not store any personal information, except for your username or display name — just enough to identify who’s participating in the conversation.   
+We value your privacy. Our system does not store any personal information, except for your username or display name & an unique user ID — just enough to identify who’s participating in the conversation.   
 
 ### ⏱️ 5. Real-Time, Human-Friendly Timestamps
 No need to check the clock! Comments now display relative timestamps like “2s ago,” “4 mins ago,” “yesterday,” or “last week.” This gives a natural, real-time feel to every interaction.
 
+### 🚮 6. Delete the Comments
+Allows users to delete their own comments which we will identified by the unique  user ID (uid) stored when the comment is added.
+
 ## 🚀 Start the Conversation
 We built this new comment system to make sharing ideas and feedback easier, faster, and more enjoyable.
 **_Try it out on any of our latest posts — sign in, drop a comment, and join the conversation!_**
-
-## Things are on the way
-- Deleting the Comment 

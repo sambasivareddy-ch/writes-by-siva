@@ -4,11 +4,12 @@ import styles from "@/styles/comments.module.css";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faEraser, faTrash } from "@fortawesome/free-solid-svg-icons";
 import formatRelativeTime from "@/utils/time";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useAuth } from "@/store/authContext";
 
@@ -20,7 +21,17 @@ const getUserColor = (user) => {
 };
 
 // Recursive comment renderer
-const Comment = ({ username, message, likes, thread, created_at, post_slug_id, comment_id, refreshComments }) => {
+const Comment = ({
+    username,
+    message,
+    likes,
+    thread,
+    created_at,
+    post_slug_id,
+    comment_id,
+    uuid,
+    refreshComments,
+}) => {
     const avtharBg = getUserColor(username);
     const [replyClicked, setReplyClicked] = useState(false);
     const [commentLikes, setCommentLikes] = useState(likes);
@@ -37,66 +48,95 @@ const Comment = ({ username, message, likes, thread, created_at, post_slug_id, c
         setTimeout(() => {
             setSuccess(false);
             setError(false);
-        }, 3000)
-    }, [success, error])
+        }, 3000);
+    }, [success, error]);
 
     const replyCommentHandler = async (e) => {
         e.preventDefault();
 
         try {
             setIsLoading(true);
-            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${comment_id}/reply`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: authUser.displayName,
-                    comment: replyComment.current.value, 
-                    blog_slug_id: post_slug_id,
-                    uuid: authUser.uid,
-                })
-            })
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${comment_id}/reply`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: authUser.displayName,
+                        comment: replyComment.current.value,
+                        blog_slug_id: post_slug_id,
+                        uuid: authUser.uid,
+                    }),
+                }
+            );
 
             if (!response.ok) {
                 setError(true);
-                console.error('Unable to post the reply to the comment');
+                console.error("Unable to post the reply to the comment");
                 return;
             }
-            
+
             setSuccess(true);
-            replyComment.current.value = '';
+            replyComment.current.value = "";
             if (refreshComments) {
                 setReplyClicked(false);
                 setShowReplies(true);
                 refreshComments();
             }
-            console.log('Successfully added reply to the Comment');
-        } catch(err) {
+            console.log("Successfully added reply to the Comment");
+        } catch (err) {
             setError(true);
             console.log(err);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     const commentLikeHandler = async () => {
-
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${comment_id}/like`, {
-                method: 'POST'
-            })
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${comment_id}/like`,
+                {
+                    method: "POST",
+                }
+            );
 
             if (!response.ok) {
-                console.log('Unable to like the comment');
+                console.log("Unable to like the comment");
             }
 
-            setCommentLikes((prev) => prev + 1)
-            console.log('Successfully liked reply to the Comment');
-        } catch(err) {
+            setCommentLikes((prev) => prev + 1);
+            console.log("Successfully liked reply to the Comment");
+        } catch (err) {
             console.log(err);
         }
-    }
+    };
+
+    const commentDeleteHandler = async () => {
+        try {
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${comment_id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+            if (!response.ok) {
+                console.error("Unable to delete comment");
+                return;
+            }
+
+            if (refreshComments) {
+                refreshComments();
+            }
+
+            console.log("Successfully deleted the Comment");
+        } catch (err) {
+            console.log(err);
+        } 
+    };
 
     return (
         <div className={styles.comment}>
@@ -113,31 +153,59 @@ const Comment = ({ username, message, likes, thread, created_at, post_slug_id, c
                 </div>
             </div>
             <div className={styles["comment-actions"]}>
-                <span>
-                    {formatRelativeTime(created_at)}
-                </span>
+                {authUser && authUser.uid === uuid &&
+                    <button className={styles['delete-btn']} onClick={commentDeleteHandler}>
+                        <FontAwesomeIcon icon={faTrash}/>
+                    </button>
+                }
+                <span>{created_at}</span>
                 <button
                     className={styles["like-btn"]}
                     onClick={commentLikeHandler}
                 >
-                    <FontAwesomeIcon icon={faHeart}/>
+                    <FontAwesomeIcon icon={faHeart} />
                     <span>{commentLikes}</span>
                 </button>
-                <button onClick={() => setReplyClicked(!replyClicked)} disabled={!authUser}>
+                <button
+                    onClick={() => setReplyClicked(!replyClicked)}
+                    disabled={!authUser}
+                >
                     {replyClicked ? "Cancel" : "Reply"}
                 </button>
-                <button className={styles['show-replies']} onClick={() => setShowReplies(!showReplies)}>
-                    {!showReplies ? <ArrowDropDownIcon/>: <ArrowDropUpIcon/>} 
-                    <span>{!showReplies ? "Show": "Hide"} Replies</span>
+                <button
+                    className={styles["show-replies"]}
+                    onClick={() => setShowReplies(!showReplies)}
+                >
+                    {!showReplies ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
+                    <span>{!showReplies ? "Show" : "Hide"} Replies</span>
                 </button>
             </div>
             {replyClicked && (
-                <form className={styles["reply-form"]} onSubmit={replyCommentHandler}>
-                    <input type="text" placeholder="Reply to the comment..." ref={replyComment}/>
+                <form
+                    className={styles["reply-form"]}
+                    onSubmit={replyCommentHandler}
+                >
+                    <input
+                        type="text"
+                        placeholder="Reply to the comment..."
+                        ref={replyComment}
+                    />
                     <button type="submit">Reply</button>
-                    {error && <span className={styles['message']}>Error occurred while adding comment!!</span>}
-                    {success && <span className={styles['message']}>Successfully posted comment!</span>}
-                    {isLoading && <span className={styles['message']}>Posting the comment....</span>}
+                    {error && (
+                        <span className={styles["message"]}>
+                            Error occurred while adding comment!!
+                        </span>
+                    )}
+                    {success && (
+                        <span className={styles["message"]}>
+                            Successfully posted comment!
+                        </span>
+                    )}
+                    {isLoading && (
+                        <span className={styles["message"]}>
+                            Posting the comment....
+                        </span>
+                    )}
                 </form>
             )}
 
@@ -153,6 +221,7 @@ const Comment = ({ username, message, likes, thread, created_at, post_slug_id, c
                             created_at={child.created_at}
                             post_slug_id={post_slug_id}
                             comment_id={child.comment_id}
+                            uuid={child.uuid}
                             refreshComments={refreshComments}
                         />
                     ))}
@@ -162,29 +231,31 @@ const Comment = ({ username, message, likes, thread, created_at, post_slug_id, c
     );
 };
 
-const Comments = ({post_slug_id}) => {
+const Comments = ({ post_slug_id }) => {
     const { authUser, signIn, signOutLocal } = useAuth();
     const [comments, setComments] = useState([]);
-    const userComment = useRef('');
+    const userComment = useRef("");
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
 
     const fetchComments = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment/${post_slug_id}`);
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/comment/${post_slug_id}`
+            );
 
             if (!response.ok) {
-                console.error('Error Occurred while fetching the comments');
+                console.error("Error Occurred while fetching the comments");
             }
 
             const json = await response.json();
 
             setComments(json);
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
-    }
+    };
 
     useEffect(() => {
         fetchComments();
@@ -208,37 +279,39 @@ const Comments = ({post_slug_id}) => {
 
         try {
             setIsLoading(true);
-            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: authUser.displayName,
-                    comment: userComment.current.value, 
-                    parent_comment_id: -1,
-                    blog_slug_id: post_slug_id,
-                    uuid: authUser.uid,
-                })
-            })
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/comment`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: authUser.displayName,
+                        comment: userComment.current.value,
+                        parent_comment_id: -1,
+                        blog_slug_id: post_slug_id,
+                        uuid: authUser.uid,
+                    }),
+                }
+            );
 
             if (!response.ok) {
                 setError(true);
-                console.error('Unable to post the comment');
-                return
+                console.error("Unable to post the comment");
+                return;
             }
 
             setSuccess(true);
-            userComment.current.value = '';
-            console.log('Successfully added Comment');
-        } catch(err) {
+            userComment.current.value = "";
+            console.log("Successfully added Comment");
+        } catch (err) {
             setError(true);
             console.error(err);
         } finally {
             setIsLoading(false);
         }
-    }
-
+    };
 
     return (
         <div className={styles["comments-section_wrapper"]}>
@@ -246,7 +319,7 @@ const Comments = ({post_slug_id}) => {
 
             {!authUser && (
                 <div className={styles["login-user"]}>
-                    <p>Login With</p>
+                    Login With
                     <button onClick={() => signIn("google")}>
                         <GoogleIcon />
                     </button>
@@ -260,17 +333,20 @@ const Comments = ({post_slug_id}) => {
 
             {authUser && (
                 <div className={styles["login-user"]}>
-                    <p>
-                        Commenting as{" "}
-                        <strong>{authUser.displayName ?? authUser.email}</strong>
-                    </p>
+                    Commenting as{" "}
+                    <strong>
+                        {authUser.displayName ?? authUser.email}
+                    </strong>
                     <button onClick={signOutLocal}>
                         <LogoutIcon />
                     </button>
                 </div>
             )}
 
-            <form className={styles["comment-form"]} onSubmit={postCommentHandler}>
+            <form
+                className={styles["comment-form"]}
+                onSubmit={postCommentHandler}
+            >
                 <textarea
                     placeholder="Please! Add your comment here.."
                     rows={5}
@@ -280,28 +356,44 @@ const Comments = ({post_slug_id}) => {
                 <button type="submit" disabled={!authUser}>
                     {authUser ? "Comment" : "SignIn above to Comment"}
                 </button>
-                {error && <span className={styles['message']}>Error occurred while adding comment!!</span>}
-                {success && <span className={styles['message']}>Successfully posted comment!</span>}
-                {isLoading && <span className={styles['message']}>Posting the comment....</span>}
+                {error && (
+                    <span className={styles["message"]}>
+                        Error occurred while adding comment!!
+                    </span>
+                )}
+                {success && (
+                    <span className={styles["message"]}>
+                        Successfully posted comment!
+                    </span>
+                )}
+                {isLoading && (
+                    <span className={styles["message"]}>
+                        Posting the comment....
+                    </span>
+                )}
             </form>
 
             <div className={styles["comments-list"]}>
-                {comments.length !== 0 && comments.map((comment) => (
-                    <Comment
-                        key={comment.comment_id}
-                        username={comment.username}
-                        message={comment.message}
-                        thread={comment.thread}
-                        likes={comment.likes}
-                        created_at={comment.created_at}
-                        comment_id={comment.comment_id}
-                        post_slug_id={post_slug_id}
-                        refreshComments={fetchComments}
-                    />
-                ))}
-                {comments.length === 0 && <p>
-                    <i>👀 No comments yet? Guess you’ll make history!</i>
-                </p>}
+                {comments.length !== 0 &&
+                    comments.map((comment) => (
+                        <Comment
+                            key={comment.comment_id}
+                            username={comment.username}
+                            message={comment.message}
+                            thread={comment.thread}
+                            likes={comment.likes}
+                            created_at={comment.created_at}
+                            comment_id={comment.comment_id}
+                            post_slug_id={post_slug_id}
+                            uuid={comment.uuid}
+                            refreshComments={fetchComments}
+                        />
+                    ))}
+                {comments.length === 0 && (
+                    <p>
+                        <i>👀 No comments yet? Guess you’ll make history!</i>
+                    </p>
+                )}
             </div>
         </div>
     );
