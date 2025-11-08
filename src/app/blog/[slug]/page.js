@@ -15,7 +15,10 @@ async function getPost(slug) {
 
         const json = await response.json();
 
-        return json.posts[0];
+        if (json && json.posts) {
+            return json.posts[0];
+        }
+        return null;
     } catch(err) {
         console.log(err)
         return null;
