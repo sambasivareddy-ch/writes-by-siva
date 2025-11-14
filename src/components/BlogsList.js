@@ -141,7 +141,7 @@ const BlogList = () => {
         params.set("limit", String(limit));
         params.set("sort_by", serverSort.sort_by);
         params.set("order", serverSort.order);
-        // params.set("include", matchAllTags);
+        params.set("include", matchAllTags);
         if (tags && tags.length > 0) params.set("tags", tags.join(","));
 
         return `${process.env.NEXT_PUBLIC_SERVER_URL || ""}/blogs?${params.toString()}`;
