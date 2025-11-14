@@ -283,11 +283,14 @@
 }
 
 .no-blogs {
+    width: fit-content;
     font-size: 16px;
     padding: 5px;
     border: solid 1px var(--highlight-color);
     font-family: var(--font-family-raleway);
     background-color: var(--highlight-color);
+    margin: 20px auto;
+    border-radius: 5px;
 }
 
 .active {
