@@ -147,6 +147,7 @@ const BlogList = () => {
         params.set("sort_by", serverSort.sort_by);
         params.set("order", serverSort.order);
         params.set("include", matchAllTags);
+        params.set("primary", selectedPrimaryTag);
         if (tags && tags.length > 0) params.set("tags", tags.join(","));
 
         return `${
@@ -156,11 +157,14 @@ const BlogList = () => {
 
     const fetchTags = useCallback(async () => {
         try {
+            const params = new URLSearchParams();
+            params.set("primary", selectedPrimaryTag);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_SERVER_URL || ""}/tags`
+                `${process.env.NEXT_PUBLIC_SERVER_URL || ""}/tags?${params.toString()}`
             );
             if (!res.ok) return;
             const json = await res.json();
+            console.log(json);
             if (json.success) {
                 setBlogTags(json.tags || []);
                 setEachTagCount(json.eachTagCount || {});
@@ -168,7 +172,7 @@ const BlogList = () => {
         } catch (err) {
             console.error("Failed to fetch tags", err);
         }
-    }, []);
+    }, [selectedPrimaryTag]);
 
     // Fetch blogs from server using selectedTags + pagination + sort
     const fetchBlogs = useCallback(
@@ -503,13 +507,12 @@ const BlogList = () => {
                             Sort By:
                         </p>
                         <select
-                            value={sortOption}
                             onChange={filterChangeHandler}
                             aria-label={`Select Sort option`}
+                            defaultValue={"default"}
                         >
                             <option
                                 value={"default"}
-                                selected={true}
                                 aria-label="Default Sort"
                             >
                                 Default

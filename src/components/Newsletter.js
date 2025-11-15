@@ -76,7 +76,7 @@ const Newsletter = () => {
                             setSubscribedFor(e.target.value);
                         }}
                     >
-                        <option value="all" selected={true} aria-label={"selected ALL"}>All</option>
+                        <option value="all" aria-label={"selected ALL"}>All</option>
                         <option value="tech" aria-label={"selected TECH"}>Tech</option>
                         <option value="personal" aria-label={"selected PERSONAL"}>Personal</option>
                     </select>
