@@ -331,7 +331,7 @@ const BlogList = () => {
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
                 <div className={styles["blog-input_header"]}>
-                    <div className={styles["header-main"]}>
+                    {/* <div className={styles["header-main"]}>
                         <button
                             className={styles["menu-btn"]}
                             onClick={() => {
@@ -342,7 +342,7 @@ const BlogList = () => {
                         >
                             {!menuOpened ? <MenuIcon /> : <CloseIcon />}
                         </button>
-                    </div>
+                    </div> */}
                     <div className={styles["controls-wrapper"]}>
                         <input
                             type="text"
@@ -539,7 +539,7 @@ const BlogList = () => {
                     </div>
                 )}
 
-                {blogTags.length !== 0 && (
+                {/* {blogTags.length !== 0 && (
                     <div className={styles["blogs-count"]}>
                         <p>
                             {meta.total === 0
@@ -549,7 +549,7 @@ const BlogList = () => {
                             of {meta.total} blogs
                         </p>
                     </div>
-                )}
+                )} */}
 
                 <div
                     className={`${styles["blogs"]} ${
