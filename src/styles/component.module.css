@@ -61,10 +61,10 @@
     gap: 5px;
 }
 
-.blog-meta .blog-date::before {
+/* .blog-meta .blog-date::before {
     content: '|';
     padding: 0 10px;
-}
+} */
 
 .blog-insights {
     display: flex;
@@ -148,7 +148,7 @@
     align-items: flex-end;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 10px 0 0 0;
+    margin: 20px 0 0 0;
 }
 
 .blog-component_insights ul {

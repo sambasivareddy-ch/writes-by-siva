@@ -134,7 +134,12 @@ const BlogList = () => {
     };
 
     // Build query string for /blogs
-    const buildBlogsUrl = ({ page = 1, limit = DEFAULT_LIMIT, tags = [], sort = "default" }) => {
+    const buildBlogsUrl = ({
+        page = 1,
+        limit = DEFAULT_LIMIT,
+        tags = [],
+        sort = "default",
+    }) => {
         const serverSort = mapSortToServer(sort);
         const params = new URLSearchParams();
         params.set("page", String(page));
@@ -144,12 +149,16 @@ const BlogList = () => {
         params.set("include", matchAllTags);
         if (tags && tags.length > 0) params.set("tags", tags.join(","));
 
-        return `${process.env.NEXT_PUBLIC_SERVER_URL || ""}/blogs?${params.toString()}`;
+        return `${
+            process.env.NEXT_PUBLIC_SERVER_URL || ""
+        }/blogs?${params.toString()}`;
     };
 
     const fetchTags = useCallback(async () => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL || ""}/tags`);
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL || ""}/tags`
+            );
             if (!res.ok) return;
             const json = await res.json();
             if (json.success) {
@@ -167,7 +176,12 @@ const BlogList = () => {
             setLoading(true);
             try {
                 // We'll request server with currently selected tags (OR behavior expected)
-                const url = buildBlogsUrl({ page, limit: DEFAULT_LIMIT, tags: selectedTags, sort: sortOption });
+                const url = buildBlogsUrl({
+                    page,
+                    limit: DEFAULT_LIMIT,
+                    tags: selectedTags,
+                    sort: sortOption,
+                });
                 const res = await fetch(url);
                 if (!res.ok) {
                     setLoading(false);
@@ -177,17 +191,30 @@ const BlogList = () => {
                 if (json.success) {
                     // server provides pagination meta and blogs
                     const serverBlogs = json.blogs || [];
-                    const serverMeta = json.meta || { total: 0, totalPages: 1, page: 1 };
+                    const serverMeta = json.meta || {
+                        total: 0,
+                        totalPages: 1,
+                        page: 1,
+                    };
 
                     // If primary tag (topic) is selected, filter client-side
-                    const filteredByPrimary = selectedPrimaryTag === "all"
-                        ? serverBlogs
-                        : serverBlogs.filter((b) => b.primary_category === selectedPrimaryTag);
+                    const filteredByPrimary =
+                        selectedPrimaryTag === "all"
+                            ? serverBlogs
+                            : serverBlogs.filter(
+                                  (b) =>
+                                      b.primary_category === selectedPrimaryTag
+                              );
 
                     // If matchAllTags is true, ensure every selected tag exist in domains
-                    const finalList = matchAllTags && selectedTags.length > 0
-                        ? filteredByPrimary.filter((b) => selectedTags.every((t) => b.domains.split(",").includes(t)))
-                        : filteredByPrimary;
+                    const finalList =
+                        matchAllTags && selectedTags.length > 0
+                            ? filteredByPrimary.filter((b) =>
+                                  selectedTags.every((t) =>
+                                      b.domains.split(",").includes(t)
+                                  )
+                              )
+                            : filteredByPrimary;
 
                     // apply client-side sorts that server might not support (e.g. most-reacted)
                     const finalSorted = applySort(finalList, sortOption);
@@ -200,7 +227,10 @@ const BlogList = () => {
                     });
 
                     // store global blogs cache if needed
-                    if ((!globalBlogs || globalBlogs.length === 0) && serverBlogs.length > 0) {
+                    if (
+                        (!globalBlogs || globalBlogs.length === 0) &&
+                        serverBlogs.length > 0
+                    ) {
                         setBlogs(serverBlogs);
                     }
                 }
@@ -210,7 +240,14 @@ const BlogList = () => {
                 setLoading(false);
             }
         },
-        [selectedTags, sortOption, selectedPrimaryTag, matchAllTags, setBlogs, globalBlogs]
+        [
+            selectedTags,
+            sortOption,
+            selectedPrimaryTag,
+            matchAllTags,
+            setBlogs,
+            globalBlogs,
+        ]
     );
 
     // Init: load theme, tags and first page of blogs
@@ -228,7 +265,13 @@ const BlogList = () => {
     useEffect(() => {
         setPresentPageIndex(1);
         fetchBlogs(1);
-    }, [selectedTags, matchAllTags, sortOption, selectedPrimaryTag, fetchBlogs]);
+    }, [
+        selectedTags,
+        matchAllTags,
+        sortOption,
+        selectedPrimaryTag,
+        fetchBlogs,
+    ]);
 
     // When user navigates pages
     useEffect(() => {
@@ -290,7 +333,8 @@ const BlogList = () => {
                             onClick={() => {
                                 setMenuOpened(!menuOpened);
                             }}
-                            aria-label="Menu"
+                            aria-label="Page Menu"
+                            aria-expanded={menuOpened}
                         >
                             {!menuOpened ? <MenuIcon /> : <CloseIcon />}
                         </button>
@@ -309,10 +353,38 @@ const BlogList = () => {
 
                 {menuOpened && (
                     <div className={styles["menu"]}>
-                        <button onClick={() => setSelectedPrimaryTag(primaryTags[0])} aria-label="All">All</button>
-                        <button onClick={() => setSelectedPrimaryTag(primaryTags[1])} aria-label="Technology">Technology</button>
-                        <button onClick={() => setSelectedPrimaryTag(primaryTags[2])} aria-label="Personal">Personal</button>
-                        <button onClick={() => setSelectedPrimaryTag(primaryTags[3])} aria-label="Tech Events">Tech-Events</button>
+                        <button
+                            onClick={() =>
+                                setSelectedPrimaryTag(primaryTags[0])
+                            }
+                            aria-label="All"
+                        >
+                            All
+                        </button>
+                        <button
+                            onClick={() =>
+                                setSelectedPrimaryTag(primaryTags[1])
+                            }
+                            aria-label="Technology"
+                        >
+                            Technology
+                        </button>
+                        <button
+                            onClick={() =>
+                                setSelectedPrimaryTag(primaryTags[2])
+                            }
+                            aria-label="Personal"
+                        >
+                            Personal
+                        </button>
+                        <button
+                            onClick={() =>
+                                setSelectedPrimaryTag(primaryTags[3])
+                            }
+                            aria-label="Tech Events"
+                        >
+                            Tech-Events
+                        </button>
                         <Link href={`/profile`}>Profile</Link>
                     </div>
                 )}
@@ -323,6 +395,7 @@ const BlogList = () => {
                             <input
                                 type="checkbox"
                                 aria-label="strict filter"
+                                aria-checked={matchAllTags}
                                 checked={matchAllTags}
                                 onChange={() => {
                                     toggleMatchAllTags();
@@ -347,13 +420,16 @@ const BlogList = () => {
                                 <button
                                     key={tag}
                                     className={`${styles["blog-tag"]} ${
-                                        selectedTags.includes(tag) ? styles["active"] : ""
+                                        selectedTags.includes(tag)
+                                            ? styles["active"]
+                                            : ""
                                     }`}
                                     onClick={() => {
                                         handleTagClick(tag);
                                         setPresentPageIndex(1);
                                     }}
-                                    aria-label={`${tag} filter`}
+                                    aria-label={`Filter based on ${tag}`}
+                                    aria-pressed={selectedTags.includes(tag)}
                                 >
                                     <span>{tag}</span>
                                     <span className={styles["blog-tag_count"]}>
@@ -373,6 +449,7 @@ const BlogList = () => {
                                 setShowMoreStatus(!showMoreStatus);
                             }}
                             aria-label={`show more tags`}
+                            aria-pressed={showMoreStatus}
                         >
                             {!showMoreStatus ? "More Tags" : "Less Tags"}
                         </button>
@@ -382,28 +459,36 @@ const BlogList = () => {
                                 className={styles["blog-pagination-btn"]}
                                 onClick={() => {
                                     if (presentPageIndex > 1) {
-                                        setPresentPageIndex(presentPageIndex - 1);
+                                        setPresentPageIndex(
+                                            presentPageIndex - 1
+                                        );
                                     }
                                 }}
                                 disabled={presentPageIndex === 1}
-                                aria-label={`previous page`}
+                                aria-label={`go to previous page`}
+                                aria-disabled={presentPageIndex === 1}
                             >
                                 <ArrowBackIosIcon fontSize="small" />
                             </button>
 
-                            <span className={styles["blog-pagination-index"]}>
+                            <p className={styles["blog-pagination-index"]}>
                                 {meta.page} / {meta.totalPages}
-                            </span>
+                            </p>
 
                             <button
                                 className={styles["blog-pagination-btn"]}
                                 onClick={() => {
                                     if (presentPageIndex < meta.totalPages) {
-                                        setPresentPageIndex(presentPageIndex + 1);
+                                        setPresentPageIndex(
+                                            presentPageIndex + 1
+                                        );
                                     }
                                 }}
                                 disabled={presentPageIndex >= meta.totalPages}
-                                aria-label={`next page`}
+                                aria-label={`go to next page`}
+                                aria-disabled={
+                                    presentPageIndex >= meta.totalPages
+                                }
                             >
                                 <ArrowForwardIosIcon fontSize="small" />
                             </button>
@@ -417,9 +502,14 @@ const BlogList = () => {
                             <SwapVertIcon />
                             Sort By:
                         </p>
-                        <select value={sortOption} onChange={filterChangeHandler}>
+                        <select
+                            value={sortOption}
+                            onChange={filterChangeHandler}
+                        >
                             <option value={"default"}>Default</option>
-                            <option value={"date-posted-asc"}>Date Posted (Asc)</option>
+                            <option value={"date-posted-asc"}>
+                                Date Posted (Asc)
+                            </option>
                             <option value={"most-reacted"}>Most Reacted</option>
                             <option value={"most-viewed"}>Most Viewed</option>
                         </select>
@@ -429,8 +519,11 @@ const BlogList = () => {
                 {blogTags.length !== 0 && (
                     <div className={styles["blogs-count"]}>
                         <p>
-                            {meta.total === 0 ? 0 : (meta.page - 1) * DEFAULT_LIMIT + 1} - {
-                            Math.min(meta.page * DEFAULT_LIMIT, meta.total)} of {meta.total} blogs
+                            {meta.total === 0
+                                ? 0
+                                : (meta.page - 1) * DEFAULT_LIMIT + 1}{" "}
+                            - {Math.min(meta.page * DEFAULT_LIMIT, meta.total)}{" "}
+                            of {meta.total} blogs
                         </p>
                     </div>
                 )}
@@ -440,34 +533,46 @@ const BlogList = () => {
                         blogTags.length === 0 && styles["zero-blogs"]
                     }`}
                 >
-                    {blogTags.length !== 0 && currentBlogs.length !== 0 && currentBlogs.map((blog) => {
-                        return (
-                            <BlogComponent
-                                key={blog.id}
-                                title={blog.title}
-                                description={blog.description}
-                                domains={blog.domains.split(",")}
-                                slug={blog.slug}
-                                date={blog.date}
-                                likes={blog.likes ? blog.likes : 0}
-                                views={blog.views ? blog.views : 0}
-                                fires={blog.fires ? blog.fires : 0}
-                                laugh={blog.laugh ? blog.laugh : 0}
-                                anger={blog.anger ? blog.anger : 0}
-                                readtime={blog.readtime ? blog.readtime : 0}
-                                author={blog.author}
-                                searchQuery={searchQuery.trim().length >= 3 ? searchQuery : ""}
-                            />
-                        );
-                    })}
+                    {blogTags.length !== 0 &&
+                        currentBlogs.length !== 0 &&
+                        currentBlogs.map((blog) => {
+                            return (
+                                <BlogComponent
+                                    key={blog.id}
+                                    title={blog.title}
+                                    description={blog.description}
+                                    domains={blog.domains.split(",")}
+                                    slug={blog.slug}
+                                    date={blog.date}
+                                    likes={blog.likes ? blog.likes : 0}
+                                    views={blog.views ? blog.views : 0}
+                                    fires={blog.fires ? blog.fires : 0}
+                                    laugh={blog.laugh ? blog.laugh : 0}
+                                    anger={blog.anger ? blog.anger : 0}
+                                    readtime={blog.readtime ? blog.readtime : 0}
+                                    author={blog.author}
+                                    searchQuery={
+                                        searchQuery.trim().length >= 3
+                                            ? searchQuery
+                                            : ""
+                                    }
+                                />
+                            );
+                        })}
 
                     {blogTags.length === 0 && (
-                        <div className={styles["no-blogs"]}>Oops, 404: Blogs not Found</div>
+                        <div className={styles["no-blogs"]}>
+                            Oops, 404: Blogs not Found
+                        </div>
                     )}
 
-                    {blogTags.length !== 0 && !loading && currentBlogs.length === 0 && (
-                        <div className={styles["no-blogs"]}>No blogs match your filters.</div>
-                    )}
+                    {blogTags.length !== 0 &&
+                        !loading &&
+                        currentBlogs.length === 0 && (
+                            <div className={styles["no-blogs"]}>
+                                No blogs match your filters.
+                            </div>
+                        )}
 
                     {loading && (
                         <div className={styles["no-blogs"]}>Loading...</div>

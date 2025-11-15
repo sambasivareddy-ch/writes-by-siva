@@ -73,16 +73,16 @@ const BlogComponent = (props) => {
                         <h3>{highlightText(title, searchQuery)}</h3>
                     </Link>
                     <div className={styles["blog-meta"]}>
-                        {author && (
-                            <div className={styles["blog-insights_author"]}>
-                                {/* <PersonOutlineIcon /> */}
-                                <p>
-                                    By:{" "}
-                                    {author[0].toUpperCase() +
-                                        author.substring(1)}
-                                </p>
-                            </div>
-                        )}
+                        {/* {author && ( */}
+                        {/* <div className={styles["blog-insights_author"]}> */}
+                        {/* <PersonOutlineIcon /> */}
+                        {/* <p> */}
+                        {/* By:{" "} */}
+                        {/* {author[0].toUpperCase() + */}
+                        {/* author.substring(1)} */}
+                        {/* </p> */}
+                        {/* </div> */}
+                        {/* )} */}
                         <p className={styles["blog-date"]}>
                             {new Date(date).toLocaleDateString("en-US", {
                                 year: "numeric",
@@ -91,9 +91,9 @@ const BlogComponent = (props) => {
                             })}
                         </p>
                     </div>
-                    <p className={styles["blog-description"]}>
+                    {/* <p className={styles["blog-description"]}>
                         {highlightText(description, searchQuery)}
-                    </p>
+                    </p> */}
                     <div className={styles["blog-component_insights"]}>
                         <div className={styles["blog-insights"]}>
                             <div className={styles["blog-insights_read"]}>
@@ -126,11 +126,12 @@ const BlogComponent = (props) => {
                                     onMouseLeave={() => setHovered(null)}
                                 />
                                 <p>
-                                    {hovered === null && likes + fires + laugh + anger}
-                                    {hovered === 'likes' && likes}
-                                    {hovered === 'fires' && fires}
-                                    {hovered === 'laugh' && laugh}
-                                    {hovered === 'anger' && anger}
+                                    {hovered === null &&
+                                        likes + fires + laugh + anger}
+                                    {hovered === "likes" && likes}
+                                    {hovered === "fires" && fires}
+                                    {hovered === "laugh" && laugh}
+                                    {hovered === "anger" && anger}
                                 </p>
                             </div>
                             <div className={styles["blog-insights_view"]}>
@@ -158,6 +159,10 @@ const BlogComponent = (props) => {
                                                         ? styles["active_btn"]
                                                         : ""
                                                 }`}
+                                                aria-label={`Filter based on tag ${domain}`}
+                                                aria-pressed={selectedTags.includes(
+                                                    domain
+                                                )}
                                             >
                                                 {domain}
                                             </button>

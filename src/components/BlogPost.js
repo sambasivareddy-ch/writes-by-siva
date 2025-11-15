@@ -16,7 +16,7 @@ import {
     faGrinTears,
     faFire,
     faHeart,
-    faFaceAngry
+    faFaceAngry,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -43,7 +43,7 @@ export default function BlogPost(props) {
     const [alreadyLaughed, setAlreadyLaughed] = useState(false);
     const [alreadyAnger, setAlreadyAnger] = useState(false);
     const [isScrollVisible, setIsScrollVisible] = useState(false);
-    const [theme, setTheme] = useState('dark');
+    const [theme, setTheme] = useState("dark");
 
     // Set the URL to the current page's URL & check whether the blog is liked or not
     useEffect(() => {
@@ -70,9 +70,8 @@ export default function BlogPost(props) {
         };
         window.addEventListener("scroll", toggleVisibility);
 
-        const theme = localStorage.getItem('blog-theme');
-        if (theme)
-            setTheme(theme);
+        const theme = localStorage.getItem("blog-theme");
+        if (theme) setTheme(theme);
 
         return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
@@ -329,6 +328,7 @@ export default function BlogPost(props) {
                                 ? styles["reacted"]
                                 : styles["not-reacted"]
                         }
+                        aria-pressed={alreadyLiked}
                     >
                         <FontAwesomeIcon icon={faHeart} />
                         <span>{likes}</span>
@@ -341,6 +341,7 @@ export default function BlogPost(props) {
                                 ? styles["reacted"]
                                 : styles["not-reacted"]
                         }
+                        aria-pressed={alreadyFired}
                     >
                         <FontAwesomeIcon icon={faFire} color={"#ffb300"} />
                         <span>{fires}</span>
@@ -353,6 +354,7 @@ export default function BlogPost(props) {
                                 ? styles["reacted"]
                                 : styles["not-reacted"]
                         }
+                        aria-pressed={alreadyLaughed}
                     >
                         <FontAwesomeIcon icon={faGrinTears} />
                         <span>{laughs}</span>
@@ -365,6 +367,7 @@ export default function BlogPost(props) {
                                 ? styles["reacted"]
                                 : styles["not-reacted"]
                         }
+                        aria-pressed={alreadyAnger}
                     >
                         <FontAwesomeIcon icon={faFaceAngry} />
                         <span>{anger}</span>
@@ -372,7 +375,7 @@ export default function BlogPost(props) {
                     {/* <button className={styles['summarize-btn']} onClick={summarizeBlogHandler}>
                         {showTldr ? 'Hide': 'Show'} Summary
                     </button> */}
-                    <div className={styles["insights"]}>
+                    <div className={styles["insights"]} aria-label="Blog Views">
                         <VisibilityIcon />
                         <span>{views} Views</span>
                     </div>
@@ -458,6 +461,7 @@ export default function BlogPost(props) {
                 <button
                     onClick={scrollToTopHandler}
                     className={styles["scroll-top_btn"]}
+                    aria-label="Scroll to Top"
                 >
                     <ArrowUpwardIcon />
                 </button>
@@ -469,7 +473,7 @@ export default function BlogPost(props) {
                         <button
                             onClick={copyToClipboardHandler}
                             className={styles["copy-url-button"]}
-                            aria-label="Copy"
+                            aria-label="Copy Link"
                         >
                             <ContentCopyIcon />
                         </button>
@@ -479,14 +483,15 @@ export default function BlogPost(props) {
                             )}`}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Share to Whatsapp"
                         >
                             <WhatsAppIcon />
                         </a>
                     </div>
                 </div>
             </div>
-            <Comments post_slug_id={slug}/>
-            <Suggestions primary={primary} domains={domains}/>
+            <Comments post_slug_id={slug} />
+            <Suggestions primary={primary} domains={domains} />
         </div>
     );
 }

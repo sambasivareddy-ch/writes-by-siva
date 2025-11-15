@@ -9,7 +9,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faEraser, faTrash } from "@fortawesome/free-solid-svg-icons";
 import formatRelativeTime from "@/utils/time";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useAuth } from "@/store/authContext";
 
@@ -119,7 +119,7 @@ const Comment = ({
             const response = await fetch(
                 `${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${comment_id}`,
                 {
-                    method: "DELETE"
+                    method: "DELETE",
                 }
             );
 
@@ -135,7 +135,7 @@ const Comment = ({
             console.log("Successfully deleted the Comment");
         } catch (err) {
             console.log(err);
-        } 
+        }
     };
 
     return (
@@ -153,22 +153,29 @@ const Comment = ({
                 </div>
             </div>
             <div className={styles["comment-actions"]}>
-                {authUser && authUser.uid === uuid &&
-                    <button className={styles['delete-btn']} onClick={commentDeleteHandler}>
-                        <FontAwesomeIcon icon={faTrash}/>
+                {authUser && authUser.uid === uuid && (
+                    <button
+                        className={styles["delete-btn"]}
+                        onClick={commentDeleteHandler}
+                        aria-label="Delete your comment"
+                    >
+                        <FontAwesomeIcon icon={faTrash} />
                     </button>
-                }
-                <span>{created_at}</span>
+                )}
+                <span aria-label="Comment Added Time">{created_at}</span>
                 <button
                     className={styles["like-btn"]}
                     onClick={commentLikeHandler}
+                    aria-label="Like Comment"
                 >
                     <FontAwesomeIcon icon={faHeart} />
-                    <span>{commentLikes}</span>
+                    <span aria-label="Comment Like Count">{commentLikes}</span>
                 </button>
                 <button
                     onClick={() => setReplyClicked(!replyClicked)}
                     disabled={!authUser}
+                    aria-label="Reply to the comment"
+                    aria-disabled={!authUser}
                 >
                     {replyClicked ? "Cancel" : "Reply"}
                 </button>
@@ -177,7 +184,11 @@ const Comment = ({
                     onClick={() => setShowReplies(!showReplies)}
                 >
                     {!showReplies ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
-                    <span>{!showReplies ? "Show" : "Hide"} Replies</span>
+                    <span
+                        aria-label={`${showReplies ? "Show" : "Hide"} Replies`}
+                    >
+                        {!showReplies ? "Show" : "Hide"} Replies
+                    </span>
                 </button>
             </div>
             {replyClicked && (
@@ -188,9 +199,12 @@ const Comment = ({
                     <input
                         type="text"
                         placeholder="Reply to the comment..."
+                        aria-label="Reply to the comment..."
                         ref={replyComment}
                     />
-                    <button type="submit">Reply</button>
+                    <button type="submit" aria-label="Submit reply">
+                        Reply
+                    </button>
                     {error && (
                         <span className={styles["message"]}>
                             Error occurred while adding comment!!
@@ -320,11 +334,17 @@ const Comments = ({ post_slug_id }) => {
             {!authUser && (
                 <div className={styles["login-user"]}>
                     Login With
-                    <button onClick={() => signIn("google")}>
+                    <button
+                        onClick={() => signIn("google")}
+                        aria-label="Signin with Google"
+                    >
                         <GoogleIcon />
                     </button>
                     /
-                    <button onClick={() => signIn("github")}>
+                    <button
+                        onClick={() => signIn("github")}
+                        aria-label="Signin with Github"
+                    >
                         <GitHubIcon />
                     </button>
                     to Comment or Reply
@@ -334,10 +354,11 @@ const Comments = ({ post_slug_id }) => {
             {authUser && (
                 <div className={styles["login-user"]}>
                     Commenting as{" "}
-                    <strong>
-                        {authUser.displayName ?? authUser.email}
-                    </strong>
-                    <button onClick={signOutLocal}>
+                    <strong>{authUser.displayName ?? authUser.email}</strong>
+                    <button
+                        onClick={signOutLocal}
+                        aria-label="Logout from Google/Github"
+                    >
                         <LogoutIcon />
                     </button>
                 </div>
@@ -353,7 +374,12 @@ const Comments = ({ post_slug_id }) => {
                     readOnly={!authUser}
                     ref={userComment}
                 />
-                <button type="submit" disabled={!authUser}>
+                <button
+                    type="submit"
+                    disabled={!authUser}
+                    aria-label="Submit Comment"
+                    aria-checked={!authUser}
+                >
                     {authUser ? "Comment" : "SignIn above to Comment"}
                 </button>
                 {error && (
