@@ -308,7 +308,7 @@ export default function BlogPost(props) {
 
     return (
         <div className={styles["blog-post-wrapper"]}>
-            <Link href={"/"} passHref>
+            <Link href={"/"} aria-label="Go Back" passHref>
                 <ArrowBackIcon />
             </Link>
             <div>

@@ -72,14 +72,13 @@ const Newsletter = () => {
                         name="select"
                         defaultValue={"all"}
                         aria-label={`Selected ${subscribedFor} newsletter type`}
-                        aria-selected={subscribedFor}
                         onChange={(e) => {
                             setSubscribedFor(e.target.value);
                         }}
                     >
-                        <option value="all">All</option>
-                        <option value="tech">Tech</option>
-                        <option value="personal">Personal</option>
+                        <option value="all" selected={true} aria-label={"selected ALL"}>All</option>
+                        <option value="tech" aria-label={"selected TECH"}>Tech</option>
+                        <option value="personal" aria-label={"selected PERSONAL"}>Personal</option>
                     </select>
                 </div>
                 <p>{message.length !== 0 && message}</p>

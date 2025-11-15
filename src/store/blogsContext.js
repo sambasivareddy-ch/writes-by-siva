@@ -58,6 +58,7 @@ export const BlogsProvider = ({ children }) => {
                     href="#footer"
                     className={styles["subscribe-btn"]}
                     onClick={() => setHightLightFooter(true)}
+                    aria-label="Clikc to Subscribe for Newsletter"
                 >
                     <MailIcon />
                 </a>

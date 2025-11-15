@@ -6,7 +6,7 @@ import styles from "../styles/profile.module.css";
 const ProfileComponent = () => {
     return (
         <div className={styles["profile-wrapper"]}>
-            <Link href={`/`}>Go to Home</Link>
+            <Link href={`/`} aria-label="Go to Home">Go to Home</Link>
             <div className={styles["profile-intro"]}>
                 <h4>Namaste, Hope you&apos;re doing great!!</h4>
                 <h1>I&apos;m Samba Siva Reddy</h1>

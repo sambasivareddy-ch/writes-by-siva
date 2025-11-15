@@ -68,6 +68,7 @@ const BlogComponent = (props) => {
                     <Link
                         href={`/blog/${slug}`}
                         className={styles["blog-comp__link"]}
+                        aria-label="Open the Blog"
                         passHref
                     >
                         <h3>{highlightText(title, searchQuery)}</h3>

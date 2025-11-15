@@ -352,7 +352,7 @@ const BlogList = () => {
                 </div>
 
                 {menuOpened && (
-                    <div className={styles["menu"]}>
+                    <nav className={styles["menu"]} aria-label="Page Navigation" aria-expanded={menuOpened}>
                         <button
                             onClick={() =>
                                 setSelectedPrimaryTag(primaryTags[0])
@@ -385,8 +385,8 @@ const BlogList = () => {
                         >
                             Tech-Events
                         </button>
-                        <Link href={`/profile`}>Profile</Link>
-                    </div>
+                        <Link href={`/profile`} aria-label="Visit Author Profile">Profile</Link>
+                    </nav>
                 )}
 
                 {blogTags.length !== 0 && (
@@ -505,13 +505,33 @@ const BlogList = () => {
                         <select
                             value={sortOption}
                             onChange={filterChangeHandler}
+                            aria-label={`Select Sort option`}
                         >
-                            <option value={"default"}>Default</option>
-                            <option value={"date-posted-asc"}>
+                            <option
+                                value={"default"}
+                                selected={true}
+                                aria-label="Default Sort"
+                            >
+                                Default
+                            </option>
+                            <option
+                                value={"date-posted-asc"}
+                                aria-label="Sort by Date Posted (Asc)"
+                            >
                                 Date Posted (Asc)
                             </option>
-                            <option value={"most-reacted"}>Most Reacted</option>
-                            <option value={"most-viewed"}>Most Viewed</option>
+                            <option
+                                value={"most-reacted"}
+                                aria-label="Sort by the Most Reacted"
+                            >
+                                Most Reacted
+                            </option>
+                            <option
+                                value={"most-viewed"}
+                                aria-label="Sort by the Most Viewed"
+                            >
+                                Most Viewed
+                            </option>
                         </select>
                     </div>
                 )}
