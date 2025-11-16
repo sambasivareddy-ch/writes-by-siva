@@ -28,7 +28,7 @@ September 20, 2024 to September 22, 2024
 People who know me, obviously knows how hard it is for them to make me talk or have a solid conversation for about atleast 10minutes 🙂. And more to that I am going to meet **4 new people**, so I let you think how hard it is going for me to involve in conversation without making people bore (PS: In this one year time, I think improved a lot, I think... 😅).  
 And that day arrived i.e **19th September, 2025** and met all the people who never know me and existence of me. At first, you obvisouly know you are **imposter** among them because they all know each other, but to my surprise they all welcoming and became friends in no time.
 ### The Highlights
-Ok, it is lot to write so I am gonna list all the place we visit in those 3days in order. The places & activities includes **Athiripally Waterfalls, Ziplining, Sky Waking, Spice Garden, Tea Factory, Mattupetty Dam, Echo Point, Gap Road, Fort Kochi**. If you guys (readers) planning Munnar, feel free to use above iterenary 🏃 and include **Kolukkumalai** to it.   
+Ok, it is lot to write so I am gonna list all the place we visit in those 3days in order. The places & activities includes **Athiripally Waterfalls, Ziplining, Sky Waking, Spice Garden, Tea Factory, Mattupetty Dam, Echo Point, Gap Road, Fort Kochi**. If you guys (readers) planning Munnar, feel free to use above itinerary 🏃 and include **Kolukkumalai** to it.   
 ### Still fresh in Mind
 - Star Game
   - King: Deepak
