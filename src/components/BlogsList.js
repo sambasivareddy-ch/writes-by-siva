@@ -47,7 +47,7 @@ const BlogList = () => {
     const [blogTags, setBlogTags] = useState([]);
     const [eachTagCount, setEachTagCount] = useState({});
     const [currentBlogs, setCurrentBlogs] = useState([]);
-    const [showMoreStatus, setShowMoreStatus] = useState(false);
+    const [showTags, setShowTags] = useState(false);
     const [blogWrapperClass, setBlogWrapperClass] = useState(
         styles["blog-tags"]
     );
@@ -306,12 +306,12 @@ const BlogList = () => {
     }, [debouncedText]);
 
     useEffect(() => {
-        if (!showMoreStatus) {
+        if (!showTags) {
             setBlogWrapperClass(styles["blog-tags"]);
         } else {
             setBlogWrapperClass(styles["blog-tags_more"]);
         }
-    }, [showMoreStatus]);
+    }, [showTags]);
 
     const handleTagClick = (tag) => {
         if (selectedTags.includes(tag)) {
@@ -393,7 +393,7 @@ const BlogList = () => {
                     </nav>
                 )}
 
-                {blogTags.length !== 0 && (
+                {showTags && blogTags.length !== 0 && (
                     <div className={styles["blog-header"]}>
                         <label className={styles["filtering-option"]}>
                             <input
@@ -450,12 +450,12 @@ const BlogList = () => {
                         <button
                             className={styles["show-more_tag_btn"]}
                             onClick={() => {
-                                setShowMoreStatus(!showMoreStatus);
+                                setShowTags(!showTags);
                             }}
                             aria-label={`show more tags`}
-                            aria-pressed={showMoreStatus}
+                            aria-pressed={showTags}
                         >
-                            {!showMoreStatus ? "More Tags" : "Less Tags"}
+                            {!showTags ? "Show Tags" : "Close Tags"}
                         </button>
 
                         <div className={styles["blog-pagination"]}>
