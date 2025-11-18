@@ -539,7 +539,7 @@ const BlogList = () => {
                     </div>
                 )}
 
-                {/* {blogTags.length !== 0 && (
+                {blogTags.length !== 0 && (
                     <div className={styles["blogs-count"]}>
                         <p>
                             {meta.total === 0
@@ -549,7 +549,11 @@ const BlogList = () => {
                             of {meta.total} blogs
                         </p>
                     </div>
-                )} */}
+                )}
+
+                {loading && (
+                    <div className={styles["no-blogs"]}>Loading...</div>
+                )}
 
                 <div
                     className={`${styles["blogs"]} ${
@@ -597,9 +601,9 @@ const BlogList = () => {
                             </div>
                         )}
 
-                    {loading && (
+                    {/* {loading && (
                         <div className={styles["no-blogs"]}>Loading...</div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>
