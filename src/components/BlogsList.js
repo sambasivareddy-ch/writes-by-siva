@@ -551,10 +551,6 @@ const BlogList = () => {
                     </div>
                 )}
 
-                {loading && (
-                    <div className={styles["no-blogs"]}>Loading...</div>
-                )}
-
                 <div
                     className={`${styles["blogs"]} ${
                         blogTags.length === 0 && styles["zero-blogs"]
@@ -593,7 +589,7 @@ const BlogList = () => {
                         </div>
                     )}
 
-                    {!loading && blogTags.length !== 0 &&
+                    {blogTags.length !== 0 &&
                         !loading &&
                         currentBlogs.length === 0 && (
                             <div className={styles["no-blogs"]}>
@@ -601,9 +597,9 @@ const BlogList = () => {
                             </div>
                         )}
 
-                    {/* {loading && (
+                    {loading && (
                         <div className={styles["no-blogs"]}>Loading...</div>
-                    )} */}
+                    )}
                 </div>
             </div>
         </div>
