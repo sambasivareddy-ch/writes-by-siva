@@ -587,13 +587,13 @@ const BlogList = () => {
                             );
                         })}
 
-                    {blogTags.length === 0 && (
+                    {!loading && blogTags.length === 0 && (
                         <div className={styles["no-blogs"]}>
                             Oops, 404: Blogs not Found
                         </div>
                     )}
 
-                    {blogTags.length !== 0 &&
+                    {!loading && blogTags.length !== 0 &&
                         !loading &&
                         currentBlogs.length === 0 && (
                             <div className={styles["no-blogs"]}>
