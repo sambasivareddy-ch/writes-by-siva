@@ -515,7 +515,7 @@ const BlogList = () => {
                                 value={"default"}
                                 aria-label="Default Sort"
                             >
-                                Default
+                                Latest
                             </option>
                             <option
                                 value={"date-posted-asc"}
