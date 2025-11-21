@@ -24,6 +24,7 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import Suggestions from "@/components/Suggestions";
 import Comments from "@/components/Comments";
+import ZoomImage from "@/components/ZoomImage";
 
 import styles from "@/styles/blog.module.css";
 
@@ -453,6 +454,8 @@ export default function BlogPost(props) {
                             </code>
                         );
                     },
+
+                    img: ({ node, ...props }) => <ZoomImage {...props} />,
                 }}
             >
                 {content}
