@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import Zoom from "react-medium-image-zoom";
 import Link from "next/link";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -454,11 +453,6 @@ export default function BlogPost(props) {
                             </code>
                         );
                     },
-                    img: ({ src, alt }) => {
-                        <Zoom>
-                            <img src={src} alt={alt} style={{ maxWidth: "100%"}} />
-                        </Zoom>
-                    }
                 }}
             >
                 {content}
