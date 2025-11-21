@@ -454,14 +454,11 @@ export default function BlogPost(props) {
                             </code>
                         );
                     },
-                    img: ({ node, ...props }) => (
+                    img: ({ src, alt }) => {
                         <Zoom>
-                          <img
-                            {...props}
-                            style={{ maxWidth: "100%", cursor: "zoom-in" }}
-                          />
+                            <img src={src} alt={alt} style={{ maxWidth: "100%"}} />
                         </Zoom>
-                    ),
+                    }
                 }}
             >
                 {content}
