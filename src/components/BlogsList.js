@@ -124,7 +124,7 @@ const BlogList = () => {
                 return { sort_by: "date", order: "ASC" };
             case "most-reacted":
                 // server may not support this; we'll still ask for date desc and sort client-side
-                return { sort_by: "date", order: "DESC" };
+                return { sort_by: "reactions", order: "DESC" };
             case "most-viewed":
                 return { sort_by: "views", order: "DESC" };
             case "default":
