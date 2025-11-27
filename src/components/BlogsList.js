@@ -455,7 +455,7 @@ const BlogList = () => {
                             aria-label={`show more tags`}
                             aria-pressed={showTags}
                         >
-                            {!showTags ? "Show Tags" : "Close Tags"}
+                            {showTags ? "Show Tags" : "Close Tags"}
                         </button>
 
                         <div className={styles["blog-pagination"]}>
