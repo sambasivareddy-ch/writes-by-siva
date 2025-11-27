@@ -393,7 +393,7 @@ const BlogList = () => {
                     </nav>
                 )}
 
-                {showTags && blogTags.length !== 0 && (
+                {!showTags && blogTags.length !== 0 && (
                     <div className={styles["blog-header"]}>
                         <label className={styles["filtering-option"]}>
                             <input
