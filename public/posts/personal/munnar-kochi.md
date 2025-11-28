@@ -35,7 +35,6 @@ Ok, it is lot to write so I am gonna list all the place we visit in those 3days 
   - Thief: Mounika
   - About me? I turned out to be **Police**
 - "Paddling in **Mattupetty Dam**", My legs still felt the pain by thinking of it but in a good way. It took me & rishitha to return the start point **1 hour 🥲😂** when all other reached it before and had snacks.
-- "Mummy, Memu Kerala Vacham" - By Rishitha 😂
 
 ## Final Thoughts
 This trip might had started as Unplanned, **but ended with giving best experience ever gave to some whose trip was the first trip**.   
