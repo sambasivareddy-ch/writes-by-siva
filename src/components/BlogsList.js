@@ -393,7 +393,7 @@ const BlogList = () => {
                     </nav>
                 )}
 
-                {!showTags && blogTags.length !== 0 && (
+                {showTags && blogTags.length !== 0 && (
                     <div className={styles["blog-header"]}>
                         <label className={styles["filtering-option"]}>
                             <input
@@ -455,7 +455,7 @@ const BlogList = () => {
                             aria-label={`show more tags`}
                             aria-pressed={showTags}
                         >
-                            {showTags ? "Show Tags" : "Close Tags"}
+                            {!showTags ? "Show Tags" : "Close Tags"}
                         </button>
 
                         <div className={styles["blog-pagination"]}>
