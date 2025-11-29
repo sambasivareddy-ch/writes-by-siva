@@ -272,6 +272,8 @@
     /* font-size: 2rem; */
     font-weight: 600;
     background-color: transparent;
+    /* letter-spacing: 1; */
+    text-transform: capitalize;
 }
 
 [data-theme="dark"] .blog-banner {
@@ -296,6 +298,14 @@
 
 [data-theme="light"] .blog-banner .blog-banner-title {
     color: var(--primary-text);
+}
+
+.blog-banner {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+  
+.blog-banner:hover {
+    transform: translateY(-5px);
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {

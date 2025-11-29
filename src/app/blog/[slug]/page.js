@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import BlogPost from "@/components/BlogPost";
+import Footer from "@/components/Footer";
 import path from "path";
 
 async function getPost(slug) {
@@ -119,6 +120,7 @@ export default async function BlogPage({ params }) {
     return (
         <>
             <BlogPost content={content} meta={meta} slug={slug} post={post} primary={post['primary_category']} domains={post['domains']}/>
+            <Footer/>
         </>
     );
 }

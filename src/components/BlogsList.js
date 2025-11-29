@@ -1,20 +1,16 @@
 "use client";
 
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext, useCallback, useRef } from "react";
 import Link from "next/link";
 
 import ClearIcon from "@mui/icons-material/Clear";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import BlogComponent from "@/components/BlogComponent";
 import styles from "@/styles/bloglist.module.css";
-import SwapVertIcon from "@mui/icons-material/SwapVert";
-
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import TagsContext from "@/store/tagsContext";
 import BlogsContext from "@/store/blogsContext";
+import PageContext from "@/store/pageContext";
+import SortByContext from "@/store/sortByContext";
 import useDebounce from "@/hooks/useDebounce";
 
 /**
@@ -43,6 +39,9 @@ const BlogList = () => {
 
     const { blogs: globalBlogs, setBlogs } = useContext(BlogsContext);
 
+    const { currentPage, setPage } = useContext(PageContext);
+    const { sortby, setSortOptionHandler } = useContext(SortByContext);
+
     const primaryTags = ["all", "tech", "personal", "tech-events"];
     const [blogTags, setBlogTags] = useState([]);
     const [eachTagCount, setEachTagCount] = useState({});
@@ -52,7 +51,7 @@ const BlogList = () => {
         styles["blog-tags"]
     );
 
-    const [presentPageIndex, setPresentPageIndex] = useState(1); // pages are 1-indexed for server
+    const [presentPageIndex, setPresentPageIndex] = useState(currentPage); // pages are 1-indexed for server
     const [searchQuery, setSearchQuery] = useState("");
     const debouncedText = useDebounce(searchQuery, 500);
     const [selectedPrimaryTag, setSelectedPrimaryTag] = useState(
@@ -60,9 +59,11 @@ const BlogList = () => {
     );
     const [menuOpened, setMenuOpened] = useState(false);
     const [theme, setTheme] = useState("dark");
-    const [sortOption, setSortOption] = useState("default");
+    const [sortOption, setSortOption] = useState(sortby);
     const [meta, setMeta] = useState({ total: 0, totalPages: 1, page: 1 });
     const [loading, setLoading] = useState(false);
+
+    const firstFiltersRun = useRef(true);
 
     // helper: safe timestamp extractor
     const getTime = (b) => {
@@ -265,13 +266,25 @@ const BlogList = () => {
         document.documentElement.setAttribute("data-theme", t || "dark");
 
         fetchTags();
-        fetchBlogs(1);
     }, [fetchTags]);
+
+    useEffect(() => {
+        setSortOption(sortby);
+    }, [sortby]);
+    
+    useEffect(() => {
+        fetchBlogs(presentPageIndex);
+    }, [presentPageIndex, fetchBlogs]);
 
     // When selectedTags / matchAllTags / sortOption / selectedPrimaryTag change -> fetch page 1
     useEffect(() => {
+        if (firstFiltersRun.current) {
+            firstFiltersRun.current = false;
+            return; // skip on first render
+        }
+
         setPresentPageIndex(1);
-        fetchBlogs(1);
+        setPage(1);
     }, [
         selectedTags,
         matchAllTags,
@@ -281,9 +294,9 @@ const BlogList = () => {
     ]);
 
     // When user navigates pages
-    useEffect(() => {
-        fetchBlogs(presentPageIndex);
-    }, [presentPageIndex]);
+    // useEffect(() => {
+    //     fetchBlogs(presentPageIndex);
+    // }, [presentPageIndex]);
 
     // Apply client-side search when debounced text changes
     useEffect(() => {
@@ -326,6 +339,7 @@ const BlogList = () => {
 
     const filterChangeHandler = (e) => {
         const optionChoosed = e.target.value;
+        setSortOptionHandler(optionChoosed);
         setSortOption(optionChoosed);
         // fetch will be triggered by effect that listens to sortOption
     };
@@ -334,18 +348,6 @@ const BlogList = () => {
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
                 <div className={styles["blog-input_header"]}>
-                    {/* <div className={styles["header-main"]}>
-                        <button
-                            className={styles["menu-btn"]}
-                            onClick={() => {
-                                setMenuOpened(!menuOpened);
-                            }}
-                            aria-label="Page Menu"
-                            aria-expanded={menuOpened}
-                        >
-                            {!menuOpened ? <MenuIcon /> : <CloseIcon />}
-                        </button>
-                    </div> */}
                     <div className={styles["controls-wrapper"]}>
                         <input
                             type="text"
@@ -454,6 +456,7 @@ const BlogList = () => {
                                     onClick={() => {
                                         handleTagClick(tag);
                                         setPresentPageIndex(1);
+                                        setPage(1);
                                     }}
                                     aria-label={`Filter based on ${tag}`}
                                     aria-pressed={selectedTags.includes(tag)}
@@ -468,61 +471,6 @@ const BlogList = () => {
                     </div>
                 )}
 
-                {/* {blogTags.length !== 0 && (
-                    <div className={styles["blog-controls"]}>
-                        <button
-                            className={styles["show-more_tag_btn"]}
-                            onClick={() => {
-                                setShowTags(!showTags);
-                            }}
-                            aria-label={`show more tags`}
-                            aria-pressed={showTags}
-                        >
-                            {!showTags ? "Show Tags" : "Close Tags"}
-                        </button>
-
-                        <div className={styles["blog-pagination"]}>
-                            <button
-                                className={styles["blog-pagination-btn"]}
-                                onClick={() => {
-                                    if (presentPageIndex > 1) {
-                                        setPresentPageIndex(
-                                            presentPageIndex - 1
-                                        );
-                                    }
-                                }}
-                                disabled={presentPageIndex === 1}
-                                aria-label={`go to previous page`}
-                                aria-disabled={presentPageIndex === 1}
-                            >
-                                <ArrowBackIosIcon fontSize="small" />
-                            </button>
-
-                            <p className={styles["blog-pagination-index"]}>
-                                {meta.page} / {meta.totalPages}
-                            </p>
-
-                            <button
-                                className={styles["blog-pagination-btn"]}
-                                onClick={() => {
-                                    if (presentPageIndex < meta.totalPages) {
-                                        setPresentPageIndex(
-                                            presentPageIndex + 1
-                                        );
-                                    }
-                                }}
-                                disabled={presentPageIndex >= meta.totalPages}
-                                aria-label={`go to next page`}
-                                aria-disabled={
-                                    presentPageIndex >= meta.totalPages
-                                }
-                            >
-                                <ArrowForwardIosIcon fontSize="small" />
-                            </button>
-                        </div>
-                    </div>
-                )} */}
-
                 {blogTags.length !== 0 && (
                     <div className={styles["blog-ops"]}>
                         <p className={styles["sort-icon"]}>
@@ -532,7 +480,7 @@ const BlogList = () => {
                         <select
                             onChange={filterChangeHandler}
                             aria-label={`Select Sort option`}
-                            defaultValue={"default"}
+                            value={sortOption}
                         >
                             <option value={"default"} aria-label="Default Sort">
                                 Latest
@@ -640,8 +588,10 @@ const BlogList = () => {
                                                     ? styles["active"]
                                                     : ""
                                             }`}
-                                            onClick={() =>
-                                                setPresentPageIndex(page)
+                                            onClick={() => {
+                                                    setPage(page)
+                                                    setPresentPageIndex(page)
+                                                }
                                             }
                                             aria-label={`go to page ${page}`}
                                             aria-pressed={

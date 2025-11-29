@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
@@ -10,6 +10,7 @@ import {
     faFaceAngry,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/component.module.css";
+import getRandomGradient from "@/utils/gradientGenerator";
 
 import TagsContext from "@/store/tagsContext";
 
@@ -53,6 +54,16 @@ const BlogComponent = (props) => {
 
     const [hovered, setHovered] = useState(null);
 
+    const [bannerGradient, setBannerGradient] = useState("");
+    const [textColor, setTextColor] = useState("#fff");
+
+    useEffect(() => {
+        const gradient = getRandomGradient();
+        const isDark = gradient.includes("#1") || gradient.includes("#2") || gradient.includes("#0");
+        setBannerGradient(gradient);
+        setTextColor(isDark? "#fff": "#000");
+    }, []);
+
     const handleClickHandler = (tag) => {
         if (selectedTags.includes(tag)) {
             removeSelectedTag(tag);
@@ -65,24 +76,26 @@ const BlogComponent = (props) => {
         <div className={styles["blog-comp__wrapper"]}>
             <div className={styles["blog-comp__meta_wrapper"]}>
                 <div className={styles["blog-comp__meta"]}>
-                    {/* <Link
+                    <Link
                         href={`/blog/${slug}`}
                         className={styles["blog-comp__link_banner"]}
                         aria-label="Open the Blog"
                         passHref
                     >
-                        <div className={styles['blog-banner']}>
-                            <h2 className={styles['blog-banner-title']}>{title}</h2>
+                        <div className={styles['blog-banner']}
+                            style={{ background: bannerGradient, zIndex: 999}}
+                        >
+                            <h2 className={styles['blog-banner-title']} style={{ color: textColor }}>{title}</h2>
                         </div>
-                    </Link> */}
-                    <Link
+                    </Link>
+                    {/* <Link
                         href={`/blog/${slug}`}
                         className={styles["blog-comp__link"]}
                         aria-label="Open the Blog"
                         passHref
                     >
                         <h2>{highlightText(title, searchQuery)}</h2>
-                    </Link>
+                    </Link> */}
                     <div className={styles["blog-meta"]}>
                         {/* {author && ( */}
                         {/* <div className={styles["blog-insights_author"]}> */}

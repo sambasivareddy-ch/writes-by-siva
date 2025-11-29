@@ -54,14 +54,14 @@ export const BlogsProvider = ({ children }) => {
         <BlogsContext.Provider value={value}>
             {children}
             <div className={styles["tool-btn"]}>
-                <a
+                {/* <a
                     href="#footer"
                     className={styles["subscribe-btn"]}
                     onClick={() => setHightLightFooter(true)}
                     aria-label="Clikc to Subscribe for Newsletter"
                 >
                     <MailIcon />
-                </a>
+                </a> */}
                 <button
                     onClick={toggleThemeHandler}
                     aria-label={`Theme Change Button, Current theme is ${theme}`}
