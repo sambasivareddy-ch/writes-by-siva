@@ -290,10 +290,10 @@
 
 .blogs {
     width: 100%;
-    min-height: 90vh;
+    /* min-height: 90vh; */
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    /* gap: 10px; */
     /* overflow: scroll; */
 }
 
@@ -313,6 +313,7 @@
     width: fit-content;
     font-size: 16px;
     padding: 5px;
+    min-height: 90vh;
     /* border: solid 1px var(--highlight-color); */
     color: var(--highlight-color);
     font-family: var(--font-family-raleway);
