@@ -7,10 +7,12 @@
   --cyan-color: #64FEDB;
   --font-family-pop: var(--font-poppins), sans-serif;
   --font-family-raleway: var(--font-raleway), sans-serif;
+  --font-family-inter: var(--font-inter), sans-serif;
   --bg-color: #0B192E;
   --text-color: #90a4ae;
   --green-color: #43a047;
   --white-color: #fff;
+  --blue-color: #1e88e5;
 
   /* Dark Theme Colors */
   --primary-color: #252525;

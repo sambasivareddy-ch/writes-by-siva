@@ -160,7 +160,9 @@ const BlogList = () => {
             const params = new URLSearchParams();
             params.set("primary", selectedPrimaryTag);
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_SERVER_URL || ""}/tags?${params.toString()}`
+                `${
+                    process.env.NEXT_PUBLIC_SERVER_URL || ""
+                }/tags?${params.toString()}`
             );
             if (!res.ok) return;
             const json = await res.json();
@@ -177,6 +179,7 @@ const BlogList = () => {
     // Fetch blogs from server using selectedTags + pagination + sort
     const fetchBlogs = useCallback(
         async (page = 1) => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
             setLoading(true);
             try {
                 // We'll request server with currently selected tags (OR behavior expected)
@@ -353,10 +356,25 @@ const BlogList = () => {
                             }}
                         />
                     </div>
+
+                    <button
+                        className={styles["show-more_tag_btn"]}
+                        onClick={() => {
+                            setShowTags(!showTags);
+                        }}
+                        aria-label={`show more tags`}
+                        aria-pressed={showTags}
+                    >
+                        {!showTags ? "Show Tags" : "Close Tags"}
+                    </button>
                 </div>
 
                 {menuOpened && (
-                    <nav className={styles["menu"]} aria-label="Page Navigation" aria-expanded={menuOpened}>
+                    <nav
+                        className={styles["menu"]}
+                        aria-label="Page Navigation"
+                        aria-expanded={menuOpened}
+                    >
                         <button
                             onClick={() =>
                                 setSelectedPrimaryTag(primaryTags[0])
@@ -389,7 +407,12 @@ const BlogList = () => {
                         >
                             Tech-Events
                         </button>
-                        <Link href={`/profile`} aria-label="Visit Author Profile">Profile</Link>
+                        <Link
+                            href={`/profile`}
+                            aria-label="Visit Author Profile"
+                        >
+                            Profile
+                        </Link>
                     </nav>
                 )}
 
@@ -445,7 +468,7 @@ const BlogList = () => {
                     </div>
                 )}
 
-                {blogTags.length !== 0 && (
+                {/* {blogTags.length !== 0 && (
                     <div className={styles["blog-controls"]}>
                         <button
                             className={styles["show-more_tag_btn"]}
@@ -498,12 +521,12 @@ const BlogList = () => {
                             </button>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {blogTags.length !== 0 && (
                     <div className={styles["blog-ops"]}>
                         <p className={styles["sort-icon"]}>
-                            <SwapVertIcon />
+                            {/* <SwapVertIcon /> */}
                             Sort By:
                         </p>
                         <select
@@ -511,10 +534,7 @@ const BlogList = () => {
                             aria-label={`Select Sort option`}
                             defaultValue={"default"}
                         >
-                            <option
-                                value={"default"}
-                                aria-label="Default Sort"
-                            >
+                            <option value={"default"} aria-label="Default Sort">
                                 Latest
                             </option>
                             <option
@@ -601,6 +621,41 @@ const BlogList = () => {
                         <div className={styles["no-blogs"]}>Loading...</div>
                     )}
                 </div>
+
+                {blogTags.length !== 0 && (
+                    <div className={styles["blog-controls"]}>
+                        <p className={styles['blog-page-title']}>Pages:</p>
+                        <div className={styles["blog-pagination"]}>
+                            {Array.from(
+                                { length: meta.totalPages },
+                                (_, index) => {
+                                    const page = index + 1;
+                                    return (
+                                        <button
+                                            key={page}
+                                            className={`${
+                                                styles["blog-pagination-number"]
+                                            } ${
+                                                presentPageIndex === page
+                                                    ? styles["active"]
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                setPresentPageIndex(page)
+                                            }
+                                            aria-label={`go to page ${page}`}
+                                            aria-pressed={
+                                                presentPageIndex === page
+                                            }
+                                        >
+                                            {page}
+                                        </button>
+                                    );
+                                }
+                            )}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

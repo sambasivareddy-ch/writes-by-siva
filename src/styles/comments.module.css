@@ -11,7 +11,7 @@
     border-radius: 8px;
     box-sizing: border-box;
     border: solid 3px var(--border-color);
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     font-weight: 500;
     font-size: 16px;
 }
@@ -76,7 +76,7 @@
 
 .user-name {
     font-size: 16px;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     font-weight: bold;
     /* text-decoration: underline; */
     color: var(--highlight-color);
@@ -178,7 +178,7 @@ button:disabled {
 
 .message {
     font-size: 14px;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
 }
 
 .comments-list {

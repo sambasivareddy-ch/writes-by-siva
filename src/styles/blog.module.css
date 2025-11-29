@@ -23,7 +23,7 @@
 .portfolio-link {
     text-decoration: none;
     font-size: 14px;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
 }
 
 .portfolio-link:hover {
@@ -168,7 +168,7 @@
 .blog-post-wrapper h4,
 .blog-post-wrapper h5,
 .blog-post-wrapper h6 {
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     color: var(--primary-text);
     margin: 20px 0 0;
 }
@@ -400,7 +400,7 @@
     gap: 10px;
     border: solid 1px var(--border-color);
     border-radius: 5px;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     background-color: var(--highlight-color);
     color: #000;
 }
@@ -423,7 +423,7 @@
     right: 10px;
     z-index: 9999;
     text-decoration: none;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     background-color: var(--primary-color);
     border-color: var(--highlight-color);
     color: var(--highlight-color);

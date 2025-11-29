@@ -4,7 +4,7 @@ import { BlogsProvider } from "@/store/blogsContext";
 import { AuthProvider } from "@/store/authContext";
 import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/Footer";
-import { Poppins, Raleway } from "next/font/google";
+import { Poppins, Raleway, Inter } from "next/font/google";
 import "@/styles/globals.css";
 
 // Load Poppins with multiple weights & italic support
@@ -25,9 +25,17 @@ const raleway = Raleway({
     variable: "--font-raleway",
 });
 
+const inter = Inter({
+    subsets: ["latin"],
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    style: ["normal", "italic"],
+    display: "swap",
+    variable: "--font-inter",
+});
+
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={`${poppins.variable} ${raleway.variable}`}>
+        <html lang="en" className={`${poppins.variable} ${raleway.variable} ${inter.variable}`}>
             <head>
                 {/* Railway API preconnect */}
                 <link

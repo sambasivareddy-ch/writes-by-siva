@@ -65,13 +65,23 @@ const BlogComponent = (props) => {
         <div className={styles["blog-comp__wrapper"]}>
             <div className={styles["blog-comp__meta_wrapper"]}>
                 <div className={styles["blog-comp__meta"]}>
+                    {/* <Link
+                        href={`/blog/${slug}`}
+                        className={styles["blog-comp__link_banner"]}
+                        aria-label="Open the Blog"
+                        passHref
+                    >
+                        <div className={styles['blog-banner']}>
+                            <h2 className={styles['blog-banner-title']}>{title}</h2>
+                        </div>
+                    </Link> */}
                     <Link
                         href={`/blog/${slug}`}
                         className={styles["blog-comp__link"]}
                         aria-label="Open the Blog"
                         passHref
                     >
-                        <h3>{highlightText(title, searchQuery)}</h3>
+                        <h2>{highlightText(title, searchQuery)}</h2>
                     </Link>
                     <div className={styles["blog-meta"]}>
                         {/* {author && ( */}
