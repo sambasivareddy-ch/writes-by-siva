@@ -85,7 +85,7 @@
     outline: none;
     border: solid 1px var(--border-color);
     padding: 10px;
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
     border-radius: 5pc;
     font-size: 12px;
     width: 250px;
@@ -106,7 +106,7 @@
     border: none;
     cursor: pointer;
     background-color: var(--primary-color);
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
     font-size: 18px;
 }
 
@@ -118,7 +118,7 @@
 .menu a {
     text-decoration: none;
     font-size: 18px;
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
     color: var(--highlight-color);
 }
 
@@ -315,7 +315,7 @@
     padding: 5px;
     /* border: solid 1px var(--highlight-color); */
     color: var(--highlight-color);
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
     /* background-color: var(--highlight-color); */
     margin: 20px auto;
     border-radius: 5px;
@@ -336,7 +336,7 @@
     margin: 20px 0;
     display: flex;
     gap: 10;
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
 }
 
 .blog-ops select {
@@ -353,7 +353,7 @@
 }
 
 .no-blogs_topic {
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
     padding: 5px;
     letter-spacing: 1px;
 }
@@ -385,7 +385,7 @@
 }
 
 .blog-page-title {
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
     margin: 0 5px 0 0;
 }
 

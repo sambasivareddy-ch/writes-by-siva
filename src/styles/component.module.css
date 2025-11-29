@@ -2,7 +2,7 @@
     width: 100%;
     height: fit-content;
     padding: 20px 0;
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
     border-bottom: solid 2px var(--border-color);
     box-sizing: border-box;
 
@@ -52,7 +52,7 @@
 }
 
 .blog-comp__link h2 {
-    font-family: var(--font-family-inter);
+    font-family: var(--font-family-raleway);
     font-weight: 500;
     margin: 10px 0;
 }
