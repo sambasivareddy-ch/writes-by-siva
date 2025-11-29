@@ -13,6 +13,10 @@ import PageContext from "@/store/pageContext";
 import SortByContext from "@/store/sortByContext";
 import useDebounce from "@/hooks/useDebounce";
 
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+
 /**
  * Updated BlogList component that talks to two server routes:
  *  - GET /tags -> returns available tags + count per tag
@@ -347,7 +351,21 @@ const BlogList = () => {
     return (
         <div className={styles["blog-wrapper"]}>
             <div className={styles["blog-main"]}>
+                <div className={styles["blog-profile"]}>
+                    <div className={styles["social-links"]}>
+                        <a href="https://sambasiva.vercel.app" target="_blank" rel="noreferrer" aria-label="Portfolio profile">
+                            <PersonOutlineIcon fontSize="medium" /> Portfolio
+                        </a>
+                        <a href="https://www.linkedin.com/in/v-n-g-samba-siva-reddy-chinta-78a9651b2/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+                            <LinkedInIcon fontSize="medium" />
+                        </a>
+                        <a href="https://www.github.com/sambasivareddy-ch" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+                            <GitHubIcon fontSize="medium" />
+                        </a>
+                    </div>
+                </div>
                 <div className={styles["blog-input_header"]}>
+
                     <div className={styles["controls-wrapper"]}>
                         <input
                             type="text"
