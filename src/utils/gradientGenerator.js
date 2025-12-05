@@ -2,56 +2,52 @@
 
 export const getRandomGradient = () => {
     const gradients = [
-        // Soft neutral grays
-        "linear-gradient(135deg, #fafafa, #e5e5e5)",
-        "linear-gradient(135deg, #f5f5f5, #dcdcdc)",
-        "linear-gradient(135deg, #f0f0f0, #dedede)",
+        // Ultra-soft whites → light grays (clean UI feel)
+        "linear-gradient(135deg, #ffffff, #f5f5f5)",
+        "linear-gradient(135deg, #fafafa, #eaeaea)",
+        "linear-gradient(135deg, #f7f7f7, #e5e5e5)",
+        "linear-gradient(135deg, #f4f4f4, #dcdcdc)",
 
-        // Light to mid charcoal
-        "linear-gradient(135deg, #2b2b2b, #1a1a1a)",
-        "linear-gradient(135deg, #3a3a3a, #2a2a2a)",
+        // Subtle neutral textures
+        "linear-gradient(135deg, #f0f0f0, #d8d8d8)",
+        "linear-gradient(135deg, #ededed, #d6d6d6)",
+        "linear-gradient(135deg, #e8e8e8, #d1d1d1)",
+
+        // Blue-gray neutrals (still monochrome-adjacent but not colorful)
+        "linear-gradient(135deg, #f2f3f5, #d7d9dd)",
+        "linear-gradient(135deg, #e7e9ec, #c8ccd2)",
+        "linear-gradient(135deg, #dde0e4, #c0c4ca)",
+
+        // Mid-gray to deep charcoal
         "linear-gradient(135deg, #444, #222)",
+        "linear-gradient(135deg, #3a3a3a, #1f1f1f)",
+        "linear-gradient(135deg, #2f2f2f, #1a1a1a)",
+        "linear-gradient(135deg, #383838, #202020)",
 
-        // Monochrome blends
-        "linear-gradient(135deg, #000, #555)",
+        // Rich monochrome blacks with tonal depth
+        "linear-gradient(135deg, #000000, #1a1a1a)",
+        "linear-gradient(135deg, #0f0f0f, #2b2b2b)",
+        "linear-gradient(135deg, #121212, #1e1e1e)",
         "linear-gradient(135deg, #111, #333)",
-        "linear-gradient(135deg, #222, #111)",
 
-        // Warm neutrals
-        "linear-gradient(135deg, #fefefe, #f4f2ee)",
-        "linear-gradient(135deg, #f8f6f3, #e7e4df)",
-        "linear-gradient(135deg, #eceae6, #d7d4cf)",
-
-        // Cool neutrals
-        "linear-gradient(135deg, #f2f4f5, #d9dee0)",
-        "linear-gradient(135deg, #e8eaec, #cfd4d8)",
-        "linear-gradient(135deg, #dfe2e5, #c3c7cc)",
-
-        // Very soft blue-grays (excellent for tech vibe)
-        "linear-gradient(135deg, #e9ecf2, #cdd4df)",
-        "linear-gradient(135deg, #dfe3ea, #c2c8d1)",
-        "linear-gradient(135deg, #d4d9e1, #b9c0cc)",
-
-        // Elegant deep neutrals
-        "linear-gradient(135deg, #1c1c1c, #2e2e2e)",
-        "linear-gradient(135deg, #1a1b1d, #2a2c30)",
+        // Elegant deep-neutral blends
         "linear-gradient(135deg, #161616, #242424)",
+        "linear-gradient(135deg, #1a1b1d, #2a2c30)",
+        "linear-gradient(135deg, #1c1c1c, #2e2e2e)",
 
-        // Colorful
-        "linear-gradient(135deg, #5eead4, #38bdf8)",
-        "linear-gradient(135deg, #6ee7b7, #3b82f6)",
-        "linear-gradient(135deg, #a5f3fc, #c4b5fd)",
-        "linear-gradient(135deg, #fbcfe8, #d8b4fe)",
-        "linear-gradient(135deg, #ffd6a5, #ffb4a2)",
-        "linear-gradient(135deg, #99f6e4, #34d399)",
-        "linear-gradient(135deg, #818cf8, #60a5fa)",
-        "linear-gradient(135deg, #ff9e9e, #ffb74d)",
-        "linear-gradient(135deg, #fdba74, #f9a8d4)",
-        "linear-gradient(135deg, #93c5fd, #6ee7b7)"
+        // High-contrast modern BW pairs
+        "linear-gradient(135deg, #ffffff, #c8c8c8)",
+        "linear-gradient(135deg, #e6e6e6, #b3b3b3)",
+        "linear-gradient(135deg, #d9d9d9, #a6a6a6)",
+        "linear-gradient(135deg, #cccccc, #999999)",
+
+        // Reverse monochrome (white → black transitions)
+        "linear-gradient(135deg, #f9f9f9, #111111)",
+        "linear-gradient(135deg, #f0f0f0, #1e1e1e)",
+        "linear-gradient(135deg, #e5e5e5, #2a2a2a)"
     ];
 
-    const randomIndex = Math.floor(Math.random() * gradients.length);
-    return gradients[randomIndex];
+    return gradients[Math.floor(Math.random() * gradients.length)];
 };
 
 export default getRandomGradient;
