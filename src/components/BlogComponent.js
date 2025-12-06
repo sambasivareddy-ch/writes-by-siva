@@ -58,7 +58,8 @@ const BlogComponent = (props) => {
     const [textColor, setTextColor] = useState("#fff");
 
     useEffect(() => {
-        const gradient = getRandomGradient();
+        const theme = localStorage.getItem("blog-theme");
+        const gradient = getRandomGradient(theme);
         const isDark = gradient.includes("#1") || gradient.includes("#2") || gradient.includes("#0");
         setBannerGradient(gradient);
         setTextColor(isDark? "#fff": "#000");
@@ -188,7 +189,7 @@ const BlogComponent = (props) => {
                                                     domain
                                                 )}
                                             >
-                                                {domain}
+                                                #{domain}
                                             </button>
                                         </li>
                                     ))}

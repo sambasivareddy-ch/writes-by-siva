@@ -50,7 +50,7 @@ const BlogList = () => {
     const [blogTags, setBlogTags] = useState([]);
     const [eachTagCount, setEachTagCount] = useState({});
     const [currentBlogs, setCurrentBlogs] = useState([]);
-    const [showTags, setShowTags] = useState(false);
+    const [showTags, setShowTags] = useState(true);
     const [blogWrapperClass, setBlogWrapperClass] = useState(
         styles["blog-tags"]
     );

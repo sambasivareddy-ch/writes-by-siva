@@ -41,8 +41,8 @@
 * {
   margin: 0;
   padding: 0;
-  color: var(--primary-text);
-  background-color: var(--primary-color);
+  color: #000;
+  /* background-color: var(--primary-color); */
 }
 
 ::selection {

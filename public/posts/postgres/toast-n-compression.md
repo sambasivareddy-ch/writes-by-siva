@@ -47,7 +47,7 @@ PostgreSQL automatically creates and manages this TOAST table behind the scenes.
 \d+ documents;
 ```
 Look for **_Storage_** column
-```
+```markdown
 Column  |  Type    | Storage | 
 --------+----------+---------+
 id      | integer  | plain   |     

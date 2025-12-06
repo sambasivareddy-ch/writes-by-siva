@@ -113,6 +113,7 @@
 .blog-insights_domains {
     padding: 5px 10px;
     border: solid 2px var(--border-color);
+    background-color: transparent;
 }
 
 /* [data-theme="dark"] .blog-banner {
@@ -248,26 +249,18 @@
 
 .blog-banner {
     width: 100%;
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
     /* display: flex;
     align-items: center;
     justify-content: center; */
     text-align:left;
-  
-    /* Gradient using your palette */
-    background: linear-gradient(
-        135deg,
-        var(--primary-color) 0%,
-        #333 50%,
-        var(--white-color) 100%
-    );
 
     border-radius: 5px;
     box-sizing: border-box;
 }
   
 .blog-banner-title {
-    font-family: var(--font-family-pop);
+    font-family: var(--font-family-raleway);
     color: var(--white-color);
     /* font-size: 2rem; */
     font-weight: 600;

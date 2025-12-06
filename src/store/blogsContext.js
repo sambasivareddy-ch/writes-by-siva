@@ -14,14 +14,14 @@ const BlogsContext = createContext({
 export const BlogsProvider = ({ children }) => {
     const [blogs, setBlogs] = useState([]);
     const [highlightFooter, setHightLightFooter] = useState(false);
-    const [theme, setTheme] = useState("dark");
+    const [theme, setTheme] = useState("light");
 
     useEffect(() => {
         const theme = localStorage.getItem("blog-theme");
         if (theme) setTheme(theme);
         else localStorage.setItem("blog-theme", "dark");
 
-        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.setAttribute("data-theme", "light");
     }, []);
 
     const toggleThemeHandler = () => {
@@ -62,13 +62,13 @@ export const BlogsProvider = ({ children }) => {
                 >
                     <MailIcon />
                 </a> */}
-                <button
+                {/* <button
                     onClick={toggleThemeHandler}
                     aria-label={`Theme Change Button, Current theme is ${theme}`}
                     aria-pressed={theme !== "dark"}
                 >
                     {theme == "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-                </button>
+                </button> */}
             </div>
         </BlogsContext.Provider>
     );
