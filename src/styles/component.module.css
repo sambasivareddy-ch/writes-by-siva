@@ -159,9 +159,9 @@
     font-size: 16px;
 }
 
-.blog-insights_read {
+/* .blog-insights_read {
     background-color: var(--border-color);
-}
+} */
 
 .blog-insights_read {
     cursor: pointer;
