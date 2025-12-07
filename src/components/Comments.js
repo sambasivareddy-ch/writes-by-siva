@@ -176,6 +176,7 @@ const Comment = ({
                     disabled={!authUser}
                     aria-label="Reply to the comment"
                     aria-disabled={!authUser}
+                    className={styles["like-btn"]}
                 >
                     {replyClicked ? "Cancel" : "Reply"}
                 </button>
