@@ -109,16 +109,16 @@ const BlogComponent = (props) => {
                         {/* </div> */}
                         {/* )} */}
                         <p className={styles["blog-date"]}>
-                            {new Date(date).toLocaleDateString("en-US", {
+                            Authored by: <b>{author}</b> on: {new Date(date).toLocaleDateString("en-In", {
                                 year: "numeric",
-                                month: "long",
+                                month: "numeric",
                                 day: "numeric",
                             })}
                         </p>
                     </div>
-                    {/* <p className={styles["blog-description"]}>
+                    <p className={styles["blog-description"]}>
                         {highlightText(description, searchQuery)}
-                    </p> */}
+                    </p>
                     <div className={styles["blog-component_insights"]}>
                         <div className={styles["blog-insights"]}>
                             <div className={styles["blog-insights_read"]}>
