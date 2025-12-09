@@ -76,9 +76,11 @@
     margin: 10px 0;
 }
 
-/* .blog-date {
-    font-weight: 300;
-} */
+.blog-date {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
 /* .blog-meta .blog-date::before {
     content: '|';
@@ -301,6 +303,19 @@
   
 .blog-banner:hover {
     transform: translateY(-5px);
+}
+
+.author-icon {
+    background-color: #448aff;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {

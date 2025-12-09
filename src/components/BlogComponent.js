@@ -77,6 +77,18 @@ const BlogComponent = (props) => {
         <div className={styles["blog-comp__wrapper"]}>
             <div className={styles["blog-comp__meta_wrapper"]}>
                 <div className={styles["blog-comp__meta"]}>
+                    <div className={styles["blog-meta"]}>
+                        <div className={styles["blog-date"]}>
+                            <p className={styles['author-icon']}>{author[0]}</p> 
+                            <b>{author}</b>
+                            <p>|</p>
+                            {new Date(date).toLocaleDateString("en-In", {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                            })}
+                        </div>
+                    </div>
                     <Link
                         href={`/blog/${slug}`}
                         className={styles["blog-comp__link_banner"]}
@@ -89,33 +101,6 @@ const BlogComponent = (props) => {
                             <h2 className={styles['blog-banner-title']} style={{ color: textColor }}>{title}</h2>
                         </div>
                     </Link>
-                    {/* <Link
-                        href={`/blog/${slug}`}
-                        className={styles["blog-comp__link"]}
-                        aria-label="Open the Blog"
-                        passHref
-                    >
-                        <h2>{highlightText(title, searchQuery)}</h2>
-                    </Link> */}
-                    <div className={styles["blog-meta"]}>
-                        {/* {author && ( */}
-                        {/* <div className={styles["blog-insights_author"]}> */}
-                        {/* <PersonOutlineIcon /> */}
-                        {/* <p> */}
-                        {/* By:{" "} */}
-                        {/* {author[0].toUpperCase() + */}
-                        {/* author.substring(1)} */}
-                        {/* </p> */}
-                        {/* </div> */}
-                        {/* )} */}
-                        <p className={styles["blog-date"]}>
-                            Authored by: <b>{author}</b> on: {new Date(date).toLocaleDateString("en-In", {
-                                year: "numeric",
-                                month: "numeric",
-                                day: "numeric",
-                            })}
-                        </p>
-                    </div>
                     <p className={styles["blog-description"]}>
                         {highlightText(description, searchQuery)}
                     </p>
