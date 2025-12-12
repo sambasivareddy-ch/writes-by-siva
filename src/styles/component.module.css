@@ -251,6 +251,10 @@
     text-decoration: none;
 }
 
+.blog-comp__link_banner img {
+    margin: 0;
+}
+
 .blog-banner {
     width: 100%;
     padding: 5rem 2rem;
@@ -301,7 +305,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
   
-.blog-banner:hover {
+.blog-comp__link_banner:hover {
     transform: translateY(-5px);
 }
 

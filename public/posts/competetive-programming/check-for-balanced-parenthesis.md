@@ -15,7 +15,7 @@ String **str** is valid if the following conditions met:
 - Opening brackets must be closed in the correct order.
 
 ## Example
-```
+```markdown
 Input = {}[](), Output = True
 Input = {({[(]})}, Output = False
 ```

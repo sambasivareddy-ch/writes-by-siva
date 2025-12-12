@@ -13,7 +13,7 @@ If you flip a fair coin:
 
 ## Basic Probability Formula
 The probability \( P \) of an event \( E \) can be calculated using the formula:
-```
+```markdown
 P(E) = Number of favorable outcomes / Total number of possible outcomes = n(E) / n(S)
 Where:
 - P(E) is the probability of event E.

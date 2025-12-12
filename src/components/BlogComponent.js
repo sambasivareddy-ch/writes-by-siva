@@ -50,6 +50,7 @@ const BlogComponent = (props) => {
         fires,
         laugh,
         anger,
+        thumbnail
     } = props;
 
     const [hovered, setHovered] = useState(null);
@@ -79,7 +80,7 @@ const BlogComponent = (props) => {
                 <div className={styles["blog-comp__meta"]}>
                     <div className={styles["blog-meta"]}>
                         <div className={styles["blog-date"]}>
-                            <p className={styles['author-icon']}>{author[0]}</p> 
+                            {/* <p className={styles['author-icon']}>{author[0]}</p>  */}
                             <b>{author}</b>
                             <p>|</p>
                             {new Date(date).toLocaleDateString("en-In", {
@@ -95,11 +96,14 @@ const BlogComponent = (props) => {
                         aria-label="Open the Blog"
                         passHref
                     >
-                        <div className={styles['blog-banner']}
+                        {!thumbnail && <div className={styles['blog-banner']}
                             style={{ background: bannerGradient, zIndex: 999}}
                         >
                             <h2 className={styles['blog-banner-title']} style={{ color: textColor }}>{title}</h2>
-                        </div>
+                        </div>}
+                        {thumbnail &&
+                            <img src={thumbnail} alt={title}/>
+                        }
                     </Link>
                     <p className={styles["blog-description"]}>
                         {highlightText(description, searchQuery)}

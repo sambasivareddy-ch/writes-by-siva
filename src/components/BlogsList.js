@@ -560,6 +560,7 @@ const BlogList = () => {
                                     anger={blog.anger ? blog.anger : 0}
                                     readtime={blog.readtime ? blog.readtime : 0}
                                     author={blog.author}
+                                    thumbnail={blog.thumbnail ? blog.thumbnail: null}
                                     searchQuery={
                                         searchQuery.trim().length >= 3
                                             ? searchQuery

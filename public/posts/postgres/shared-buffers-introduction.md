@@ -79,7 +79,7 @@ PostgreSQL’s buffer system is made of several tightly connected structures:
 - A large contiguous array in shared memory
 - Contains fixed-size 8 KB pages
 - Number of slots = shared_buffers / 8 KB. Example:
-```
+```markdown
 shared_buffers = 8GB → 8GB / 8KB = ~1,048,576 buffers
 ```
 - Each slot holds:
@@ -107,7 +107,7 @@ typedef struct BufferDesc {
 
 ### Buffer Tags
 - A buffer tag uniquely identifies a specific 8 KB block:
-```
+```markdown
 (relfilenode, tablespace, database OID, block number)
 ```
 - This allows PostgreSQL to map file pages → memory slots.
