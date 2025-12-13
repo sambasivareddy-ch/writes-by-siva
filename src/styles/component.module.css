@@ -340,4 +340,7 @@
     .blog-banner-title {
         text-align: left;
     }
+    .blog-comp__link_banner img {
+        height: 200px;
+    }
 }
