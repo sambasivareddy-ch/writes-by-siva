@@ -15,7 +15,7 @@
   --blue-color: #1e88e5;
 
   /* Dark Theme Colors */
-  --primary-color: #FFFDF6;
+  --primary-color: #FFF;
   --primary-text: #252525;
   --secondary-text: #000;
   --border-color: #E9E9E9;
@@ -27,7 +27,7 @@
 
 [data-theme="light"] {
   /* Light Theme Colors */
-  --primary-color: #fafafa;
+  --primary-color: #fff;
   --primary-text: #252525;
   --secondary-text: #000;
   --border-color: #E9E9E9;
