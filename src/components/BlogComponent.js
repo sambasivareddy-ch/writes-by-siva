@@ -97,6 +97,7 @@ const BlogComponent = (props) => {
                         aria-label="Open the Blog"
                         onMouseEnter={() => setCursor('open')}
                         onMouseLeave={() => setCursor('default')}
+                        onClick={() => setCursor('default')}
                         passHref
                     >
                         {!thumbnail && <div className={styles['blog-banner']}
