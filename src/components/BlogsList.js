@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useContext, useCallback, useRef } from "react";
+import React, {
+    useState,
+    useEffect,
+    useContext,
+    useCallback,
+    useRef,
+} from "react";
 import Link from "next/link";
 
 import ClearIcon from "@mui/icons-material/Clear";
@@ -11,11 +17,12 @@ import TagsContext from "@/store/tagsContext";
 import BlogsContext from "@/store/blogsContext";
 import PageContext from "@/store/pageContext";
 import SortByContext from "@/store/sortByContext";
+import CursorContext from "@/store/cursorContext";
 import useDebounce from "@/hooks/useDebounce";
 
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
 /**
  * Updated BlogList component that talks to two server routes:
@@ -45,6 +52,7 @@ const BlogList = () => {
 
     const { currentPage, setPage } = useContext(PageContext);
     const { sortby, setSortOptionHandler } = useContext(SortByContext);
+    const { setCursor } = useContext(CursorContext);
 
     const primaryTags = ["all", "tech", "personal", "tech-events"];
     const [blogTags, setBlogTags] = useState([]);
@@ -275,7 +283,7 @@ const BlogList = () => {
     useEffect(() => {
         setSortOption(sortby);
     }, [sortby]);
-    
+
     useEffect(() => {
         fetchBlogs(presentPageIndex);
     }, [presentPageIndex, fetchBlogs]);
@@ -353,19 +361,39 @@ const BlogList = () => {
             <div className={styles["blog-main"]}>
                 <div className={styles["blog-profile"]}>
                     <div className={styles["social-links"]}>
-                        <a href="https://sambasiva.vercel.app" target="_blank" rel="noreferrer" aria-label="Portfolio profile">
+                        <a
+                            href="https://sambasiva.vercel.app"
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label="Portfolio profile"
+                            onMouseEnter={() => setCursor('visit')}
+                            onMouseLeave={() => setCursor('default')}
+                        >
                             <PersonOutlineIcon fontSize="medium" /> Portfolio
                         </a>
-                        <a href="https://www.linkedin.com/in/v-n-g-samba-siva-reddy-chinta-78a9651b2/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+                        <a
+                            href="https://www.linkedin.com/in/v-n-g-samba-siva-reddy-chinta-78a9651b2/"
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label="LinkedIn profile"
+                            onMouseEnter={() => setCursor('visit')}
+                            onMouseLeave={() => setCursor('default')}
+                        >
                             <LinkedInIcon fontSize="medium" />
                         </a>
-                        <a href="https://www.github.com/sambasivareddy-ch" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+                        <a
+                            href="https://www.github.com/sambasivareddy-ch"
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label="GitHub profile"
+                            onMouseEnter={() => setCursor('visit')}
+                            onMouseLeave={() => setCursor('default')}
+                        >
                             <GitHubIcon fontSize="medium" />
                         </a>
                     </div>
                 </div>
                 <div className={styles["blog-input_header"]}>
-
                     <div className={styles["controls-wrapper"]}>
                         <input
                             type="text"
@@ -478,6 +506,14 @@ const BlogList = () => {
                                     }}
                                     aria-label={`Filter based on ${tag}`}
                                     aria-pressed={selectedTags.includes(tag)}
+                                    onMouseEnter={() => {
+                                        if (selectedTags.includes(tag)) {
+                                            setCursor('unselect');
+                                        } else {
+                                            setCursor('select');
+                                        }
+                                    }}
+                                    onMouseLeave={() => setCursor('default')}
                                 >
                                     <span>{tag}</span>
                                     <span className={styles["blog-tag_count"]}>
@@ -560,7 +596,9 @@ const BlogList = () => {
                                     anger={blog.anger ? blog.anger : 0}
                                     readtime={blog.readtime ? blog.readtime : 0}
                                     author={blog.author}
-                                    thumbnail={blog.thumbnail ? blog.thumbnail: null}
+                                    thumbnail={
+                                        blog.thumbnail ? blog.thumbnail : null
+                                    }
                                     searchQuery={
                                         searchQuery.trim().length >= 3
                                             ? searchQuery
@@ -591,7 +629,7 @@ const BlogList = () => {
 
                 {blogTags.length !== 0 && (
                     <div className={styles["blog-controls"]}>
-                        <p className={styles['blog-page-title']}>Pages:</p>
+                        <p className={styles["blog-page-title"]}>Pages:</p>
                         <div className={styles["blog-pagination"]}>
                             {Array.from(
                                 { length: meta.totalPages },
@@ -608,10 +646,9 @@ const BlogList = () => {
                                                     : ""
                                             }`}
                                             onClick={() => {
-                                                    setPage(page)
-                                                    setPresentPageIndex(page)
-                                                }
-                                            }
+                                                setPage(page);
+                                                setPresentPageIndex(page);
+                                            }}
                                             aria-label={`go to page ${page}`}
                                             aria-pressed={
                                                 presentPageIndex === page

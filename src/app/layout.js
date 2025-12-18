@@ -3,6 +3,7 @@ import { TagsProvider } from "@/store/tagsContext";
 import { BlogsProvider } from "@/store/blogsContext";
 import { AuthProvider } from "@/store/authContext";
 import { PageProvider } from "@/store/pageContext";
+import { CursorProvider } from "@/store/cursorContext";
 import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/Footer";
 import { Poppins, Raleway, Inter } from "next/font/google";
@@ -61,8 +62,10 @@ export default function RootLayout({ children }) {
                     <TagsProvider>
                         <PageProvider>
                             <BlogsProvider>
-                                {children}
-                                {/* <Footer /> */}
+                                <CursorProvider>
+                                    {children}
+                                    {/* <Footer /> */}
+                                </CursorProvider>
                             </BlogsProvider>
                         </PageProvider>
                     </TagsProvider>

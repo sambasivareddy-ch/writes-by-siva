@@ -13,6 +13,7 @@ import styles from "@/styles/component.module.css";
 import getRandomGradient from "@/utils/gradientGenerator";
 
 import TagsContext from "@/store/tagsContext";
+import CursorContext from "@/store/cursorContext";
 
 const highlightText = (text, query) => {
     if (!query) return text;
@@ -35,6 +36,8 @@ const highlightText = (text, query) => {
 const BlogComponent = (props) => {
     const { selectedTags, setSelectedTags, removeSelectedTag } =
         useContext(TagsContext);
+    
+    const { setCursor } = useContext(CursorContext);
 
     const {
         slug,
@@ -92,6 +95,8 @@ const BlogComponent = (props) => {
                         href={`/blog/${slug}`}
                         className={styles["blog-comp__link_banner"]}
                         aria-label="Open the Blog"
+                        onMouseEnter={() => setCursor('open')}
+                        onMouseLeave={() => setCursor('default')}
                         passHref
                     >
                         {!thumbnail && <div className={styles['blog-banner']}
@@ -171,6 +176,14 @@ const BlogComponent = (props) => {
                                                         ? styles["active_btn"]
                                                         : ""
                                                 }`}
+                                                onMouseEnter={() => {
+                                                    if (selectedTags.includes(domain)) {
+                                                        setCursor('unselect');
+                                                    } else {
+                                                        setCursor('select');
+                                                    }
+                                                }}
+                                                onMouseLeave={() => setCursor('default')}
                                                 aria-label={`Filter based on tag ${domain}`}
                                                 aria-pressed={selectedTags.includes(
                                                     domain
