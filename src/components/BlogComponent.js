@@ -60,6 +60,8 @@ const BlogComponent = (props) => {
 
     const [bannerGradient, setBannerGradient] = useState("");
     const [textColor, setTextColor] = useState("#fff");
+    const [blogPersonality, setBlogPersonality] = useState('');
+    const [totalReactions, setTotalReactions] = useState(0)
 
     useEffect(() => {
         const theme = localStorage.getItem("blog-theme");
@@ -67,7 +69,41 @@ const BlogComponent = (props) => {
         const isDark = gradient.includes("#1") || gradient.includes("#2") || gradient.includes("#0");
         setBannerGradient(gradient);
         setTextColor(isDark? "#fff": "#000");
+        setTotalReactions(likes + fires + laugh + anger);
     }, []);
+
+    useEffect(() => {
+        if (totalReactions >= 4) {
+            if (likes > 0 && fires > 0) {
+                setBlogPersonality("❤️ Most Liked");
+            } 
+            else if (anger > 0 && fires > 0) {
+                setBlogPersonality("🔥 Not for Everyone");
+            }
+            else if (laugh > 0 && likes > 0) {
+                setBlogPersonality("😄 Friendly Read");
+            }
+        }
+
+        if (blogPersonality === '') {
+            const dominant = Math.max(likes, fires, anger, laugh);
+    
+            if (dominant >= 4) {
+                if (dominant === likes) {
+                    setBlogPersonality("✅ Straightforward or Informative");
+                }
+                else if (dominant === fires) {
+                    setBlogPersonality("🚀 Deep & Insightful");
+                }
+                else if (dominant === anger) {
+                    setBlogPersonality("🧂 Salty Take");
+                }
+                else {
+                    setBlogPersonality("😆 Enjoyable");
+                }
+            }
+        }
+    }, [totalReactions]);
 
     const handleClickHandler = (tag) => {
         if (selectedTags.includes(tag)) {
@@ -113,6 +149,9 @@ const BlogComponent = (props) => {
                         {highlightText(description, searchQuery)}
                     </p>
                     <div className={styles["blog-component_insights"]}>
+                        {blogPersonality && <div className={styles['blog-personality']}>
+                            {blogPersonality}
+                        </div>}
                         <div className={styles["blog-insights"]}>
                             <div className={styles["blog-insights_read"]}>
                                 <MenuBookIcon />
