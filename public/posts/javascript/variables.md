@@ -17,18 +17,18 @@ A Variable is a **_named storage_** used to store the data in the Javascript. We
 ### Let
 One way to create a variable in Javascript by using `let` keyword.
 Let's declare a variable called "message" using _let_. And initialize a value to it.
-```javascript
+```
     let message;
     message = "Hello Everyone!!";
     console.log(message); // Prints 'Hello Everyone!!' in the console
 ```
 Or we can combine the both declaration and initialization in the same line like below:
-```javascript
+```
     let message = "Hello Everyone!!";
     console.log(message); // Prints 'Hello Everyone!!' in the console
 ```
 We can define multiple variables in the same line like
-```javascript
+```
     let message = "Hello Everyone!!", number = 1024, year = 2000;
 ```
 - But it is recommended to declare a new variable in a new line for Readability Purposes.
@@ -36,7 +36,7 @@ We can define multiple variables in the same line like
 ### Var
 In older javascript script, **_var_** keyword is used to declare a variable like **let**.
 #### Example:
-```javascript
+```
     var message = "Hello Everyone!!";
     console.log(message); // Hello Everyone!!
 ```
@@ -45,7 +45,7 @@ In older javascript script, **_var_** keyword is used to declare a variable like
 ### Const
 In certain cases, we **don't want the value in a variable to change everytime but same value through out**, in these cases we can use **_const_** keyword to declare the constant variables.
 #### Example:
-```javascript
+```
     const MY_BIRTH_DAY = "24/10/2000"
     console.log(MY_BIRTH_DAY); // 24/10/2000
 
@@ -58,7 +58,7 @@ There are two limitations on variable names in JavaScript:
 - The first character **must not be a digit**.
 ### Example
 Valid variable names
-```javascript
+```
     let userName;
     let FirstName;
     let $lastName; 
@@ -71,7 +71,7 @@ The biggest differences between let and var are **_scope_** and **_hoisting_**.
 - **let is block-scoped**: accessible only inside the `{}` block where it is declared.
 - **var is function-scoped**: accessible throughout the function where it is declared.
 #### Example
-```javascript
+```
     if (true) {
         var x = 10; 
         let y = 20;
@@ -84,7 +84,7 @@ The biggest differences between let and var are **_scope_** and **_hoisting_**.
   - Hoisting means the declaration will be moved to the top of the code.
 - Variables declared with let are also hoisted but remain in the **Temporal Dead Zone (TDZ) until declared**.
 #### Example
-```javascript
+```
     console.log(a); // undefined (var is hoisted)
     var a = 5;
 

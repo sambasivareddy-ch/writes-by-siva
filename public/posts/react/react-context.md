@@ -10,21 +10,23 @@ canonical_url: "https://bysiva.vercel.app/blog/react-context"
 # React Context
 
 ## 📚 Table of Contents
-- [Introduction](#introduction)
+- [React Context](#react-context)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [Introduction](#introduction)
     - [Example](#example)
-- [Context an Alternative to Props](#context-an-alternative-to-props)
-    - [Examples](#example-1)
-    - [Step 1: Create a Context](#step-1-create-the-context)
+  - [Context: An alternative to Props](#context-an-alternative-to-props)
+    - [Example 1](#example-1)
+    - [Step 1: Create the Context](#step-1-create-the-context)
     - [Step 2: Provide the Context](#step-2-provide-the-context)
     - [Step 3: Consume the Context](#step-3-consume-the-context)
-        - [Step 3.a: Consume the Context in Another Component](#step-3a-consume-the-context-in-another-component)
-- [Use Cases](#use-cases-of-context)
+    - [Step 3.a: Consume the Context in another Component](#step-3a-consume-the-context-in-another-component)
+  - [Use cases of Context](#use-cases-of-context)
 
 ## Introduction
 Usually in React, if you want to pass the information between the components like between the Parent & Children we uses the **Props**
 
 ### Example
-```jsx
+```
 const Heading = ({level, children}) => {
     const Tag = `h${level}`
     return (
@@ -53,7 +55,7 @@ React Context lets the Parent Pass the information to entire tree rendered below
 
 Here one example would be switching between the Themes in an application. That is when a Theme switched we have pass that information to every component in that application and passing that information as a prop is hard job to do.
 ### Example 1
-```jsx
+```
 const Header = ({theme, setTheme}) => {
     const changeHandler = () => {
         setTheme(!theme);
@@ -106,7 +108,7 @@ const App = () => {
 First, you need to create the context using `createContext()`.
 - The only argument to createContext is **default value** which can be any value like primitive data or event objects.
 - Export the context so that you can import the context and use on the components.
-```javascript
+```
 // ThemeContext.js
 import { createContext } from 'react';
 
@@ -117,7 +119,7 @@ export default ThemeContext;
 
 ### Step 2: Provide the Context
 Now provide the context to the component so that entire child of that component can see the same theme.
-```jsx
+```
 import ThemeContext from './ThemeContext';
 
 const App = () => {
@@ -135,7 +137,7 @@ const App = () => {
 
 ### Step 3: Consume the Context
 Now we can access the **_theme_** & **_setTheme_** without even passing them to Page component and from Page components to it's children.
-```jsx
+```
 import { useContext } from 'react';
 import ThemeContext from './ThemeContext';
 
@@ -158,7 +160,7 @@ const Header = () => {
 ```
 
 ### Step 3.a: Consume the Context in another Component
-```jsx
+```
 import { useContext } from 'react';
 import ThemeContext from './ThemeContext';
 

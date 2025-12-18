@@ -10,22 +10,24 @@ canonical_url: "https://bysiva.vercel.app/blog/this"
 # This & Bind Functions
 
 ## 📚 Table of Contents
-- [This](#this)
+- [This \& Bind Functions](#this--bind-functions)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [This](#this)
     - [Example](#example)
-- [Call, Apply & Bind](#call-apply--bind)
-- [Call](#call)
-    - [Example](#example-2)
-- [Apply](#apply)
-    - [Example](#example-2)
-- [Bind](#bind)
-    - [Example](#example-3)
+  - [Call, Apply \& Bind](#call-apply--bind)
+    - [.call()](#call)
+      - [Example](#example-1)
+    - [.apply()](#apply)
+      - [Example](#example-2)
+    - [.bind()](#bind)
+      - [Example](#example-3)
 
 ## This
 - The **`this`** keyword in JavaScript represents the execution context of a function.
 - It determines which object is "currently calling" the function or method.
 
 ### Example
-```javascript
+```
     const user = {
         name: 'Siva',
         greet: function() {
@@ -41,11 +43,11 @@ canonical_url: "https://bysiva.vercel.app/blog/this"
 These are the key tools for controlling **`this`** in javascript, that is with these functions you can tell the javascript where to refer when **'this'** is used.
 ### .call()
 - call() is a function with a specific 'this' values and arguments are passed one-by-one.
-```javascript
+```
     .call(thisArg, arg1, arg2, ....);
 ```
 #### Example
-```javascript
+```
     function greet(greeting, punctuation) {
         console.log(`${greeting}, ${this.name} ${punctuation}`)
     }
@@ -60,11 +62,11 @@ These are the key tools for controlling **`this`** in javascript, that is with t
 
 ### .apply()
 - Same as .call(), but arguments are passed as an array/list.
-```javascript
+```
     .apply(thisArg, [arg1, arg2, ...]);
 ```
 #### Example
-```javascript
+```
     function greet(greeting, punctuation) {
         console.log(`${greeting}, ${this.name} ${punctuation}`)
     }
@@ -79,7 +81,7 @@ These are the key tools for controlling **`this`** in javascript, that is with t
 ### .bind()
 - Returns a new function with a bound this value and optional arguments, without invoking it immediately unlike .call() and .apply() which invokes immediately.
 #### Example
-```javascript
+```
     function greet(greeting, punctuation) {
         console.log(`${greeting}, ${this.name} ${punctuation}`)
     }

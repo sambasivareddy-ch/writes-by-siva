@@ -119,7 +119,7 @@ The music streaming system can be divided into several high level components as 
   - Albums
   - Playlists
 - We can use relational database like **PostgreSQL** or **SQL**, the schema of the above tables will looks like below:
-```sql
+```
     USERS (
         user_id primary key, 
         name, 
@@ -174,7 +174,7 @@ The music streaming system can be divided into several high level components as 
 #### Streams API
 ##### GET /song/{song_id}
 - This endpoint will return the **Blob Host URI** of the song.
-```bash
+```
     https://aws_s3_song_name.blog/
 ```
 ##### GET /search
@@ -182,7 +182,7 @@ The music streaming system can be divided into several high level components as 
   - query: searching key
   - limit: no.of records should return
   - pagination offset: default 0
-```bash
+```
     {
         "results": [
             {

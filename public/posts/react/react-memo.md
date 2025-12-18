@@ -9,23 +9,27 @@ canonical_url: "https://bysiva.vercel.app/blog/react-memo"
 # useMemo
 
 ## 📚 Table of Contents
-- [Introduction](#introduction)
+- [useMemo](#usememo)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [Introduction](#introduction)
     - [Example](#example)
-- [Memo](#memo)
-    - [Examples](#example-1)
-- [Use Cases](#use-cases-of-context)
+  - [Memo](#memo)
+    - [Example-1](#example-1)
+      - [Before Memoization (Inefficient Re-render)](#before-memoization-inefficient-re-render)
+      - [After Memoization (Efficient Re-render)](#after-memoization-efficient-re-render)
+  - [Use Cases](#use-cases)
 
 ## Introduction
 **useMemo** is a React Hook that lets you "cache" the result of a calculation between the re-renders.
 - React’s rendering behavior is powerful, but sometimes you might notice unnecessary recalculations during component re-renders. This is where React's useMemo hook comes in handy.
-```javascript
+```
     const cachedValue = useMemo(funcForCalculation, dependencies)
 ```
 - `funcForCalculation`: The function calculating the value that you want to **Cache**. It should be pure, should take no arguments, and should return a value of any type. React will calls your function for first render. On next renders, function will call only when on of the dependecies changes else return the old cached value.
 - `dependencies`: An array/list of all reactive values used inside **funcForCalculation**. And it must of constant number of items.
 
 ### Example
-```javascript
+```
     import React, { useMemo } from 'react';
 
     const calculateValue = (val) => {
@@ -46,7 +50,7 @@ canonical_url: "https://bysiva.vercel.app/blog/react-memo"
 ```
 - In the above example, we are passing `calculateValue` function to useMemo with dependencies [val]. 
 - Consider initially we rendered above component as below:
-```javascript
+```
     const App = () => {
         return <ExpensiveComponent val={10}>
     }
@@ -57,7 +61,7 @@ canonical_url: "https://bysiva.vercel.app/blog/react-memo"
 In react by default if a component re-renders it will recursively re-renders it's child componenets as well. If the number of children components are less, it won't show much effect. But if you experienced the slowness while re-rendering the children and you know that the **props** passed to the child components won't change, then actual you can cache that children component as well by wrapping the component around `memo()`.
 ### Example-1 
 #### Before Memoization (Inefficient Re-render)
-```javascript
+```
 import React, { useState } from 'react';
 
 function ChildComponent({ name }) {
@@ -81,7 +85,7 @@ export default ParentComponent;
 ```
 - In the above example, ChildComponent will re-renders everytime when Increment button clicked. But actually we are not changing prop to `ChildComponent` at all, so re-rendering everytime count increases is not ideal. We can avoid that by using `memo`.
 #### After Memoization (Efficient Re-render)
-```javascript
+```
 import React, { useState, memo } from 'react';
 
 const ChildComponent = memo(function ChildComponent({ name }) {

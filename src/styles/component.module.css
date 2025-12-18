@@ -80,6 +80,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    color: var(--primary-text);
 }
 
 /* .blog-meta .blog-date::before {
@@ -112,6 +113,7 @@
     padding: 5px 10px;
     border-radius: 5pc;
     cursor: pointer;
+    color: var(--primary-text);
 }
 
 .blog-insights_domains {
@@ -154,6 +156,7 @@
 .blog-insights_read svg,
 .blog-insights_author svg {
     font-size: 16px;
+    fill: var(--primary-text);
 }
 
 .blog-insights_view p,
@@ -161,6 +164,7 @@
 .blog-insights_read p,
 .blog-insights_author p {
     font-size: 16px;
+    color: var(--primary-text);
 }
 
 /* .blog-insights_read {
@@ -212,6 +216,10 @@
     align-items: center;
     position: relative;
 }
+
+.blog-reactions p {
+    color: var(--primary-text);
+}
   
 .reactionIcon {
     border-radius: 50%;
@@ -219,6 +227,10 @@
     margin-left: -8px; 
     transition: transform 0.2s ease, z-index 0.2s ease;
     cursor: pointer;
+}
+
+.reactionIcon path {
+    color: var(--primary-text);
 }
 
 .reactionIcon:first-child {

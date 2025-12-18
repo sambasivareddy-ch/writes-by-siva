@@ -159,7 +159,7 @@ const Comment = ({
                         onClick={commentDeleteHandler}
                         aria-label="Delete your comment"
                     >
-                        <FontAwesomeIcon icon={faTrash} />
+                        <FontAwesomeIcon className={styles.reactionIcon} icon={faTrash} />
                     </button>
                 )}
                 <span aria-label="Comment Added Time">{created_at}</span>
@@ -168,7 +168,7 @@ const Comment = ({
                     onClick={commentLikeHandler}
                     aria-label="Like Comment"
                 >
-                    <FontAwesomeIcon icon={faHeart} />
+                    <FontAwesomeIcon className={styles.reactionIcon} icon={faHeart} />
                     <span aria-label="Comment Like Count">{commentLikes}</span>
                 </button>
                 <button
@@ -355,7 +355,7 @@ const Comments = ({ post_slug_id }) => {
             {authUser && (
                 <div className={styles["login-user"]}>
                     Commenting as{" "}
-                    <strong>{authUser.displayName ?? authUser.email}</strong>
+                    "{authUser.displayName ?? authUser.email}"
                     <button
                         onClick={signOutLocal}
                         aria-label="Logout from Google/Github"

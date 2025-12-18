@@ -35,7 +35,7 @@ canonical_url: "https://bysiva.vercel.app/blog/wal"
 ## Core Principle
 > Never change Data files like **Heap & Indexes** (where the actual data stores) before the corresponding changes are securely logged in the WAL.
 
-```mermaid
+```
 flowchart TD
     A[Client Transaction] --> B[Shared Buffers(Dirty Pages in Memory)]
     B --> C[WAL Buffers]
@@ -77,7 +77,7 @@ We’ll do three things:
 - Start a transaction that modifies data.
 - Observe WAL activity (pg_current_wal_lsn, pg_waldump).
 - See how changes hit data files only after checkpoints.
-```sql
+```
 
     -- Create Table
     CREATE TABLE wal_demo(id serial, data text);
@@ -104,14 +104,14 @@ We’ll do three things:
     -- Now the page is definitely flushed to disk.
 ```
 ## Crash Simulation
-```text
+```
     INSERT → WAL write → COMMIT → crash → restart → WAL replay → data restored
 ```
 - If PostgreSQL crashes after COMMIT but before CHECKPOINT:
   - Data files don’t yet show the row.
   - On restart, WAL is replayed → PostgreSQL re-applies the INSERT → row is back ✅
   - On restart, we can see the log message like
-  ```makefile
+  ```
     redo starts at ...
     redo done at ...
   ```
@@ -151,7 +151,7 @@ The LSN is a `64-bit` integer, representing it's position in the WAL log. This 6
 The WAL file name is in the format _`TTTTTTTTXXXXXXXXYYYYYYYY`_. Here 'T' is the timeline, 'X' is the high 32-bits part of LSN similarly 'Y' is the low 32-bits part of LSN.
 
 #### Example
-```makefile
+```
     LSN: 0/3F8B660
     Here, Higher Bits: 0
           Low-High 8Bits: 03 (or 3)
@@ -163,7 +163,7 @@ The WAL file name is in the format _`TTTTTTTTXXXXXXXXYYYYYYYY`_. Here 'T' is the
 ```
 #### Current WAL LSN and insert LSN
 We have helper functions to get the current WAL LSN and insert LSN like `pg_current_wal_lsn` which gives the location of the **_last write_**. The `pg_current_wal_insert_lsn` is the logical location reflects **_data in the buffer that has not been written to the disk_**.
-```sql
+```
 select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
  pg_current_wal_lsn | pg_current_wal_insert_lsn 
 --------------------+---------------------------
@@ -173,7 +173,7 @@ select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
 
 
 ## Inspect the WAL files
-```sql
+```
 select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
  pg_current_wal_lsn | pg_current_wal_insert_lsn 
 --------------------+---------------------------
@@ -190,7 +190,7 @@ select pg_current_wal_lsn(), pg_current_wal_insert_lsn();
 (1 row)
 ```
 With the information we captured in the previous steps, use `pg_waldump` to get a human readable summary of the WAL segment contents. In the following command the starting position `(-s)` and ending position `(-e)` are specified along with the WAL file name (000000010000000000000003). The start position was the current_wal_lsn before our INSERT and the ending position was the current_wal_lsn after our insert. 
-```makefile
+```
 pg_waldump -s 76/7E000060 -e 76/7E000108 00000001000000760000007E
 
 RMGR: Transaction ...

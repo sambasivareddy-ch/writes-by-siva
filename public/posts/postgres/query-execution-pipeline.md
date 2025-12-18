@@ -36,7 +36,7 @@ PostgreSQL's query execution pipeline can be thought of in five key stages:
 - **Rewriter** - Rewriter transforms a query tree into better query tree (still unoptimized) by applying **Rules, Views and Constraints**.
 - **Planner/Optimizer** - The planner decides the best way to run the query by choosing the best plan tree from the set of generated plan trees that can most effectively be executed from the query tree.
 - **Executor** - Finally, the executor executes the query how the choosed plan tells by accessing the tables, views and indexes.
-```pgsql
+```
 SQL --> Parser --> Analyzer --> Planner/Optimizer --> Executor --> Results
 ```
 
@@ -48,7 +48,7 @@ SQL --> Parser --> Analyzer --> Planner/Optimizer --> Executor --> Results
   - Also checks for valid column names, functions exists (like avg(), sum()) etc.
 - At the end of this stage, we will posses a raw *parse tree* based on syntax (not optimized).
 #### Example
-```sql
+```
     SELECT id, first_name FROM users WHERE age > 30;
 ```
 At this stage, PG only cares that:
@@ -64,14 +64,14 @@ At this stage, PG only cares that:
   - **Rules** --> rewrite logic applied
 - At the end of this stage, rewriter converts the parse tree into query tree on bases of semantics (not optimized)
 #### Example (based on view)
-```sql
+```
     CREATE VIEW active_users AS SELECT * FROM users WHERE active = true;  -- active_users view
 
     -- We queried as follows:
     SELECT id FROM active_users WHERE age > 30;
 ```
 Now, the rewriter will transforms the above query into something like:
-```sql
+```
     SELECT id FROM users WHERE active = true AND age > 30;
 ```
 
@@ -86,11 +86,11 @@ Now, the rewriter will transforms the above query into something like:
   - Join Algorithms (Nested Loop, Hash Join, Merge Join)
   - Disk I/O vs Memory Usage
 #### Example
-```sql
+```
     EXPLAIN SELECT id, first_name FROM users WHERE age > 30;
 ```
 Might returns:
-```sql
+```
     Seq Scan on users (cost=0.00..45.00 rows=300 width=12)
         Filter: (age > 30)
 ```
@@ -104,7 +104,7 @@ Meaning
 - The executor follows the plan choosen by planner and executes it step by step.
 - Execution is **Volcano-Style**, meaning each node gets the results from its child node, and processes them and passes them upwards.
 #### Example
-```sql
+```
     EXPLAIN SELECT primary_category, sum(likes) FROM blogs GROUP BY primary_category;
 
                             QUERY PLAN                          

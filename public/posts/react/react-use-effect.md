@@ -21,7 +21,7 @@ canonical_url: "https://bysiva.vercel.app/blog/react-use-effect"
 **useEffect** is a react hook that lets you synchronize a component with an external system like e.g., browser APIs, subscriptions, or network requests etc.
 
 ## Definition
-```js
+```
     import { useEffect } from 'react';
 
     useEffect(setup, dependencies?)
@@ -55,7 +55,7 @@ This led to:
 - It only run on the _CLIENT_, they don't run during serves rendering.
 
 ## Example
-```jsx
+```
     import { useState, useEffect } from 'react';
     import { createConnection } from './chat.js';
 

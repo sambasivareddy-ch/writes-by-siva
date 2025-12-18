@@ -13,7 +13,7 @@ If you flip a fair coin:
 
 ## Basic Probability Formula
 The probability \( P \) of an event \( E \) can be calculated using the formula:
-```markdown
+```
 P(E) = Number of favorable outcomes / Total number of possible outcomes = n(E) / n(S)
 Where:
 - P(E) is the probability of event E.
@@ -48,14 +48,14 @@ Two events are dependent if the occurrence of one affects the occurrence of the 
 ## Expected Values
 The expected value (EV) is a measure of the center of a probability distribution. It represents the average outcome if an experiment were repeated many times.
 The expected value \( E(X) \) of a random variable \( X \) can be calculated as:
-```math
+```
 E(X) = (x_0 * P(x_0)) + (x_1 * P(x_1) + ... +  (x_i * P(x_i))
 where ( x_i ) are the possible outcomes and ( P(x_i) ) is the probability of each outcome.
 ```
 
 ## Example of Expected Value
 If you have a game where you win $10 with a probability of 0.2, lose $5 with a probability of 0.5, and break even with a probability of 0.3, the expected value is calculated as follows:
-```math
+```
 E(X) = (10 * 0.2) + (-5 * 0.5) + (0 * 0.3)
 E(X) = 2 - 2.5 + 0 = -0.5
 ```

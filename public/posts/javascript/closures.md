@@ -20,7 +20,7 @@ In simple terms, a **Closure** is a function that *remembers* the variables from
 - This means a closure can access variables from the scope where it was originally defined.
 
 ## Example
-```javascript
+```
 function makeCounter() {
     let count = 0;
     // Closure
@@ -49,11 +49,11 @@ has an internally associated object called the **Lexical Environment**.
   - Environment Record – holds local variables/functions for that block or function.
   - Outer Reference – points to the outer lexical environment.
 ### Variable Declaration
-```javascript
+```
 let phrase = "Hello";
 ```
 Lexical Environment:
-```javascript
+```
 {
     EnvironmentRecord: {
         phrase: "Hello"
@@ -62,7 +62,7 @@ Lexical Environment:
 }
 ```
 ### Function Declaration
-```javascript
+```
 let phrase = "Hello";
 function say(name) {
     console.log(`${phrase}, ${name}`)
@@ -70,7 +70,7 @@ function say(name) {
 say("John")
 ```
 During the call to say("John"), a new lexical environment is created like this:
-```javascript
+```
 {
     EnvironmentRecord: {
         name: "John"
@@ -89,7 +89,7 @@ During the call to say("John"), a new lexical environment is created like this:
 
 ## Closure Environment in Action
 Let’s revisit the makeCounter closure example:
-```javascript
+```
 function makeCounter() {
     let count = 0;
     return function () {
@@ -98,7 +98,7 @@ function makeCounter() {
 }
 ```
 When the closure is created, here's how the lexical environments are chained:
-```javascript
+```
 {
     EnvironmentRecord: { /* closure function has no local vars yet */ },
     Outer: {

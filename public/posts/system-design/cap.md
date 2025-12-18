@@ -10,10 +10,12 @@ canonical_url: "https://bysiva.vercel.app/blog/system-design-05"
 # CAP Theorem
 
 ## 📚 Table of Contents
-1. [Introduction](#introduction)  
-2. [Network Partitions](#network-partitions)  
-3. [Implementation](#implementation)  
-4. [Applications](#applications)
+- [CAP Theorem](#cap-theorem)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [Introduction](#introduction)
+    - [Network Partitions](#network-partitions)
+  - [Implementation](#implementation)
+  - [Applications](#applications)
 
 ## Introduction
 The **CAP Theorem** also known as **Browser's Theorem** stats that, in a distributed systems, you can have only **_two_** out of three guarantee states at the same time
@@ -24,7 +26,7 @@ The **CAP Theorem** also known as **Browser's Theorem** stats that, in a distrib
 ### Network Partitions
 Network partitions refers to the network failures that divides the distributed systems into the two or more groups(partitions) that cannot communicate with each other.
 - This doesn't means that the nodes are down, it means they cannot communicate across the partitions
-```math
+```
 
     Distributed Systems 
     (All Systems are connected)
@@ -53,7 +55,7 @@ In general distributed system choose below combinations of two out of three guar
 
 > Note: Partition Tolerance (P) is typically non-negotiable in distributed systems due to real-world network failures. That is a network or part of network can go down frequently & unexpectedly. So we can assume network failures can happen to your system no matter what. That's why CA is impractical as our systems must be Partition Tolerance.
 
-```tree
+```
         Consistency
             /\
            /  \

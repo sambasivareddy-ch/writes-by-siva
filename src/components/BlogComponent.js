@@ -81,9 +81,7 @@ const BlogComponent = (props) => {
                     <div className={styles["blog-meta"]}>
                         <div className={styles["blog-date"]}>
                             {/* <p className={styles['author-icon']}>{author[0]}</p>  */}
-                            <b>{author}</b>
-                            <p>|</p>
-                            {new Date(date).toLocaleDateString("en-In", {
+                            {author} | {new Date(date).toLocaleDateString("en-In", {
                                 year: "numeric",
                                 month: "short",
                                 day: "numeric",

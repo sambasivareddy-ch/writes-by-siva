@@ -89,6 +89,7 @@
     border-radius: 5pc;
     font-size: 12px;
     width: 250px;
+    color: var(--primary-text);
 }
 
 .menu {
@@ -129,6 +130,7 @@
     gap: 5px;
     padding: 10px;
     box-sizing: border-box;
+    color: var(--primary-text);
 }
 
 .blog-tags {
@@ -161,6 +163,10 @@
     color: var(--primary-text);
     font-size: 14px;
     cursor: pointer;
+}
+
+.blog-tag span {
+    color: var(--primary-text);
 }
 
 .show-more_tag_btn {
@@ -214,6 +220,7 @@
 .show-more_tag_btn svg {
     color: var(--primary-text);
     background-color: var(--border-color);
+    fill: var(--primary-text);
 }
 
 .blog-tag_reset svg {
@@ -288,6 +295,10 @@
     margin: 20px 0;
 }
 
+.blogs-count p {
+    color: var(--primary-text);
+}
+
 .blog-profile {
     margin: 0.5rem 0;
     border-bottom: solid 1px var(--border-color);
@@ -298,6 +309,14 @@
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+.blog-profile .social-links a {
+    color: var(--primary-text);
+}
+
+.blog-profile .social-links a svg {
+    fill: var(--primary-text);
 }
 
 .blog-profile a {
@@ -362,6 +381,7 @@
     display: flex;
     gap: 10;
     font-family: var(--font-family-raleway);
+    color: var(--primary-text);
 }
 
 .blog-ops select {
@@ -370,11 +390,13 @@
     width: fit-content;
     font-size: 16px;
     font-family: var(--font-family-pop);
+    color: var(--primary-text);
 }
 
 .blog-ops .sort-icon {
     display: flex;
     align-items: center;
+    color: var(--primary-text);
 }
 
 .no-blogs_topic {
@@ -412,6 +434,7 @@
 .blog-page-title {
     font-family: var(--font-family-raleway);
     margin: 0 5px 0 0;
+    color: var(--primary-text);
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {

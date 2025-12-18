@@ -15,7 +15,7 @@ String **str** is valid if the following conditions met:
 - Opening brackets must be closed in the correct order.
 
 ## Example
-```markdown
+```
 Input = {}[](), Output = True
 Input = {({[(]})}, Output = False
 ```
@@ -29,7 +29,7 @@ Input = {({[(]})}, Output = False
 - Once the iteration done, check if stack is empty or not. 
     - If empty, return **True** means the input is valid.
     - Else return **False**
-```python
+```
 def IsStrValid(string):
     stack = []
 

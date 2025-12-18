@@ -15,14 +15,14 @@
   --blue-color: #1e88e5;
 
   /* Dark Theme Colors */
-  --primary-color: #FFF;
-  --primary-text: #252525;
-  --secondary-text: #000;
-  --border-color: #E9E9E9;
-  --accent-color: #000000;
-  --highlight-color: #22c55e;
-  --yellow-color: #c0ca33;
-  --glass-color: rgb(255, 252, 250, 0.75);
+  --primary-color: #000;
+  --primary-text: #FFFFFF;
+  --secondary-text: #cacaca;
+  --border-color: #585858;
+  --accent-color: #2C2C2C;
+  --highlight-color: #10b981;
+  --yellow-color: #FEE715FF;
+  --glass-color: rgba(38, 38, 38, 0.75);
 }
 
 [data-theme="light"] {

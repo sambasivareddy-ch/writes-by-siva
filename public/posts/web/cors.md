@@ -42,7 +42,7 @@ Two URLs have the **same origin** only if all three match exactly.
 - `Access-Control-Allow-Headers` → specifies which request headers can be sent (Content-Type, Authorization..).
 - `Access-Control-Allow-Credentials` → indicates if cookies or authentication info can be included.
 ### Example
-```http
+```
     HTTP/1.1 200 OK
     Access-Control-Allow-Origin: https://example.com
     Access-Control-Allow-Methods: GET, POST
@@ -70,14 +70,14 @@ Browsers send a preflight request when the cross-origin request is not simple.
 ### Example
 Example flow (client at https://app.com, server at https://api.com)
 **Step 1** – Browser sends preflight (OPTIONS request):
-```http
+```
 OPTIONS /data HTTP/1.1
 Origin: https://app.com
 Access-Control-Request-Method: PUT
 Access-Control-Request-Headers: Content-Type, Authorization
 ```
 **Step 2** – Server responds with allowed CORS policy:
-```http
+```
 HTTP/1.1 204 No Content
 Access-Control-Allow-Origin: https://app.com
 Access-Control-Allow-Methods: GET, POST, PUT, DELETE
@@ -85,7 +85,7 @@ Access-Control-Allow-Headers: Content-Type, Authorization
 Access-Control-Max-Age: 3600
 ```
 **Step 3** – Browser sends the actual request (if allowed):
-```http
+```
 PUT /data HTTP/1.1
 Origin: https://app.com
 Authorization: Bearer abc123

@@ -58,7 +58,7 @@ canonical_url: "https://bysiva.vercel.app/blog/pg-replication"
 **Ufff!! That's lot of theory, let's get our hands dirty!!**
 ## Cluster
 Let's initialize a **Primary Cluster**
-```bash
+```
     initdb -D /Users/samba-17793/Documents/distdb/experiments/master 
 ```
 - I am going with PORT 6432 instead of default port 5432 (anything is fine). To change the port, change `port` variable in `postgresql.conf` file and restart the postgres to get that applied
@@ -66,29 +66,29 @@ Let's initialize a **Primary Cluster**
 ## Physical Replication
 ### On Primary Cluster 
   - Edit the `postgresql.conf`:
-    ```ini
+    ```
         wal_level = replica
         max_wal_senders = 5         //max number of walsender processes
         max_replication_slots = 5   //max number of replication slots
         hot_standby = on
     ```
   - Allow replication in `pg_hba.conf`:
-    ```ini
+    ```
         host replication replicator 127.0.0.1/32 md5
     ```
   - Create a **replication user**:
-    ```sql
+    ```
         CREATE ROLE replicator WITH replication LOGIN PASSWORD '*****';
     ```
   - Now restart the Primary cluster i.e Master
-    ```bash
+    ```
         pg_ctl -D /Users/samba-17793/Documents/distdb/experiments/master -l logfile restart
     ```
 
 ### On Replica Cluster
   - Stop PostgreSQl
   - Clone data from primary using pg_basebackup:
-    ```bash
+    ```
         pg_basebackup -h 127.0.0.1 -p 6432 -D /Users/samba-17793/Documents/distdb/experiments/slave -U replicator -P -R
     ```
     - Why **pg_basebackup**? 
@@ -103,12 +103,12 @@ Let's initialize a **Primary Cluster**
 
 ### Testing / Verification
 - **On Primary Cluster**
-  ```sql
+  ```
     SELECT client_addr, state FROM pg_stat_replication;
   ```
     - Now you should see the **replica** connected.
 - **On Replica**
-  ```sql
+  ```
     SELECT pg_is_in_recovery();
   ```
     - It should return true.
@@ -117,12 +117,12 @@ Let's initialize a **Primary Cluster**
 
 - **Failover**
   - Crash the Primary Cluster by running the following
-  ```bash
+  ```
     pg_ctl -D /Users/samba-17793/Documents/distdb/experiments/master -m immediate stop
   ``` 
     - `-m immediate` simulates a crash, because it kills the instance instantly without flushing everything.
   - **Promote the Slave to Become New Master**
-  ```bash
+  ```
     pg_ctl -D /Users/samba-17793/Documents/distdb/experiments/slave promote
   ```
     - This changes the **recovery.signal** to `recovery.done`
@@ -132,21 +132,21 @@ Let's initialize a **Primary Cluster**
 This is row-level replication (table-based). Replicas can be read-write and donâ€™t have to be identical.
 ### On Primary Cluster
   - Edit the `postgresql.conf`:
-  ```ini
+  ```
     wal_level = logical
     max_replication_slots = 5
     max_wal_senders = 5
   ```
   - Restart the **PostgreSQL**.
   - Create a **Publication**
-  ```sql
+  ```
     CREATE PUBLICATION my_pub FOR TABLE employees, departments;
   ```
 
 ### On Replica Cluster
   - Ensure the same schema exists (tables must exist, but data may be copied).
   - Create a subscription:
-  ```sql
+  ```
     CREATE SUBSCRIPTION my_sub
     CONNECTION 'host=127.0.0.1 port=6433 user=replicator password=***** dbname=postgres'
     PUBLICATION my_pub;
@@ -155,11 +155,11 @@ This is row-level replication (table-based). Replicas can be read-write and donâ
 
 ### Verification
 - On replica:
-```sql
+```
     SELECT * FROM pg_subscription;
 ```
 - On primary:
-```sql
+```
     SELECT * FROM pg_stat_replication;
 ```
 

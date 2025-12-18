@@ -16,11 +16,11 @@ In this post, we’ll explore what TOAST is, how it compresses and stores large 
 Every table in PostgreSQL is made up of pages, each typically 8KB in size. Every row must fit inside a single page—there’s no spanning allowed.  
 
 Now consider a table like this:
-```sql
+```
 CREATE TABLE documents (id SERIAL PRIMARY KEY, content TEXT);
 ```
 Insert a large data into it:
-```sql
+```
 INSERT INTO documents (content)
 VALUES (repeat('A very long string ', 10000));
 ```
@@ -43,11 +43,11 @@ If it doesn’t, PostgreSQL applies this sequence of actions:
   - The original table keeps a small pointer (around 18 bytes) referring to the TOASTed value.
 
 PostgreSQL automatically creates and manages this TOAST table behind the scenes. You can see its existence using:
-```sql
+```
 \d+ documents;
 ```
 Look for **_Storage_** column
-```markdown
+```
 Column  |  Type    | Storage | 
 --------+----------+---------+
 id      | integer  | plain   |     
@@ -63,7 +63,7 @@ TOAST behavior can be controlled per column using the STORAGE parameter. There a
 - **EXTERNAL**: No compression, stores out-of-line if too large
 - **EXTENDED**: Compresses and stores out-of-line if needed (default)
 ### Example
-```sql
+```
 CREATE TABLE custom_toast (
     id serial,
     doc text STORAGE EXTERNAL
@@ -72,7 +72,7 @@ CREATE TABLE custom_toast (
 This tells PostgreSQL: **“Don’t compress, just store the data externally if it doesn’t fit.”** 
 
 You can modify an existing column too:
-```sql
+```
 ALTER TABLE custom_toast ALTER COLUMN doc SET STORAGE MAIN;
 ```
 
@@ -80,7 +80,7 @@ ALTER TABLE custom_toast ALTER COLUMN doc SET STORAGE MAIN;
 By default, PostgreSQL uses pglz compression—a lightweight, lossless algorithm that strikes a balance between speed and ratio.  
 Since PostgreSQL 14, you can optionally enable lz4, which is faster but produces slightly less compression.  
 You can check what compression method a column is using with:
-```sql
+```
 SELECT pg_column_compression('documents', 'content');
 ```
 Typical outputs:
@@ -89,7 +89,7 @@ Typical outputs:
 - NULL – not compressed
 
 Want to enable LZ4 globally?
-```sql
+```
 ALTER SYSTEM SET default_toast_compression = 'lz4';
 SELECT pg_reload_conf();
 ```
@@ -97,13 +97,13 @@ SELECT pg_reload_conf();
 ## Peeking Inside TOAST Data
 Every table that might store large attributes has a TOAST companion table, named something like `_tablename_oid`.  
 You can discover it with:
-```sql
+```
 SELECT reltoastrelid::regclass
 FROM pg_class
 WHERE relname = 'documents';
 ```
 Once you know the name, you can even (carefully) inspect it:
-```sql
+```
 SELECT * FROM pg_toast_66387 LIMIT 5;
 ```
 Each row corresponds to a “chunk” of your compressed or uncompressed large data.

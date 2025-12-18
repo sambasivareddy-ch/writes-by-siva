@@ -10,10 +10,11 @@
     padding: 10px;
     border-radius: 8px;
     box-sizing: border-box;
-    border: solid 3px var(--border-color);
+    border: solid 1px var(--border-color);
     font-family: var(--font-family-raleway);
     font-weight: 500;
     font-size: 16px;
+    color: var(--primary-text);
 }
 
 .comment-form textarea:read-only {
@@ -25,10 +26,11 @@
     padding: 10px;
     text-align: center;
     font-family: var(--font-family-pop);
-    border: solid 2px var(--border-color);
-    background-color: var(--border-color);
+    border: solid 1px var(--border-color);
+    background-color: var(--primary-text);
     border-radius: 8px;
     cursor: pointer;
+    color: var(--primary-color);
 }
 
 .comment-form button:disabled {
@@ -60,6 +62,14 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.comment-meta span {
+    color: var(--primary-text);
+}
+
+.comment-meta .user-name {
+    color: var(--highlight-color);
 }
 
 .user-avthar {
@@ -97,11 +107,22 @@
     font-size: 14px;
 }
 
+.comment-actions span {
+    color: var(--primary-text);
+}
+
 .comment-actions button {
     outline: none;
     border: none;
     font-size: 14px;
     cursor: pointer;
+    color: var(--primary-text);
+}
+
+.comment-actions button svg,
+.delete-btn svg {
+    fill: var(--primary-text);
+    color: var(--primary-text);
 }
 
 .comment-actions .like-btn {
@@ -113,6 +134,10 @@
 
 .comment-actions button:hover {
     text-decoration: underline;
+}
+
+.reactionIcon path{
+    fill: var(--primary-text);
 }
 
 .reply-form {
@@ -147,6 +172,7 @@
 .login-user {
     margin: 1rem 0;
     font-size: 16px;
+    color: var(--primary-text);
 }
 
 .show-replies {
@@ -164,6 +190,7 @@
 
 .login-user button svg {
     font-size: 16px;
+    fill: var(--primary-text);
 }
 
 .login-user button:hover {
@@ -181,6 +208,7 @@ button:disabled {
 .message {
     font-size: 14px;
     font-family: var(--font-family-raleway);
+    color: var(--primary-text);
 }
 
 .comments-list {

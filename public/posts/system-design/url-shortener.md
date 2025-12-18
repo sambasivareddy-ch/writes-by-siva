@@ -48,7 +48,7 @@ The aim of this blog is to design a URL Shortener system which takes
 ## Consideration: Hash Length
 For this, we are going with short alias length of 7.
 ### Example
-```text
+```
     mytinyurl.com/ax12abZ
 
     Hash = ax12abZ
@@ -65,7 +65,7 @@ As we see, the Base64 algorithm contains 26 uppercase letters, 26 lowercase lett
 
 ## Calculations
 If we consider the hash length to be **7**, then each position can hold any of the 62 Base62 characters, the total number of unique combinations will be
-```math
+```
     62 ^ 7 = 3,521,614,606,208 = ~3.5T
 ```
 - So by considering Base62 algorithm to generate unique short alias and hash length of 7, then we can generate nearly upto 3.5 trillion unique short alias URL.
@@ -73,7 +73,7 @@ If we consider the hash length to be **7**, then each position can hold any of t
 
 ## Database Design
 ### User Table
-```markdown
+```
     Table Name: User Table
     ________________________________________________________________________________
     | Column Name           | Data Type         | Constraints                      |
@@ -86,7 +86,7 @@ If we consider the hash length to be **7**, then each position can hold any of t
     --------------------------------------------------------------------------------     
 ```
 ### URL Table
-```markdown
+```
     Table Name: URL Table
     ________________________________________________________________________________
     | Column Name           | Data Type         | Constraints                      |
@@ -132,7 +132,7 @@ In general, the URL shortening systems uses the combination of above things to m
 - **Method**: POST
 - **Purpose**: To create a new short URL from a long URL
 - **Sample Request**:
-```json
+```
     {
         "long_url": "https://www.example.com/some/very/long/path?param1=value1&param2=value2",
         "expiration_time": "2026-07-10T16:30:00Z", // Optional: ISO 8601 format
@@ -140,7 +140,7 @@ In general, the URL shortening systems uses the combination of above things to m
     }
 ```
 - **Sample Response**:
-```json
+```
     {
         "short_url": "https://mytinyurl.com/aX12abZi",
         "long_url": "https://www.example.com/some/very/long/path?param1=value1&param2=value2",
@@ -177,7 +177,7 @@ Rate limiting is the process of restricting the number of requests a user or cli
     - Each user/IP gets tokens that refill over time. Tokens are consumed per request — if tokens are exhausted, further requests are blocked or queued.
 ### Example
 Use Redis INCR with TTL to count requests per user:
-```text
+```
     INCR shorten_user123
     EXPIRE shorten_user123 60
 ```
@@ -213,7 +213,7 @@ Scalability means the ability of the system to handle increasing load (more user
 
 
 ## Complete System Architecture
-```text
+```
    +-----------------------------+                             
    |       User / Client         |
    +-----------------------------+

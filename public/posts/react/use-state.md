@@ -9,21 +9,26 @@ canonical_url: "https://bysiva.vercel.app/blog/react-01"
 # React Hook: useState
 
 ## 📚 Table of Contents
-- [Introduction](#introduction)
-- [Definition](#definition)
-- [More about set function](#more-about-set-function)
-    - [Examples](#examples)
-        - [Example-1](#example---1-primitive-type)
-        - [Example-2](#example---2-passing-function-to-set-function)
-        - [Example-3](#example---3-objects-array)
-- [Things to Remember](#things-to-remember)
+- [React Hook: useState](#react-hook-usestate)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [Introduction](#introduction)
+  - [Definition](#definition)
+    - [Parameter](#parameter)
+    - [Return](#return)
+    - [Example](#example)
+  - [More about Set Function](#more-about-set-function)
+  - [Examples](#examples)
+    - [Example - 1 (Primitive Type)](#example---1-primitive-type)
+    - [Example - 2 (Passing function to set function)](#example---2-passing-function-to-set-function)
+    - [Example - 3 (Objects: Array)](#example---3-objects-array)
+  - [Things to Remember](#things-to-remember)
 
 
 ## Introduction
 useState() is a react hook that lets you add a state variable to your component, _allows a component to remember it's state/values across the multiple re-renders._
 
 ## Definition
-```javascript
+```
     import { useState } from 'react';
 
     const [state, setState] = useState(initialState);
@@ -41,7 +46,7 @@ useState() hook returns two values i.e current state (state) and a setter functi
 
 > Note: Since it’s a hook, useState must be called at the top level of a React function component (or a custom hook), not inside loops, conditions, or nested functions.
 ### Example
-```javascript
+```
     const MyComponent = (props) => {
         const [state, setState] = useState(0);
 
@@ -58,7 +63,7 @@ useState() hook returns two values i.e current state (state) and a setter functi
 
 ## Examples
 ### Example - 1 (Primitive Type)
-```javascript
+```
     const Counter = (props) => {
         const [count, setCount] = useState(0);
 
@@ -79,7 +84,7 @@ useState() hook returns two values i.e current state (state) and a setter functi
 - That's how everytime the button clicked, count increases by 1. And we can see in the browser like "Button clicked: 2 times"
 
 ### Example - 2 (Passing function to set function)
-```javascript
+```
     const Counter = (props) => {
         const [count, setCount] = useState(0);
 
@@ -102,7 +107,7 @@ useState() hook returns two values i.e current state (state) and a setter functi
 - This is preferred when the new state depends on the previous state — especially helpful in asynchronous updates or batched updates.
 
 ### Example - 3 (Objects: Array)
-```javascript
+```
     const Tasks = (props) => {
         const [todos, setTodos] = useState([]);
         const [todoTitle, setTodoTitle] = useState("");

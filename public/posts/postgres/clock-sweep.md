@@ -38,7 +38,7 @@ PostgreSQL maintains a **Circular Array** of buffer descriptors (`BufferDesc`) t
 - Continue sweeping until a suitable buffer is found.
 - This loop continues until a victim buffer is selected or all buffers are skipped due to being pinned or recently used.
 
-```c
+```
 // File Path: src/backend/storage/buffer/freelist.c
 // Function: StrategyGetBuffer
 

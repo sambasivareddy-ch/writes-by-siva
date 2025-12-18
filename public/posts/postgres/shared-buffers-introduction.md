@@ -35,7 +35,7 @@ canonical_url: "https://bysiva.vercel.app/blog/shared-buffer-introduction"
 
 ## Configuration
 Shared Buffers size can be configured and controlled by the configuration parameter:
-```markdown
+```
 shared_buffers = 125MB (or Whatever the value feasible for your DB System)
 ```
 The whole point of existance of shared buffers is to:
@@ -79,7 +79,7 @@ PostgreSQL’s buffer system is made of several tightly connected structures:
 - A large contiguous array in shared memory
 - Contains fixed-size 8 KB pages
 - Number of slots = shared_buffers / 8 KB. Example:
-```markdown
+```
 shared_buffers = 8GB → 8GB / 8KB = ~1,048,576 buffers
 ```
 - Each slot holds:
@@ -91,7 +91,7 @@ shared_buffers = 8GB → 8GB / 8KB = ~1,048,576 buffers
 ### Buffer Descriptors
 - Each buffer has a descriptor that stores metadata.
 - A simplified version:
-```c
+```
 typedef struct BufferDesc {
     BufferTag tag;         // identifies relation + block number
     uint16    flags;       // dirty, valid, io_in_progress, etc.
@@ -107,7 +107,7 @@ typedef struct BufferDesc {
 
 ### Buffer Tags
 - A buffer tag uniquely identifies a specific 8 KB block:
-```markdown
+```
 (relfilenode, tablespace, database OID, block number)
 ```
 - This allows PostgreSQL to map file pages → memory slots.

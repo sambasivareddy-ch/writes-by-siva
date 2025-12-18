@@ -31,12 +31,17 @@
     display: flex;
     align-items: center;
     gap: 5px 0;
+    color: var(--primary-text);
 }
 
 .social-links a svg {
-    color: var(--primary-text);
+    fill: var(--primary-text);
     background-color: transparent;
     transition: transform 0.3s ease;
+}
+
+.contact-info p{
+    color: var(--primary-text);
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {

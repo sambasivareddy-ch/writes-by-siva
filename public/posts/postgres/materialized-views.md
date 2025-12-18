@@ -28,12 +28,12 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
 
 ## Example
 - Let's create a table called **_'SALES'_** which stores the sales happened on each product.
-```sql
+```
     CREATE TABLE SALES (ID INT, PRODUCT_ID INT, PRODUCT TEXT, PRICE INT, PRIMARY KEY (ID, PRODUCT_ID));
 ```
 
 - Now we are inserting **_2M_** rows for products with Product_IDs 1 & 2 that is `1M` for each product.
-```sql
+```
     -- Product 1
     INSERT INTO SALES (ID, PRODUCT_ID, PRODUCT, PRICE)
     SELECT gs, 1, 'Product-1', (random() * 100 + 1)::INT  
@@ -46,7 +46,7 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
 ```
 
 - Now the user wants to know _how many sales happened and what is money generated for each product_.
-```sql
+```
     SELECT product_id, count(*), sum(price) FROM sales GROUP BY product_id;
     product_id |  count  |   sum    
     ------------+---------+----------
@@ -58,7 +58,7 @@ A **`Materialized View`** in PostgreSQL is a database object which **_stores the
 This query took `98.024ms` to return the results. But in the real world, query can be more complex includes Aggregates, Joins etc.. and can take more time.
   
 - Let's see, how can we improve the performance of the same query using Materialized View. Let's create a materialized view called **money_generated**.
-```sql
+```
     CREATE MATERIALIZED VIEW money_generated 
     AS
         SELECT product_id, count(*), sum(price) 
@@ -68,7 +68,7 @@ This query took `98.024ms` to return the results. But in the real world, query c
 Now that materialized view run the query and **_stores the results of it in the disk or say cache the result_**. So that whenever the user runs the same query again, materialized view simply returns the cached results without executing the query.
 
 - Now run the following query
-```sql
+```
     SELECT * FROM money_generated;
     product_id |  count  |   sum    
     ------------+---------+----------
@@ -83,7 +83,7 @@ See the results are returned in just `0.169ms` which **500%** faster then the or
 ## Common Problem
 - In most of the real-world applications, data will be continously inserted into the tables or data will be updated regularly, means that the materialized view should be return the most recent data, but it will return already computed results.
 - And to re-compute the results we can **_refresh_** the materialized view.
-```sql
+```
     -- Refresh the materialized view (to update with latest data)
     REFRESH MATERIALIZED VIEW money_generated;
 
@@ -92,7 +92,7 @@ See the results are returned in just `0.169ms` which **500%** faster then the or
 ```
 **REFRESH MATERIALIZED VIEW** replaces the old data with fresh results. **CONCURRENTLY** allows refreshing without blocking reads (but you must have a unique index on the view).
 ### Example
-```sql
+```
     DELETE FROM sales WHERE product_id = 1;
     DELETE 1000000
 

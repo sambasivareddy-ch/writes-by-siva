@@ -14,14 +14,14 @@ const BlogsContext = createContext({
 export const BlogsProvider = ({ children }) => {
     const [blogs, setBlogs] = useState([]);
     const [highlightFooter, setHightLightFooter] = useState(false);
-    const [theme, setTheme] = useState("light");
+    const [theme, setTheme] = useState("dark");
 
     useEffect(() => {
         const theme = localStorage.getItem("blog-theme");
         if (theme) setTheme(theme);
         else localStorage.setItem("blog-theme", "dark");
 
-        document.documentElement.setAttribute("data-theme", "light");
+        document.documentElement.setAttribute("data-theme", "dark");
     }, []);
 
     const toggleThemeHandler = () => {

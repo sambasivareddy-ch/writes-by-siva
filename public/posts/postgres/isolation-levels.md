@@ -54,7 +54,7 @@ The choice of isolation level determines the trade-off between performance and c
 - A repeated SELECT (in the same transaction) can see changes committed by other transactions.
 - Prevents dirty reads means transaction with this isolation level won't see uncommitted data.
 #### Example
-```sql
+```
     BEGIN; -- Txn 1                                         |
     SELECT COUNT(*) FROM TASKS; -- Sees 10 rows             |
                                                             |   BEGIN; -- Txn 2 (executing concurrent to txn 1)
@@ -73,7 +73,7 @@ Typical anomalies in this mode:
 - Prevents non-repeatable reads for repeated queries in the same transaction as _snapshot for that transaction is fixed_.
 - Write-skew is type of anamoly that can happen here.
 #### Example
-```sql
+```
     BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ; -- Txn1                                         |
     SELECT COUNT(*) FROM TASKS; -- Sees 10 rows             |
                                                             |   BEGIN; -- Txn 2 (executing concurrent to txn 1)
@@ -83,7 +83,7 @@ Typical anomalies in this mode:
     COMMIT; -- Txn1 committed                               |
 ```
 #### Example for Write Skew
-```sql
+```
 CREATE TABLE oncall (doctor int PRIMARY KEY, oncall boolean);
 INSERT INTO oncall VALUES (1, true), (2, true);
 
@@ -109,7 +109,7 @@ COMMIT;  -- also commits fine                               |
   - Tracks read/write dependencies between concurrent transactions.
   - Aborts one transaction with SQLSTATE 40001 if it detects a dangerous dependency cycle that could lead to a non-serializable outcome.
 - Does not block with range locks; instead, it detects and aborts conflicting transactions at commit time.
-```sql
+```
 ERROR:  could not serialize access due to read/write dependencies among transactions
 SQLSTATE: 40001
 ```

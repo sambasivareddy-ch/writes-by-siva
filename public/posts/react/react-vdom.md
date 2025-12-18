@@ -9,13 +9,18 @@ canonical_url: "https://bysiva.vercel.app/blog/react-vdom"
 # React's Virtual DOM
 
 ## 📚 Table of Contents
-- [Introduction](#introduction)
-- [What is DOM?](#what-is-dom)
+- [React's Virtual DOM](#reacts-virtual-dom)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [Introduction](#introduction)
+  - [What is DOM?](#what-is-dom)
     - [Example](#example)
-- [What is VDOM?](#what-is-vdom)
-- [How Virtual DOM works?](#how-virtual-dom-works)
-- [Virtual DOM Example](#example-1)
-- [Key Benefits](#key-benefits-of-vdom)
+  - [What is VDOM?](#what-is-vdom)
+  - [How Virtual DOM works?](#how-virtual-dom-works)
+    - [Rendering the VDOM](#rendering-the-vdom)
+    - [Diffing the Virtual DOM](#diffing-the-virtual-dom)
+    - [Updating the Real DOM](#updating-the-real-dom)
+  - [Example](#example-1)
+  - [Key benefits of VDOM](#key-benefits-of-vdom)
 
 ## Introduction
 The **Virtual DOM**(VDOM) is a concept where an virtual representation of a UI is kept in memory and synced with the Real DOM when the updates required.
@@ -24,7 +29,7 @@ The **Virtual DOM**(VDOM) is a concept where an virtual representation of a UI i
 - DOM stands for **Document Object Model**.
 - The DOM is a programming interface for a HTML Document which represents the structure of a document as a tree where each node/child represents a HTML Element
 ### Example
-```text
+```
     document
     └── <html>
         ├── <head>
@@ -61,7 +66,7 @@ In this step, React compares the recently/newly created Virtual DOM tree with th
 
 ## Example
 Let's consider a Simple Component which shows a Hello Message and a description
-```javascript
+```
 const MyComponent = () => {
     return (
         <div>
@@ -72,7 +77,7 @@ const MyComponent = () => {
 }
 ```
 - Step 1: Initial Rendering
-```tree
+```
 VDOM (Old)
 └── <div>
     ├── <h1>
@@ -82,7 +87,7 @@ VDOM (Old)
 ```
 - Step 2: New Virtual DOM Tree After State Change
 Imagine the state changes and the message changes to "Welcome to my updated site."
-```tree
+```
 VDOM (New)
 └── <div>
     ├── <h1>
@@ -91,7 +96,7 @@ VDOM (New)
         └── "Welcome to my updated site."
 ```
 - Step 3: Diffing Algorithm Identifies Changes
-```tree
+```
 Comparing:
 <p> "Welcome to my site."      ⟶     <p> "Welcome to my updated site."
 
@@ -101,7 +106,7 @@ Comparing:
     - React identifies that <p> content as changed.
     - No need to update <div> & <h1> again
 - Step 4: Real DOM Update 
-```tree
+```
 Real DOM Before
 └── <div>
     ├── <h1> Hello </h1>

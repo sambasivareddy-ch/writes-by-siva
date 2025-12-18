@@ -12,7 +12,7 @@ canonical_url: "https://bysiva.vercel.app/blog/cp-12"
 Given a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
 ### Tree Structure
-```go
+```
 type TreeNode struct {
     Val   int
     Left  *TreeNode

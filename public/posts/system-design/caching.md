@@ -22,7 +22,7 @@ canonical_url: "https://bysiva.vercel.app/blog/caching"
 ## Caching Techniques
 ### Browser Caching
 Browser caching stores the webpage resources locally to the user browser. And when the user again visits the page, loads the cached results without making a new request to the server.
-```javascript
+```
     app.use((req, res, next) => {
         res.set({
             'Cache-Control': 'public, max-age=86400', // 24hrs retention

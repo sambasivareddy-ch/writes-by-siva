@@ -15,7 +15,7 @@ Polyfills in JavaScript are blocks of code that implement functionality not supp
 ### ES6 Map 
 - In ES6, in general we call `map` over an array and we pass a function to process over each element of the array on which the map is called and it returns a new array with mapped element.
 #### Example-1
-```javascript
+```
     const arr = [1,2,3,4,5,6]
     const doubledArray = arr.map((ele) => {
         return ele*2
@@ -31,7 +31,7 @@ Polyfills in JavaScript are blocks of code that implement functionality not supp
     - 1st Argument - element
     - 2nd Argument - element's index
 #### Example-2
-```javascript
+```
     Array.prototype.compatibleMap = function(func) {
         let new_array = [];
         for (let idx = 0; idx < this.length; idx++) {
@@ -47,7 +47,7 @@ Polyfills in JavaScript are blocks of code that implement functionality not supp
 - Then for each element in the array we are calling `func` by passing the element and element's index.
 - Once processing is done, we are returning new array like in case of `standard ES6 Map`.
 #### Example-3
-```javascript
+```
     const arr = [1,2,3,4,5,6]
     const doubledArray = arr.compatibleMap((ele) => {
         return ele*2
@@ -55,7 +55,7 @@ Polyfills in JavaScript are blocks of code that implement functionality not supp
 ```
 
 ## Complete Example
-```javascript
+```
 if (!Array.prototype.map) {
     Array.prototype.map = function(func) {
         let new_array = [];

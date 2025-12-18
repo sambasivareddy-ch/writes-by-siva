@@ -20,7 +20,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import Suggestions from "@/components/Suggestions";
 import Comments from "@/components/Comments";
@@ -309,7 +309,7 @@ export default function BlogPost(props) {
 
     return (
         <div className={styles["blog-post-wrapper"]}>
-            <Link href={"/"} aria-label="Go Back" passHref>
+            <Link className={styles.navLink} href={"/"} aria-label="Go Back" passHref>
                 <ArrowBackIcon />
             </Link>
             <div>
@@ -344,7 +344,7 @@ export default function BlogPost(props) {
                         }
                         aria-pressed={alreadyFired}
                     >
-                        <FontAwesomeIcon icon={faFire} color={"#ffb300"} />
+                        <FontAwesomeIcon icon={faFire} />
                         <span>{fires}</span>
                     </button>
                     <button
@@ -405,9 +405,22 @@ export default function BlogPost(props) {
                                         );
                                         return !inline && match ? (
                                             <SyntaxHighlighter
-                                                style={oneDark}
+                                                style={{
+                                                    ...oneLight,
+                                                    'pre[class*="language-"]': {
+                                                    color: '#e5e7eb',
+                                                    background: '#000',
+                                                    },
+                                                    'code[class*="language-"]': {
+                                                    color: '#e5e7eb',
+                                                    },
+                                                }}
                                                 language={match[1]}
                                                 PreTag="div"
+                                                customStyle={{
+                                                    color: "#e5e7eb",
+                                                    background: "#000",
+                                                  }}
                                                 {...props}
                                             >
                                                 {String(children).replace(
@@ -441,9 +454,24 @@ export default function BlogPost(props) {
                         const match = /language-(\w+)/.exec(className || "");
                         return !inline && match ? (
                             <SyntaxHighlighter
-                                style={oneDark}
-                                language={match[1]}
-                                PreTag="div"
+                                // style={{
+                                //     ...oneLight,
+                                //     'pre[class*="language-"]': {
+                                //     color: '#e5e7eb',
+                                //     background: '#000',
+                                //     },
+                                //     'code[class*="language-"] span': {
+                                //     color: '#e5e7eb',
+                                //     background: '#000',
+
+                                //     },
+                                // }}
+                                // language={match[1]}
+                                // // PreTag="div"
+                                customStyle={{
+                                    color: "#e5e7eb",
+                                    background: "#000",
+                                  }}
                                 {...props}
                             >
                                 {String(children).replace(/\n$/, "")}

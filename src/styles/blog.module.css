@@ -49,6 +49,10 @@
     margin: 10px 0;
 }
 
+.blog-post-footer p {
+    color: var(--primary-text);
+}
+
 .blog-post-share {
     display: flex;
     align-items: flex-end;
@@ -153,6 +157,10 @@
     border-bottom: solid 2px var(--border-color);
 }
 
+.blog-post-wrapper .navLink svg{
+    fill: var(--primary-text);
+}
+
 .blog-post-wrapper a {
     color: var(--yellow-color);
     text-decoration: none;
@@ -167,10 +175,29 @@
 .blog-post-wrapper h3,
 .blog-post-wrapper h4,
 .blog-post-wrapper h5,
-.blog-post-wrapper h6 {
+.blog-post-wrapper h6,
+.blog-post-wrapper p,
+.blog-post-wrapper b,
+.blog-post-wrapper i, 
+.blog-post-wrapper em,
+.blog-post-wrapper strong,
+.blog-post-wrapper code,
+.blog-post-wrapper pre {
     font-family: var(--font-family-raleway);
     color: var(--primary-text);
     margin: 20px 0 0;
+}
+
+.blog-post-wrapper pre  {
+    border: solid 0.5px var(--border-color);
+} 
+
+.blog-post-wrapper ul,
+.blog-post-wrapper ol,
+.blog-post-wrapper ul li,
+.blog-post-wrapper ol li {
+    font-family: var(--font-family-raleway);
+    color: var(--primary-text);
 }
 
 .blog-post-wrapper h1 {
@@ -328,6 +355,14 @@
     border: solid 1px var(--border-color);
 }
 
+.blog-insights button span {
+    color: var(--primary-text);
+}
+
+.not-reacted svg path {
+    color: var(--primary-text);
+}
+
 .blog-insights button:hover {
     background-color: var(--border-color);
     border-radius: 5px;
@@ -346,7 +381,7 @@
     fill: #e53935;
 }
 
-.blog-insights button:nth-child(1).reacted p {
+.blog-insights button:nth-child(1).reacted span {
     color: #e53935;
 }
 
@@ -358,7 +393,7 @@
     fill: #ffc107;
 }
 
-.blog-insights button:nth-child(2).reacted p {
+.blog-insights button:nth-child(2).reacted span {
     color: #ffc107;
 }
 
@@ -371,7 +406,7 @@
     fill: #ffd600;
 }
 
-.blog-insights button:nth-child(3).reacted p {
+.blog-insights button:nth-child(3).reacted span {
     color: #ffd600;
 }
 
@@ -384,7 +419,7 @@
     fill: #dd2c00;
 }
 
-.blog-insights button:nth-child(4).reacted p {
+.blog-insights button:nth-child(4).reacted span {
     color: #dd2c00;
 }
 
@@ -483,6 +518,7 @@
 
 .scroll-top_btn svg {
     background-color: transparent;
+    fill: var(--primary-text);
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {

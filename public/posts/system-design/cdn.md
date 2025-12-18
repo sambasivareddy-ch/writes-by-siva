@@ -12,12 +12,13 @@ This blog post is the fourth in a series on system design, where we will explore
 
 ## 📚 Table of Contents
 
-1. [Introduction](#cdn-content-delivery-network)  
-2. [Definition](#definition)  
-3. [Is a CDN the Same as a Load Balancer?](#is-a-cdn-the-same-as-a-load-balancer)  
-4. [Is a CDN the Same as a Web Server?](#is-a-cdn-the-same-as-a-web-server)  
-5. [How CDNs Work](#how-cdns-work)  
-6. [Benefits of Using a CDN](#benefits-of-using-a-cdn)
+- [CDN (Content Delivery Network)](#cdn-content-delivery-network)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [Definition](#definition)
+    - [Is a CDN the same as a Load Balancer?](#is-a-cdn-the-same-as-a-load-balancer)
+    - [Is a CDN the same as a Web Server?](#is-a-cdn-the-same-as-a-web-server)
+  - [How CDNs Work](#how-cdns-work)
+  - [Benefits of Using a CDN](#benefits-of-using-a-cdn)
 
 ## Definition
 A Content Delivery Network (CDN) is a geograhphically distributed network of proxy servers and data centers that work together to deliver the static content to users based on their geographic location.
@@ -42,7 +43,7 @@ No, a CDN is not the same as a load balancer, although they both aim to improve 
 3. **Content Delivery**: The CDN serves the requested content from the nearest edge server, reducing the distance the data needs to travel and improving response times. If the content is not available in the cache, the CDN fetches it from the origin server (the original web server where the content is hosted) and caches it for future requests.
 4. **Cache Management**: The CDN manages the cache by periodically checking for updates to the content on the origin server. If the content has changed, the CDN fetches the updated content from the origin server and refreshes its cache.
 5. **Load Balancing**: In some cases, CDNs also implement load balancing techniques to distribute requests across multiple edge servers, ensuring that no single server is overwhelmed and improving overall performance.
-```text
+```
 -----------------------------------------------------------------------------------------------------------
 | CDN Architecture Overview                                                                               |
 -----------------------------------------------------------------------------------------------------------

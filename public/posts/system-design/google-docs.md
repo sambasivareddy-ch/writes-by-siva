@@ -125,7 +125,7 @@ This is the detailed, actionable part — includes **_CRDT choice, message forma
   - A sequence CRDT like RGA / Logoot / Yjs style (identifier per element). Use tombstones for deletes, and periodic compaction to remove tombstones and reassign compact IDs in snapshots.
   
 ### CRDT op JSON (example)
-```json
+```
 {
   "type": "op",
   "opId": "uuid-1234",
@@ -146,7 +146,7 @@ This is the detailed, actionable part — includes **_CRDT choice, message forma
 ### WebSocket protocol (simplified)
 - **Client → Server messages**: op, cursor, presence, heartbeat, sync-request
 - **Server → Client messages**: op-broadcast, ack(seq/opId), snapshot, presence-update
-```json
+```
 { "type": "ack", "opId": "uuid-1234", "seq": 10010 }
 ```
 

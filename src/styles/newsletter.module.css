@@ -23,12 +23,18 @@
 .news-letter_wrapper-highlight h3 {
     font-family: var(--font-family-raleway);
     background-color: transparent;
+    color: var(--highlight-color);
 }
 
 .sub-for {
     display: flex;
     gap: 10px;
     margin: 5px 0;
+}
+
+.sub-for p,
+.sub-for select {
+    color: var(--primary-text);
 }
 
 .news-letter_wrapper form,
