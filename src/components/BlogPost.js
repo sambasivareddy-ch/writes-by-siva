@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import rehypeSlug from "rehype-slug";
@@ -28,6 +28,8 @@ import ZoomImage from "@/components/ZoomImage";
 import Footer from "@/components/Footer";
 import styles from "@/styles/blog.module.css";
 
+import CursorContext from "@/store/cursorContext";
+
 export default function BlogPost(props) {
     const { slug, content, meta, post, primary, domains } = props;
     const [url, setUrl] = useState("");
@@ -45,6 +47,8 @@ export default function BlogPost(props) {
     const [alreadyAnger, setAlreadyAnger] = useState(false);
     const [isScrollVisible, setIsScrollVisible] = useState(false);
     const [theme, setTheme] = useState("dark");
+
+    const { setCursor } = useContext(CursorContext);
 
     // Set the URL to the current page's URL & check whether the blog is liked or not
     useEffect(() => {
@@ -309,7 +313,14 @@ export default function BlogPost(props) {
 
     return (
         <div className={styles["blog-post-wrapper"]}>
-            <Link className={styles.navLink} href={"/"} aria-label="Go Back" passHref>
+            <Link 
+                className={styles.navLink} 
+                href={"/"} 
+                aria-label="Go Back" 
+                onMouseEnter={() => setCursor('go-back')}
+                onMouseLeave={() => setCursor('default')}
+                passHref
+            >
                 <ArrowBackIcon />
             </Link>
             <div>
@@ -329,6 +340,8 @@ export default function BlogPost(props) {
                                 ? styles["reacted"]
                                 : styles["not-reacted"]
                         }
+                        onMouseEnter={() => setCursor('like')}
+                        onMouseLeave={() => setCursor('default')}
                         aria-pressed={alreadyLiked}
                     >
                         <FontAwesomeIcon icon={faHeart} />
@@ -343,6 +356,8 @@ export default function BlogPost(props) {
                                 : styles["not-reacted"]
                         }
                         aria-pressed={alreadyFired}
+                        onMouseEnter={() => setCursor('fire')}
+                        onMouseLeave={() => setCursor('default')}
                     >
                         <FontAwesomeIcon icon={faFire} />
                         <span>{fires}</span>
@@ -356,6 +371,8 @@ export default function BlogPost(props) {
                                 : styles["not-reacted"]
                         }
                         aria-pressed={alreadyLaughed}
+                        onMouseEnter={() => setCursor('laugh')}
+                        onMouseLeave={() => setCursor('default')}
                     >
                         <FontAwesomeIcon icon={faGrinTears} />
                         <span>{laughs}</span>
@@ -369,6 +386,8 @@ export default function BlogPost(props) {
                                 : styles["not-reacted"]
                         }
                         aria-pressed={alreadyAnger}
+                        onMouseEnter={() => setCursor('anger')}
+                        onMouseLeave={() => setCursor('default')}
                     >
                         <FontAwesomeIcon icon={faFaceAngry} />
                         <span>{anger}</span>
@@ -454,20 +473,6 @@ export default function BlogPost(props) {
                         const match = /language-(\w+)/.exec(className || "");
                         return !inline && match ? (
                             <SyntaxHighlighter
-                                // style={{
-                                //     ...oneLight,
-                                //     'pre[class*="language-"]': {
-                                //     color: '#e5e7eb',
-                                //     background: '#000',
-                                //     },
-                                //     'code[class*="language-"] span': {
-                                //     color: '#e5e7eb',
-                                //     background: '#000',
-
-                                //     },
-                                // }}
-                                // language={match[1]}
-                                // // PreTag="div"
                                 customStyle={{
                                     color: "#e5e7eb",
                                     background: "#000",

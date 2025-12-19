@@ -30,6 +30,7 @@
     height: 64px;
     transform: translate(-50%, -50%) scale(1.2);
 }
+
 .cursor--select {
     width: 64px;
     height: 64px;
@@ -37,6 +38,7 @@
     background: rgba(254, 231, 16, 0.15);
     transform: translate(-50%, -50%) scale(0.7);
 }
+
 .cursor--unselect {
     width: 64px;
     height: 64px;
@@ -44,13 +46,63 @@
     background: rgba(229, 55, 52, 0.15);
     transform: translate(-50%, -50%) scale(0.8);
 }
+
 .cursor--type {
     opacity: 0.6;
 }
+
 .cursor--visit {
     width: 64px;
     height: 64px;
     transition: all ease;
     transform: translate(-50%, -50%) scale(0.6);
     background: rgba(150, 255, 150, 0.15);
+}
+
+.cursor--like {
+    width: 64px;
+    height: 64px;
+    transition: all ease;
+    background: rgba(226, 254, 16, 0.15);
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+.cursor--fire {
+    width: 64px;
+    height: 64px;
+    transition: all ease;
+    background: rgba(254, 222, 16, 0.15);
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+.cursor--laugh {
+    width: 64px;
+    height: 64px;
+    transition: all ease;
+    background: rgba(111, 254, 16, 0.15);
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+.cursor--anger {
+    width: 64px;
+    height: 64px;
+    transition: all ease;
+    background: rgba(254, 16, 16, 0.15);
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+.cursor--text {
+    width: 64px;
+    height: 64px;
+    transition: all ease;
+    background: rgba(254, 16, 16, 0.15);
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+.cursor--go-back {
+    width: 64px;
+    height: 64px;
+    transition: all ease;
+    background: rgba(16, 238, 254, 0.15);
+    transform: translate(-50%, -50%) scale(0.7);
 }
