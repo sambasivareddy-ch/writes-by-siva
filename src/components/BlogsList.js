@@ -372,7 +372,7 @@ const BlogList = () => {
                             <PersonOutlineIcon fontSize="medium" /> Portfolio
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/v-n-g-samba-siva-reddy-chinta-78a9651b2/"
+                            href="https://www.linkedin.com/in/samba-siva-reddy-ch/"
                             target="_blank"
                             rel="noreferrer"
                             aria-label="LinkedIn profile"

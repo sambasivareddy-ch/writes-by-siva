@@ -21,7 +21,7 @@ const Footer = () => {
                         <a href="https://sambasiva.vercel.app" target="_blank" rel="noreferrer" aria-label="Portfolio profile">
                             <PersonOutlineIcon fontSize="medium" />
                         </a>
-                        <a href="https://www.linkedin.com/in/v-n-g-samba-siva-reddy-chinta-78a9651b2/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+                        <a href="https://www.linkedin.com/in/samba-siva-reddy-ch/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
                             <LinkedInIcon fontSize="medium" />
                         </a>
                         <a href="https://www.github.com/sambasivareddy-ch" target="_blank" rel="noreferrer" aria-label="GitHub profile">
