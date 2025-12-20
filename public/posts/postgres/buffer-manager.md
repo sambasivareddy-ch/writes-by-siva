@@ -8,7 +8,7 @@ canonical_url: "https://bysiva.vercel.app/blog/buffer-manager"
 ---
 
 # How the Postges Buffer Manager works?
-This blog is a continuation post in the **Shared Buffers** seris, where we are going to discuss about how the postgres's buffer manager works underneath by handling the page access requests and maintaining the shared buffer pool.   
+This blog is a continuation post in the **Shared Buffers** series, where we are going to discuss about how the postgres's buffer manager works underneath by handling the page access requests and maintaining the shared buffer pool.   
 Checkout [Part-1](/blog/shared-buffers-introduction) here..
 
 ## Table of Contents
@@ -43,7 +43,8 @@ When a backend requests a page that is already cached:
 - If found, pin the buffer: _increment its reference (refcount) and usage counters_.
 - Acquire a shared content lock before reading or an exclusive lock before modifying.
 - Release the lock(s) after use.
-> Pinning ensures that a page in use is not selected for eviction by other backends.
+> Pinning ensures that a page in use is not selected for eviction by other backends.   
+
 ![Buffer Manager 1](https://pub-b8d5ca13188446a08ac9941fcca1304e.r2.dev/shared-manager-1.png)
 
 ## Loading Page into a Empty Slot
