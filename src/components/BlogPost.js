@@ -25,7 +25,6 @@ import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Suggestions from "@/components/Suggestions";
 import Comments from "@/components/Comments";
 import ZoomImage from "@/components/ZoomImage";
-import Footer from "@/components/Footer";
 import styles from "@/styles/blog.module.css";
 
 import CursorContext from "@/store/cursorContext";
@@ -392,79 +391,11 @@ export default function BlogPost(props) {
                         <FontAwesomeIcon icon={faFaceAngry} />
                         <span>{anger}</span>
                     </button>
-                    {/* <button className={styles['summarize-btn']} onClick={summarizeBlogHandler}>
-                        {showTldr ? 'Hide': 'Show'} Summary
-                    </button> */}
                     <div className={styles["insights"]} aria-label="Blog Views">
                         <VisibilityIcon />
                         <span>{views} Views</span>
                     </div>
                 </div>
-            </div>
-            <div className={styles["tldr-wrapper"]}>
-                {showTldr && (
-                    <div className={styles["tldr"]}>
-                        <h1>tl;dr</h1>
-                        {tldr ? (
-                            <ReactMarkdown
-                                rehypePlugins={[
-                                    rehypeSlug,
-                                    rehypeAutolinkHeadings,
-                                ]}
-                                components={{
-                                    code({
-                                        node,
-                                        inline,
-                                        className,
-                                        children,
-                                        ...props
-                                    }) {
-                                        const match = /language-(\w+)/.exec(
-                                            className || ""
-                                        );
-                                        return !inline && match ? (
-                                            <SyntaxHighlighter
-                                                style={{
-                                                    ...oneLight,
-                                                    'pre[class*="language-"]': {
-                                                    color: '#e5e7eb',
-                                                    background: '#000',
-                                                    },
-                                                    'code[class*="language-"]': {
-                                                    color: '#e5e7eb',
-                                                    },
-                                                }}
-                                                language={match[1]}
-                                                PreTag="div"
-                                                customStyle={{
-                                                    color: "#e5e7eb",
-                                                    background: "#000",
-                                                  }}
-                                                {...props}
-                                            >
-                                                {String(children).replace(
-                                                    /\n$/,
-                                                    ""
-                                                )}
-                                            </SyntaxHighlighter>
-                                        ) : (
-                                            <code
-                                                className={className}
-                                                {...props}
-                                            >
-                                                {children}
-                                            </code>
-                                        );
-                                    },
-                                }}
-                            >
-                                {tldr}
-                            </ReactMarkdown>
-                        ) : (
-                            "Loading...."
-                        )}
-                    </div>
-                )}
             </div>
             <ReactMarkdown
                 rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}

@@ -5,39 +5,20 @@ import { AuthProvider } from "@/store/authContext";
 import { PageProvider } from "@/store/pageContext";
 import { CursorProvider } from "@/store/cursorContext";
 import { Analytics } from "@vercel/analytics/next";
-import Footer from "@/components/Footer";
-import { Poppins, Raleway, Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "@/styles/globals.css";
 
-// Load Poppins with multiple weights & italic support
-const poppins = Poppins({
+const montserrat = Montserrat({
     subsets: ["latin"],
     weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
     style: ["normal", "italic"],
     display: "swap",
-    variable: "--font-poppins", // Optional: if using CSS variables
-});
-
-// Load Raleway with full weight range
-const raleway = Raleway({
-    subsets: ["latin"],
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-    style: ["normal", "italic"],
-    display: "swap",
-    variable: "--font-raleway",
-});
-
-const inter = Inter({
-    subsets: ["latin"],
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-    style: ["normal", "italic"],
-    display: "swap",
-    variable: "--font-inter",
+    variable: "--font-montserrat",
 });
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={`${poppins.variable} ${raleway.variable} ${inter.variable}`}>
+        <html lang="en" className={`${montserrat.variable}`}>
             <head>
                 {/* Railway API preconnect */}
                 <link
@@ -64,7 +45,6 @@ export default function RootLayout({ children }) {
                             <BlogsProvider>
                                 <CursorProvider>
                                     {children}
-                                    {/* <Footer /> */}
                                 </CursorProvider>
                             </BlogsProvider>
                         </PageProvider>

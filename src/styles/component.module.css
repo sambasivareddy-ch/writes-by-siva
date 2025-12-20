@@ -2,7 +2,7 @@
     width: 100%;
     height: fit-content;
     padding: 40px 0;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     border-bottom: solid 1px var(--border-color);
     border-top: solid 1px var(--border-color);
     box-sizing: border-box;
@@ -17,7 +17,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    /* margin: 0 0 5px; */
     align-items: center;
     align-self: flex-start;
 }
@@ -43,26 +42,17 @@
     text-decoration: underline;
 }
 
-/* .blog-comp__meta p {
-    font-size: 20px;
-} */
-
 .blog-comp__link {
     text-decoration: none;
     color: var(--primary-text);
 }
 
 .blog-comp__link h2 {
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     font-weight: 600;
     margin: 10px 0;
     font-size: 1.3rem;
 }
-
-/* .blog-comp__link h3 {
-    font-size: 1.5rem;
-    margin: 10px 0 15px;
-} */
 
 .blog-comp__link:hover h2 {
     color: var(--highlight-color);
@@ -82,11 +72,6 @@
     align-items: center;
     color: var(--primary-text);
 }
-
-/* .blog-meta .blog-date::before {
-    content: '|';
-    padding: 0 10px;
-} */
 
 .blog-insights {
     display: flex;
@@ -128,24 +113,6 @@
     border-color: var(--blue-color);
 }
 
-/* [data-theme="dark"] .blog-banner {
-    background: linear-gradient(
-        135deg,
-        #3a3a3a 0%,
-        #2b2b2b 50%,
-        #3a3a3a 100%
-    );
-}
-
-[data-theme="light"] .blog-banner {
-    background: linear-gradient(
-        135deg,
-        #ffffff 0%,
-        #ededed 50%,
-        #dcdcdc 100%
-    );
-} */
-
 .blog-insights_view,
 .blog-insights_like,
 .blog-insights_author {
@@ -173,18 +140,9 @@
     color: var(--primary-text);
 }
 
-/* .blog-insights_read {
-    background-color: var(--border-color);
-} */
-
 .blog-insights_read {
     cursor: pointer;
 }
-
-/* .blog-insights_read svg,
-.blog-insights_read p {
-    background-color: var(--border-color);
-} */
 
 .blog-description {
     font-size: 16px;
@@ -276,9 +234,6 @@
 .blog-banner {
     width: 100%;
     padding: 5rem 2rem;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
     text-align:left;
 
     border-radius: 5px;
@@ -286,12 +241,10 @@
 }
   
 .blog-banner-title {
-    font-family: var(--font-family-raleway);
-    color: var(--white-color);
-    /* font-size: 2rem; */
+    font-family: var(--font-family-inter);
+    color: var(--primary-text);
     font-weight: 600;
     background-color: transparent;
-    /* letter-spacing: 1; */
     text-transform: capitalize;
 }
 
@@ -348,10 +301,6 @@
         margin: 0;
         height: fit-content;
     }
-    /* .blog-banner {
-        display: none;
-        margin: 0;
-    } */
     .blog-comp__link h1 {
         font-size: 1.5rem;
     }

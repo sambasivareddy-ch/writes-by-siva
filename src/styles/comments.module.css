@@ -11,7 +11,7 @@
     border-radius: 8px;
     box-sizing: border-box;
     border: solid 1px var(--border-color);
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     font-weight: 500;
     font-size: 16px;
     color: var(--primary-text);
@@ -25,7 +25,7 @@
 .comment-form button {
     padding: 10px;
     text-align: center;
-    font-family: var(--font-family-pop);
+    font-family: var(--font-family-inter);
     border: solid 1px var(--border-color);
     background-color: var(--primary-text);
     border-radius: 8px;
@@ -86,9 +86,8 @@
 
 .user-name {
     font-size: 16px;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     font-weight: bold;
-    /* text-decoration: underline; */
     color: var(--highlight-color);
 }
 
@@ -153,7 +152,7 @@
     padding: 10px;
     border: solid 1px var(--border-color);
     border-radius: 8px;
-    font-family: var(--font-family-pop);
+    font-family: var(--font-family-inter);
 }
 
 .reply-form button {
@@ -207,7 +206,7 @@ button:disabled {
 
 .message {
     font-size: 14px;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     color: var(--primary-text);
 }
 

@@ -1,42 +1,16 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap'); */
-
 :root {
-  --charcoal-color: #101820FF;
-  --yellow-color: #FEE715FF;
-  --cyan-color: #64FEDB;
-  --font-family-pop: var(--font-poppins), sans-serif;
-  --font-family-raleway: var(--font-raleway), sans-serif;
-  --font-family-inter: var(--font-inter), sans-serif;
-  --bg-color: #0B192E;
-  --text-color: #90a4ae;
-  --green-color: #43a047;
-  --white-color: #fff;
-  --blue-color: #1e88e5;
-
+  --font-family-inter: var(--font-montserrat), sans-serif;
+  
   /* Dark Theme Colors */
-  --primary-color: #000;
+  --primary-color: #101820FF;
   --primary-text: #FFFFFF;
   --secondary-text: #cacaca;
   --border-color: #585858;
-  --accent-color: #2C2C2C;
   --highlight-color: #10b981;
   --yellow-color: #FEE715FF;
+  --blue-color: #1e88e5;
   --glass-color: rgba(38, 38, 38, 0.75);
 }
-
-[data-theme="light"] {
-  /* Light Theme Colors */
-  --primary-color: #fff;
-  --primary-text: #252525;
-  --secondary-text: #000;
-  --border-color: #E9E9E9;
-  --accent-color: #000000;
-  --highlight-color: #22c55e;
-  --yellow-color: #c0ca33;
-  --glass-color: rgb(255, 252, 250, 0.75);
-}
-
 
 * {
   margin: 0;
@@ -79,7 +53,3 @@ mark {
   color: #000;
   border-radius: 5px;
 }
-
-/* ul {
-  list-style: none;
-} */

@@ -23,7 +23,7 @@
 .portfolio-link {
     text-decoration: none;
     font-size: 14px;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
 }
 
 .portfolio-link:hover {
@@ -33,7 +33,7 @@
 .home-link {
     text-decoration: none;
     font-size: 16px;
-    font-family: var(--font-family-pop);
+    font-family: var(--font-family-inter);
 }
 
 .post-footer {
@@ -95,7 +95,7 @@
 .open__btn {
     width: fit-content;
     color: #000;
-    font-family: var(--font-family-pop);
+    font-family: var(--font-family-inter);
     font-weight: 600;
     text-decoration: none;
     border: none;
@@ -147,7 +147,7 @@
 }
 
 .blog-post-wrapper {
-    font-family: var(--font-family-pop);
+    font-family: var(--font-family-inter);
     line-height: 2;
     width: 60%;
     margin: 20px auto;
@@ -183,7 +183,6 @@
 .blog-post-wrapper strong,
 .blog-post-wrapper code,
 .blog-post-wrapper pre {
-    font-family: var(--font-family-raleway);
     color: var(--primary-text);
     margin: 20px 0 0;
 }
@@ -196,7 +195,7 @@
 .blog-post-wrapper ol,
 .blog-post-wrapper ul li,
 .blog-post-wrapper ol li {
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     color: var(--primary-text);
 }
 
@@ -313,7 +312,7 @@
     gap: 10px;
     align-items: center;
     flex-wrap: wrap;
-    font-family: var(--font-family-pop);
+    font-family: var(--font-family-inter);
     margin: 15px 0 0 0;
 }
 
@@ -435,7 +434,7 @@
     gap: 10px;
     border: solid 1px var(--border-color);
     border-radius: 5px;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     background-color: var(--highlight-color);
     color: #000;
 }
@@ -458,7 +457,7 @@
     right: 10px;
     z-index: 9999;
     text-decoration: none;
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     background-color: var(--primary-color);
     border-color: var(--highlight-color);
     color: var(--highlight-color);

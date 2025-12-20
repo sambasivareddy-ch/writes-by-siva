@@ -7,7 +7,6 @@
     transform: translate(-50%, -50%);
     backdrop-filter: blur(6px);
     background: rgba(16, 183, 127, 0.15);
-    /* background-color: #1f89e5; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +20,7 @@
     text-transform: uppercase;
     background-color: transparent;
     color: var(--primary-text);
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
 }
 
 /* Context styles */

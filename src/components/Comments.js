@@ -7,9 +7,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faEraser, faTrash } from "@fortawesome/free-solid-svg-icons";
-import formatRelativeTime from "@/utils/time";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { useAuth } from "@/store/authContext";
 

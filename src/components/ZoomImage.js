@@ -37,8 +37,6 @@ const ZoomImage = (props) => {
                             style={{
                                 cursor: "zoom-out",
                                 display: "block",
-                                // no maxHeight here – let it be full height
-                                // optional: keep width under control to avoid sideways scroll:
                                 maxWidth: "100%",
                                 height: "auto",
                             }}

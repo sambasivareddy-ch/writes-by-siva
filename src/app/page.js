@@ -1,4 +1,3 @@
-import Head from "next/head";
 import BlogList from "@/components/BlogsList";
 
 export async function generateMetadata() {

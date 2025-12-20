@@ -4,9 +4,8 @@
 }
 
 .profile-wrapper {
-    /* height: 80vh; */
     margin: 50px auto 100px ;
-    font-family: var(--font-family-pop);
+    font-family: var(--font-family-inter);
 }
 
 .profile-wrapper a {
@@ -20,7 +19,7 @@
 }
 
 .profile-intro h1 {
-    font-family: var(--font-family-raleway);
+    font-family: var(--font-family-inter);
     margin: 10px 0;
 }
 

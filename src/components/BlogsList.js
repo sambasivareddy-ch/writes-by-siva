@@ -24,19 +24,6 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
-/**
- * Updated BlogList component that talks to two server routes:
- *  - GET /tags -> returns available tags + count per tag
- *  - GET /blogs -> accepts query params: tags, page, limit, sort_by, order
- *
- * Notes / behavior decisions implemented here:
- *  - tags are fetched from /tags and used to render tag buttons and counts
- *  - blogs are fetched from /blogs with the server-side pagination
- *  - client-side search (>=3 chars) filters results returned from server
- *  - matchAllTags is enforced client-side because the server "tags" param
- *    is assumed to behave as an OR filter (server behavior may vary)
- */
-
 const DEFAULT_LIMIT = 10;
 
 const BlogList = () => {
@@ -305,11 +292,6 @@ const BlogList = () => {
         fetchBlogs,
     ]);
 
-    // When user navigates pages
-    // useEffect(() => {
-    //     fetchBlogs(presentPageIndex);
-    // }, [presentPageIndex]);
-
     // Apply client-side search when debounced text changes
     useEffect(() => {
         const q = debouncedText.trim().toLowerCase();
@@ -528,7 +510,6 @@ const BlogList = () => {
                 {blogTags.length !== 0 && (
                     <div className={styles["blog-ops"]}>
                         <p className={styles["sort-icon"]}>
-                            {/* <SwapVertIcon /> */}
                             Sort By:
                         </p>
                         <select
