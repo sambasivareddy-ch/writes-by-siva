@@ -83,6 +83,14 @@ const BlogComponent = (props) => {
             else if (laugh > 0 && likes > 0) {
                 setBlogPersonality("😄 Friendly Read");
             }
+        } else {
+            const isNewPost =
+                views < 10 &&
+                Date.now() - new Date(date).getTime() < (10 * 24 * 60 * 60 * 1000);
+
+            if (isNewPost) {
+                setBlogPersonality("📩 New One")
+            }
         }
 
         if (blogPersonality === '') {
