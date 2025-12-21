@@ -33,7 +33,8 @@ Whenever a backend process needs a table or index page, it calls **_ReadBufferEx
 The buffer manager handles page access through three scenarios:
 - Page is already in the buffer pool.
 - Page is not in memory and there is an empty slot.
-- Page is not in memory and all slots are in use.
+- Page is not in memory and all slots are in use.   
+
 We are going to discuss how each of these scenarios handled underneath with detailed explanation.
 
 ## Accessing a Page already in Shared Buffers
