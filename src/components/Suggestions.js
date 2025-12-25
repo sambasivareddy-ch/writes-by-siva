@@ -38,8 +38,8 @@ const Suggestions = ({ primary, domains }) => {
 
     return (
         <div className={styles["suggestion-wrapper"]}>
-            <h2>Related Articles</h2>
-            <div className={styles["suggestions"]}>
+            {suggestedBlogs.length !== 0 && <h2>Related Articles</h2>}
+            {suggestedBlogs.length !== 0 && <div className={styles["suggestions"]}>
                 {suggestedBlogs.map((blog, idx) => {
                     return (
                         <div key={Math.random()} className={styles['top-blog']}>
@@ -51,7 +51,7 @@ const Suggestions = ({ primary, domains }) => {
                         </div>
                     );
                 })}
-            </div>
+            </div>}
         </div>
     );
 };
