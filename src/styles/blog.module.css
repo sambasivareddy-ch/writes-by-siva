@@ -346,6 +346,11 @@
     margin-left: 15px;
 }
 
+.insights span,
+.insights svg path {
+    color: var(--primary-text);
+}
+
 .blog-insights button {
     padding: 5px;
     display: flex;
