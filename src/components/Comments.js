@@ -332,7 +332,7 @@ const Comments = ({ post_slug_id }) => {
 
             {!authUser && (
                 <div className={styles["login-user"]}>
-                    Login With
+                    {/* Login With */}
                     <button
                         onClick={() => signIn("google")}
                         aria-label="Signin with Google"
@@ -346,7 +346,6 @@ const Comments = ({ post_slug_id }) => {
                     >
                         <GitHubIcon />
                     </button>
-                    to Comment or Reply
                 </div>
             )}
 
