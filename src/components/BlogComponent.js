@@ -62,6 +62,7 @@ const BlogComponent = (props) => {
     const [textColor, setTextColor] = useState("#fff");
     const [blogPersonality, setBlogPersonality] = useState('');
     const [totalReactions, setTotalReactions] = useState(0)
+    const [blogSite, setBlogSite] = useState(window.location.hostname);
 
     useEffect(() => {
         const theme = localStorage.getItem("blog-theme");
@@ -73,7 +74,9 @@ const BlogComponent = (props) => {
     }, []);
 
     useEffect(() => {
-        if (totalReactions >= 4) {
+        if ((totalReactions >= 4 && blogSite !== 'personal.bysiva.blog')
+            || (totalReactions >= 10 && blogSite === 'personal.bysiva.blog')
+        ) {
             if (likes > 0 && fires > 0) {
                 setBlogPersonality("❤️ Most Liked");
             } 
@@ -96,7 +99,9 @@ const BlogComponent = (props) => {
         if (blogPersonality === '') {
             const dominant = Math.max(likes, fires, anger, laugh);
     
-            if (dominant >= 4) {
+            if ((dominant >= 4 && blogSite !== 'personal.bysiva.blog')
+                || (dominant >= 10 && blogSite === 'personal.bysiva.blog')
+            ) {
                 if (dominant === likes) {
                     setBlogPersonality("✅ Straightforward or Informative");
                 }
