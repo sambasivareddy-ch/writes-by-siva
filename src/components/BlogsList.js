@@ -162,7 +162,11 @@ const BlogList = () => {
             const res = await fetch(
                 `${
                     process.env.NEXT_PUBLIC_SERVER_URL || ""
-                }/tags?${params.toString()}`
+                }/tags?${params.toString()}`, {
+                    headers: {
+                        "x-site-host": window.location.hostname
+                    }
+                }
             );
             if (!res.ok) return;
             const json = await res.json();
@@ -189,7 +193,11 @@ const BlogList = () => {
                     tags: selectedTags,
                     sort: sortOption,
                 });
-                const res = await fetch(url);
+                const res = await fetch(url, {
+                    headers: {
+                        "x-site-host": window.location.hostname
+                    }
+                });
                 if (!res.ok) {
                     setLoading(false);
                     return;
