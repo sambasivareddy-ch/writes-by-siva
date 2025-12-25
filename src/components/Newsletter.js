@@ -10,7 +10,13 @@ const Newsletter = () => {
         : styles["news-letter_wrapper"];
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-    const [subscribedFor, setSubscribedFor] = useState("all");
+    const [subscribedFor, setSubscribedFor] = useState("tech");
+
+    useEffect(() => {
+        if (window.location.hostname === 'personal.bysiva.blog') {
+            setSubscribedFor("personal");
+        }
+    }, [])
 
     useEffect(() => {
         setTimeout(() => {
@@ -64,23 +70,6 @@ const Newsletter = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <div className={styles["sub-for"]}>
-                    <label htmlFor="select">
-                        <p>Subscribe for:</p>
-                    </label>
-                    <select
-                        name="select"
-                        defaultValue={"all"}
-                        aria-label={`Selected ${subscribedFor} newsletter type`}
-                        onChange={(e) => {
-                            setSubscribedFor(e.target.value);
-                        }}
-                    >
-                        <option value="all" aria-label={"selected ALL"}>All</option>
-                        <option value="tech" aria-label={"selected TECH"}>Tech</option>
-                        <option value="personal" aria-label={"selected PERSONAL"}>Personal</option>
-                    </select>
-                </div>
                 <p>{message.length !== 0 && message}</p>
                 <button type="submit" aria-label="Subscribe submit Button">
                     Subscribe
