@@ -63,6 +63,7 @@ const BlogComponent = (props) => {
     const [blogPersonality, setBlogPersonality] = useState('');
     const [totalReactions, setTotalReactions] = useState(0)
     const [blogSite, setBlogSite] = useState(window.location.hostname);
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     useEffect(() => {
         const theme = localStorage.getItem("blog-theme");
@@ -148,14 +149,21 @@ const BlogComponent = (props) => {
                         onClick={() => setCursor('default')}
                         passHref
                     >
+                        
+                        {thumbnail && !imageLoaded && (
+                            <div className={styles["blog-image-skeleton"]} />
+                            )}
+
+                        {thumbnail &&
+                            <img onLoad={() => setImageLoaded(true)} src={thumbnail} alt={title}/>
+                        }
+
+                        {/* Fallback */}
                         {!thumbnail && <div className={styles['blog-banner']}
                             style={{ background: bannerGradient, zIndex: 999}}
                         >
                             <h2 className={styles['blog-banner-title']} style={{ color: textColor }}>{title}</h2>
                         </div>}
-                        {thumbnail &&
-                            <img src={thumbnail} alt={title}/>
-                        }
                     </Link>
                     <p className={styles["blog-description"]}>
                         {highlightText(description, searchQuery)}
