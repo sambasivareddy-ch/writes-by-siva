@@ -22,7 +22,8 @@ import useDebounce from "@/hooks/useDebounce";
 
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import PublicIcon from '@mui/icons-material/Public';
+import RssFeedIcon from '@mui/icons-material/RssFeed';
 
 const DEFAULT_LIMIT = 10;
 
@@ -352,6 +353,22 @@ const BlogList = () => {
                 <div className={styles["blog-profile"]}>
                     <div className={styles["social-links"]}>
                         <a
+                            href={
+                                window.location.hostname === 'personal.bysiva.blog' 
+                                ? 'https://www.bysiva.blog/'
+                                : 'https://personal.bysiva.blog/'
+                            }
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label="Portfolio profile"
+                            onMouseEnter={() => setCursor('visit')}
+                            onMouseLeave={() => setCursor('default')}
+                        >
+                            <RssFeedIcon fontSize="medium" /> Visit {window.location.hostname === 'personal.bysiva.blog' 
+                                ? 'Tech'
+                                : 'Personal'} Blogs
+                        </a>
+                        <a
                             href="https://sambasiva.vercel.app"
                             target="_blank"
                             rel="noreferrer"
@@ -359,7 +376,7 @@ const BlogList = () => {
                             onMouseEnter={() => setCursor('visit')}
                             onMouseLeave={() => setCursor('default')}
                         >
-                            <PersonOutlineIcon fontSize="medium" /> Portfolio
+                            <PublicIcon fontSize="medium" />
                         </a>
                         <a
                             href="https://www.linkedin.com/in/samba-siva-reddy-ch/"
