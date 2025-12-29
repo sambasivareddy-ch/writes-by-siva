@@ -62,8 +62,13 @@ const BlogList = () => {
     const [sortOption, setSortOption] = useState(sortby);
     const [meta, setMeta] = useState({ total: 0, totalPages: 1, page: 1 });
     const [loading, setLoading] = useState(false);
+    const [hostname, setHostName] = useState();
 
     const firstFiltersRun = useRef(true);
+
+    useEffect(() => {
+        setHostName(window.location.hostname)
+    }, [])
 
     // helper: safe timestamp extractor
     const getTime = (b) => {
@@ -354,7 +359,7 @@ const BlogList = () => {
                     <div className={styles["social-links"]}>
                         <a
                             href={
-                                window.location.hostname === 'personal.bysiva.blog' 
+                                hostname === 'personal.bysiva.blog' 
                                 ? 'https://www.bysiva.blog/'
                                 : 'https://personal.bysiva.blog/'
                             }
@@ -364,7 +369,7 @@ const BlogList = () => {
                             onMouseEnter={() => setCursor('visit')}
                             onMouseLeave={() => setCursor('default')}
                         >
-                            <RssFeedIcon fontSize="medium" /> Visit {window.location.hostname === 'personal.bysiva.blog' 
+                            <RssFeedIcon fontSize="medium" /> Visit {hostname === 'personal.bysiva.blog' 
                                 ? 'Tech'
                                 : 'Personal'} Blogs
                         </a>
