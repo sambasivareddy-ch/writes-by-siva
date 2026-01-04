@@ -357,7 +357,7 @@ const BlogList = () => {
             <div className={styles["blog-main"]}>
                 <div className={styles["blog-profile"]}>
                     <div className={styles["social-links"]}>
-                        <a
+                        {/* <a
                             href={
                                 hostname === 'personal.bysiva.blog' 
                                 ? 'https://www.bysiva.blog/'
@@ -372,7 +372,7 @@ const BlogList = () => {
                             <RssFeedIcon fontSize="medium" /> Visit {hostname === 'personal.bysiva.blog' 
                                 ? 'Tech'
                                 : 'Personal'} Blogs
-                        </a>
+                        </a> */}
                         <a
                             href="https://sambasiva.vercel.app"
                             target="_blank"
